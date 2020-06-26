@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <title>Teleoma</title>
+    </head>
+    <body>
+        <nav>
+            <h1>Teleoma</h1>
+            <a href="index.html">inicio</a>
+            <a href="problemas.html">problemas</a>
+        </nav>
+        <main>
+            <h1>Crear Nuevo Problema</h1>
+            <textarea type="text" rows="10" id="solution">Escriba aquí el enunciado</textarea>
+            <label for="prob_id">ID del problema: </label>
+            <input type="integer" id="prob_id"><br>
+            <label for="inicio">Fecha y hora de inicio:</label>
+            <input type="date" id="inicio-date">
+            <input type="time" id="inicio"><br>
+            <label for="fin">Fecha y hora de fin:</label>
+            <input type="date" id="fin-date">
+            <input type="time" id="fin"><br>
+            <button onclick= "document.getElementById(&quot;preview&quot;).innerHTML=document.getElementById(&quot;solution&quot;).value; MathJax.typeset()"
+            >Preview</button>
+            <button>
+                Crear Problema
+            </button>
+            <p id="preview">lala</p>
+        </main>
+    </body>
+</html>

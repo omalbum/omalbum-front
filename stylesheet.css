@@ -1,0 +1,248 @@
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+html, body {
+    margin: 0px;
+    font-family: "Georgia";
+}
+
+nav {
+    background: #349;
+    color: white;
+    margin: 0;
+    padding: 10px;
+    padding-left: var(--side);
+    padding-right: var(--side);
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    padding-right: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 2px;
+    margin-right: 20px;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+
+main {
+    padding-left: var(--side);
+    padding-right: var(--side);
+}
+
+main h1 {
+    padding-top: 20px;
+    font-size: 3rem;
+    font-weight: normal;
+}
+
+main p {
+    line-height: 1.5;
+    text-align: justify;
+}
+
+main section h1 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+@media(max-width: 900px) {
+    html {
+        --side: 20px;
+    }
+    nav h1 {
+        flex-basis: 100%;
+    }
+    nav h1 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    nav {
+        justify-content: center;
+    }
+    nav a {
+        font-size: 1.5rem;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    .problem-list {
+        justify-content: center;
+    }
+    .problem {
+        flex-grow: 2;
+    }
+}
+@media(min-width: 901px) {
+    html {
+        --side: 20vw;
+    }
+    .problem-list {
+        justify-content: left;
+    }
+}
+
+.problem-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.problem {
+    min-width: 5rem;
+}
+
+.problem {
+    text-decoration: none !important;
+}
+
+.problem {
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    margin: 3px;
+}
+
+.problem:hover {
+    margin: 0px;
+    border-width: 5px;
+}
+
+.failure {
+    background: #a00;
+    color: white;
+    border-color: #a00;
+}
+
+.success {
+    background: #0a0;
+    color: white;
+    border-color: #0a0;
+}
+
+.normal {
+    background: #349;
+    color: white;
+    border-color: #349;
+}
+
+.problem p {
+    padding: 0px;
+    margin: 0;
+    text-align: center;
+}
+
+.problem i {
+    font-size: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+}
+
+.problem {
+    padding: 10px;
+}
+
+.code {
+    font-size: 1.5rem;
+}
+
+.enunciado {
+    padding: 0;
+    margin-top: 10px;
+    /* border-radius: 10px;
+    box-shadow: #bbb 0px 0px 5px 5px; */
+}
+
+hr {
+    border-width: 1px;
+    border-color: #000;
+    margin: 3rem;
+    margin-right: 10vw;
+    margin-left: 10vw;
+}
+
+form {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: box;
+}
+
+input {
+    margin: 5px;
+}
+
+form {
+    /* background: rgb(170, 180, 230); */
+    /* padding: 10px;
+    border-radius: 10px;
+    border: solid 1px #ccc; */
+    text-align: center;
+    /* box-shadow: #bbb 0px 0px 5px 5px; */
+}
+
+main a {
+    color: #349;
+}
+
+main h1 i {
+    font-size: 3rem !important;
+}
+
+.done {
+    color: #0a0;
+}
+
+.add i {
+    color: white;
+}
+
+textarea {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.problem {
+    min-width: 6rem;
+}
+
+main h1 {
+    text-align: center;
+    padding: 10px;
+}
+
+#login {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+form {
+    display: flex;
+    align-items: stretch;
+    flex-flow: column;
+    max-width: 30rem;
+    margin: auto;
+}
+
+input {
+    margin: 2px;
+    padding: 0;
+}
