@@ -8,7 +8,7 @@ function update_preview() {
 }
 
 // https://stackoverflow.com/a/24468752
-function get_request(endpoint, payload, method) {
+function get_request(endpoint, payload, authorize, method) {
     return new Promise (
         function(callback, fail) {
             var xhr = new XMLHttpRequest();
@@ -21,9 +21,17 @@ function get_request(endpoint, payload, method) {
                 url = host + endpoint;
             }
             xhr.open(method, url, true);
-            // xhr.setRequestHeader("Content-Type", "application/json");
+            if(method != "GET") {
+                xhr.setRequestHeader("Content-Type", "application/json");
+            }
+            if(authorize && is_logged_in()) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem('token').token);
+            }
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
+                if (200 <= xhr.status && xhr.status < 300) {
+                    console.log(xhr.responseText);
                     var json = JSON.parse(xhr.responseText);
                     callback(json);
                 } else {
@@ -54,13 +62,12 @@ function get_problems() {
 }
 
 function login_or_profile() {
-    user_id = read_cookie("user_id");
-    if(user_id == "") {
-        document.getElementsByTagName("nav")[0].innerHTML
-            += `<a href="login.html">login</a><a href="register.html">register</a>`
-    } else {
+    if(is_logged_in()) {
         document.getElementsByTagName("nav")[0].innerHTML
             += `<a href="profile.html">profile</a>`
+    } else {
+        document.getElementsByTagName("nav")[0].innerHTML
+            += `<a href="login.html">login</a><a href="register.html">register</a>`
     }
 }
 
@@ -107,6 +114,7 @@ function extract_data(form) {
             data[elem.name] = elem.value;
         }
     }
+    return data;
 }
 
 function init() {
@@ -116,14 +124,29 @@ function init() {
     on_event("login", login);
 }
 
+function is_logged_in() {
+    expiration = localStorage.getItem('expiration')
+    if(expiration) return Date.parse(expiration) > Date.now();
+    return false;
+}
+
 function register(form) {
-    get_request("api/v1/register", extract_data(form), "POST").then(token => {
+    data = extract_data(form.parentElement);
+    console.log("DATA: " + JSON.stringify(data));
+    get_request("api/v1/register", data, false, "POST").then(token => {
+        localStorage.setItem('token', token.token);
+        localStorage.setItem('expiration', token.expiration);
+        localStorage.setItem('user', JSON.stringify(token.user));
         console.log(token);
     });
 }
 
 function login(form) {
-    get_request("api/v1/login", extract_data(form), "POST").then(token => {
+    data = extract_data(form.parentElement);
+    get_request("api/v1/auth/login", data, false, "POST").then(token => {
+        localStorage.setItem('token', token.token);
+        localStorage.setItem('expiration', token.expiration);
+        localStorage.setItem('user', JSON.stringify(token.user));
         console.log(token);
     });
 }
