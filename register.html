@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script type="text/javascript" src="locations.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <title>Teleoma</title>
     </head>
@@ -19,16 +20,21 @@
             <form>
                 <input type="text" name="email" placeholder="email">
                 <input type="text" name="user_name" placeholder="usuario">
-                <input type="text" name="password" placeholder="contraseña">
+                <input type="password" name="password" placeholder="contraseña">
                 <input type="text" name="name" placeholder="nombre">
                 <input type="text" name="last_name" placeholder="apellido">
                 <input type="text" name="birth_date" placeholder="fecha de nacimiento">
                 <input type="text" name="gender" placeholder="sexo">
                 <input type="text" name="is_student" placeholder="es estudiante">
                 <input type="text" name="school_year" placeholder="año de escolaridad">
-                <input type="text" name="country" placeholder="país">
-                <input type="text" name="province" placeholder="provincia">
-                <input type="text" name="department" placeholder="departamento">
+                <input type="text" list="country" name="country" placeholder="país">
+                <datalist id="country">
+                    <option value="Argentina">Argentina</option>
+                </datalist>
+                <input type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">
+                <datalist id="province"></datalist>
+                <input type="text" list="department" name="department" placeholder="departamento">
+                <datalist id="department"></datalist>
                 <input type="text" name="location" placeholder="lugar">
                 <input type="text" name="school" placeholder="escuela">
                 <button class="register">Registrarse</button>

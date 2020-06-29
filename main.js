@@ -148,6 +148,29 @@ function init() {
         fill_with("fill-user_id", () => user.user_id);
         fill_with("fill-email", () => user.email);
     }
+    ele = document.getElementById("province");
+    if(ele) {
+        for(k in locations) {
+            ele.innerHTML += `<option>${k}</option>`
+        }
+        loc = document.getElementById("department");
+        for(k in locations) {
+            for(j of locations[k]) {
+                loc.innerHTML += `<option>${j}</option>`
+            }
+        }
+    }
+}
+
+function reset_departments() {
+    console.log("reset departamentos");
+    loc = document.getElementById("department");
+    tag = document.getElementsByName("province")[0];
+    console.log(tag.value);
+    loc.innerHTML = ""
+    for(j of locations[tag.value]) {
+        loc.innerHTML += `<option>${j}</option>`
+    }
 }
 
 function is_logged_in() {
