@@ -61,14 +61,26 @@ function get_problems() {
     return post_request("/api/v1/problems/all", {});
 }
 
+function user() {
+
+}
+
 function login_or_profile() {
     if(is_logged_in()) {
+        var user = JSON.parse(localStorage.getItem('user'));
         document.getElementsByTagName("nav")[0].innerHTML
-            += `<a href="profile.html">profile</a>`
+            += `<a href="profile.html">profile<span class="username">(${user.user_name})</span></a>
+            <a href="index.html" onclick="logout();">logout</a>`
     } else {
         document.getElementsByTagName("nav")[0].innerHTML
             += `<a href="login.html">login</a><a href="register.html">register</a>`
     }
+}
+
+function logout() {
+    localStorage.setItem("expiration", "");
+    localStorage.setItem("token", "");
+    localStorage.setItem("user", "");
 }
 
 function problem_html(p) {
@@ -107,6 +119,12 @@ function on_event(class_name, action, event="click") {
     }
 }
 
+function fill_with(class_name, action) {
+    for(e of document.getElementsByClassName(class_name)) {
+        e.innerHTML = action(e);
+    }
+}
+
 function extract_data(form) {
     var data = {};
     for(elem of form.childNodes) {
@@ -122,6 +140,14 @@ function init() {
     login_or_profile();
     on_event("register", register);
     on_event("login", login);
+    if(is_logged_in()) {
+        var user = JSON.parse(localStorage.getItem('user'));
+        fill_with("fill-user_name", () => user.user_name);
+        fill_with("fill-name", () => user.name);
+        fill_with("fill-last_name", () => user.last_name);
+        fill_with("fill-user_id", () => user.user_id);
+        fill_with("fill-email", () => user.email);
+    }
 }
 
 function is_logged_in() {
@@ -136,7 +162,7 @@ function register(form) {
     get_request("api/v1/register", data, false, "POST").then(token => {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
-        localStorage.setItem('user', JSON.stringify(token.user));
+        localStorage.setItem('user', JSON.stringify(token.User));
         console.log(token);
     });
 }
@@ -146,8 +172,8 @@ function login(form) {
     get_request("api/v1/auth/login", data, false, "POST").then(token => {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
-        localStorage.setItem('user', JSON.stringify(token.user));
-        console.log(token);
+        localStorage.setItem('user', JSON.stringify(token.User));
+        window.location.href = "index.html";
     });
 }
 

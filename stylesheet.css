@@ -2,7 +2,7 @@
 
 html, body {
     margin: 0px;
-    font-family: "Georgia";
+    font-family: "Arial";
 }
 
 nav {
@@ -243,6 +243,36 @@ form {
 }
 
 input {
-    margin: 2px;
-    padding: 0;
+    margin: 5px;
+    padding: 5px;
+}
+
+button {
+    max-width: 20vw;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+dt, dd {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+dt {
+    margin-top: 1rem;
+    color: #349;
+    font-size: 2rem;
+}
+
+dd {
+    margin-left: 1rem;
+}
+
+.username {
+    font-style: italic;
+    color: rgb(147, 160, 226);
+    padding-left: 0.2rem;
 }
