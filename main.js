@@ -8,7 +8,7 @@ function update_preview() {
 }
 
 // https://stackoverflow.com/a/24468752
-function get_request(endpoint, payload, method) {
+function get_request(endpoint, payload, authorize, method) {
     return new Promise (
         function(callback, fail) {
             var xhr = new XMLHttpRequest();
@@ -21,9 +21,17 @@ function get_request(endpoint, payload, method) {
                 url = host + endpoint;
             }
             xhr.open(method, url, true);
-            // xhr.setRequestHeader("Content-Type", "application/json");
+            if(method != "GET") {
+                xhr.setRequestHeader("Content-Type", "application/json");
+            }
+            if(authorize && is_logged_in()) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem('token').token);
+            }
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
+                if (200 <= xhr.status && xhr.status < 300) {
+                    console.log(xhr.responseText);
                     var json = JSON.parse(xhr.responseText);
                     callback(json);
                 } else {
@@ -53,15 +61,26 @@ function get_problems() {
     return post_request("/api/v1/problems/all", {});
 }
 
+function user() {
+
+}
+
 function login_or_profile() {
-    user_id = read_cookie("user_id");
-    if(user_id == "") {
+    if(is_logged_in()) {
+        var user = JSON.parse(localStorage.getItem('user'));
         document.getElementsByTagName("nav")[0].innerHTML
-            += `<a href="login.html">login</a><a href="register.html">register</a>`
+            += `<a href="profile.html">profile<span class="username">(${user.user_name})</span></a>
+            <a href="index.html" onclick="logout();">logout</a>`
     } else {
         document.getElementsByTagName("nav")[0].innerHTML
-            += `<a href="profile.html">profile</a>`
+            += `<a href="login.html">login</a><a href="register.html">register</a>`
     }
+}
+
+function logout() {
+    localStorage.setItem("expiration", "");
+    localStorage.setItem("token", "");
+    localStorage.setItem("user", "");
 }
 
 function problem_html(p) {
@@ -100,6 +119,12 @@ function on_event(class_name, action, event="click") {
     }
 }
 
+function fill_with(class_name, action) {
+    for(e of document.getElementsByClassName(class_name)) {
+        e.innerHTML = action(e);
+    }
+}
+
 function extract_data(form) {
     var data = {};
     for(elem of form.childNodes) {
@@ -107,6 +132,7 @@ function extract_data(form) {
             data[elem.name] = elem.value;
         }
     }
+    return data;
 }
 
 function init() {
@@ -114,17 +140,63 @@ function init() {
     login_or_profile();
     on_event("register", register);
     on_event("login", login);
+    if(is_logged_in()) {
+        var user = JSON.parse(localStorage.getItem('user'));
+        fill_with("fill-user_name", () => user.user_name);
+        fill_with("fill-name", () => user.name);
+        fill_with("fill-last_name", () => user.last_name);
+        fill_with("fill-user_id", () => user.user_id);
+        fill_with("fill-email", () => user.email);
+    }
+    ele = document.getElementById("province");
+    if(ele) {
+        for(k in locations) {
+            ele.innerHTML += `<option>${k}</option>`
+        }
+        loc = document.getElementById("department");
+        for(k in locations) {
+            for(j of locations[k]) {
+                loc.innerHTML += `<option>${j}</option>`
+            }
+        }
+    }
+}
+
+function reset_departments() {
+    console.log("reset departamentos");
+    loc = document.getElementById("department");
+    tag = document.getElementsByName("province")[0];
+    console.log(tag.value);
+    loc.innerHTML = ""
+    for(j of locations[tag.value]) {
+        loc.innerHTML += `<option>${j}</option>`
+    }
+}
+
+function is_logged_in() {
+    expiration = localStorage.getItem('expiration')
+    if(expiration) return Date.parse(expiration) > Date.now();
+    return false;
 }
 
 function register(form) {
-    get_request("api/v1/register", extract_data(form), "POST").then(token => {
+    data = extract_data(form.parentElement);
+    console.log("DATA: " + JSON.stringify(data));
+    get_request("api/v1/register", data, false, "POST").then(token => {
+        localStorage.setItem('token', token.token);
+        localStorage.setItem('expiration', token.expiration);
+        localStorage.setItem('user', JSON.stringify(token.User));
         console.log(token);
     });
 }
 
 function login(form) {
-    get_request("api/v1/login", extract_data(form), "POST").then(token => {
-        console.log(token);
+    data = extract_data(form.parentElement);
+    get_request("api/v1/auth/login", data, false, "POST").then(token => {
+        localStorage.setItem('token', token.token);
+        localStorage.setItem('expiration', token.expiration);
+        localStorage.setItem('user', JSON.stringify(token.User));
+        window.location.href = "index.html";
     });
 }
 
