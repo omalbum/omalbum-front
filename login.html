@@ -17,9 +17,13 @@
         <main>
             <h1>Loggeate!</h1>
             <form>
-                <input type="text" name="user_name" placeholder="usuario">
-                <input type="password" name="password" placeholder="contraseña">
-                <button class="login">Loggearse</button>
+                <div class="stretch">
+                    <input type="text" name="user_name" placeholder="usuario">
+                </div>
+                <div class="stretch">
+                    <input type="password" name="password" placeholder="contraseña">
+                </div>
+                <button type="button" onclick="login(this);">Loggearse</button>
             </form>
         </main>
     </body>

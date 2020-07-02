@@ -18,37 +18,70 @@
         <main>
             <h1>Registrate!</h1>
             <form>
-                <input type="text" name="email" placeholder="email">
-                <input type="text" name="user_name" placeholder="usuario">
-                <input type="password" name="password" placeholder="contraseña">
+                <div class="stretch">
+                    <input type="text" name="email" placeholder="email">
+                </div>
+                <div class="stretch">
+                    <input type="text" name="user_name" placeholder="usuario">
+                </div>
+                <div class="stretch">
+                    <input type="password" name="password" placeholder="contraseña">
+                </div>
+                <div class="stretch">
                 <legend>Información Personal</legend>
-                <input type="text" name="name" placeholder="nombre">
-                <input type="text" name="last_name" placeholder="apellido">
-                <input type="text" name="birth_date" placeholder="fecha de nacimiento">
-                <input type="text" list="gender" name="gender" placeholder="sexo">
+                </div>
+                <div class="stretch">
+                    <input type="text" name="name" placeholder="nombre">
+                </div>
+                <div class="stretch">
+                    <input type="text" name="last_name" placeholder="apellido">
+                </div>
+                <p class="tit">fecha de nacimiento</p>
+                <div class="stretch">
+                    <input type="date" name="birth_date" placeholder="fecha de nacimiento">
+                </div>
+                <div class="stretch">
+                    <input type="text" list="gender" name="gender" placeholder="sexo">
+                </div>
                 <datalist id="gender">
                     <option value="male">Hombre</option>
                     <option value="female">Mujer</option>
                     <option value="none">Prefiero no Decir</option>
                 </datalist>
-                <input type="text" list="boolean" name="is_student" placeholder="es estudiante">
+                <div class="left">
+                    <p class="tit">sos estudiante?</p>
+                    <input type="checkbox" list="boolean" name="is_student" value="true" placeholder="es estudiante">
+                </div>
                 <datalist id="boolean">
                     <option value="true">Sí</option>
                     <option value="false">No</option>
                 </datalist>
-                <input type="text" name="school_year" placeholder="año de escolaridad">
+                <p class="tit">año de escolaridad</p>
+                <div class="stretch">
+                    <input type="number" name="school_year" placeholder="desde primer grado de primaria">
+                </div>
                 <legend>Locación</legend>
-                <input type="text" list="country" name="country" placeholder="país">
+                <div class="stretch">
+                    <input type="text" list="country" name="country" placeholder="país">
+                </div>
                 <datalist id="country">
                     <option value="Argentina">Argentina</option>
                 </datalist>
-                <input type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">
+                <div class="stretch">
+                    <input type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">
+                </div>
                 <datalist id="province"></datalist>
-                <input type="text" list="department" name="department" placeholder="departamento">
+                <div class="stretch">
+                    <input type="text" list="department" name="department" placeholder="departamento">
+                </div>
                 <datalist id="department"></datalist>
-                <input type="text" name="location" placeholder="lugar">
-                <input type="text" name="school" placeholder="escuela">
-                <button class="register">Registrarse</button>
+                <div class="stretch">
+                    <input type="text" name="location" placeholder="lugar">
+                </div>
+                <div class="stretch">
+                    <input type="text" name="school" placeholder="escuela">
+                </div>
+                <button type="button" onclick="register(this)">Registrarse</button>
             </form>
         </main>
     </body>

@@ -16,21 +16,64 @@
         </nav>
         <main>
             <h1>Crear Nuevo Problema</h1>
-            <textarea type="text" rows="10" id="solution">Escriba aquí el enunciado</textarea>
-            <label for="prob_id">ID del problema: </label>
-            <input type="integer" id="prob_id"><br>
-            <label for="inicio">Fecha y hora de inicio:</label>
-            <input type="date" id="inicio-date">
-            <input type="time" id="inicio"><br>
-            <label for="fin">Fecha y hora de fin:</label>
-            <input type="date" id="fin-date">
-            <input type="time" id="fin"><br>
-            <button onclick= "document.getElementById(&quot;preview&quot;).innerHTML=document.getElementById(&quot;solution&quot;).value; MathJax.typeset()"
-            >Preview</button>
-            <button>
-                Crear Problema
-            </button>
-            <p id="preview">lala</p>
+            <form>
+                <p class="tit">Enunciado</p>
+                <div class="stretch padded">
+                    <textarea class="input" name="statement" type="text" rows="2" id="statement">Sea \(n \in \mathbb{Z}\). Demostrar que \(n^2 \geq 0\).
+                    </textarea>
+                </div>
+                <button class="margin" type="button" onclick="update_preview(this)" for="statement">Preview</button>
+                <p class="tit">Solución Oficial</p>
+                <div class="stretch padded">
+                    <textarea class="input" name="official_solution" type="text" rows="2" id="solution">anotaciones
+                    </textarea>
+                </div>
+                <button type="button" class="margin" onclick="update_preview(this)" for="solution">Preview</button>
+                <p class="tit">Hint</p>
+                <div class="stretch padded">
+                    <textarea class="input" name="hint" type="text" rows="2" id="hint">hints</textarea>
+                </div>
+                <button type="button" class="margin" onclick="update_preview(this)" for="hint">Preview</button>
+                <div class="boxed light-bg">
+                <p id="preview">Apriete "Preview" para ver el contenido renderizado con Mathjax</p>
+                </div>
+                <div class="spacer"></div>
+                <p class="tit">ID del problema</p>
+                <div class="stretch">
+                    <input name="problem_id" type="integer" id="prob_id">
+                </div>
+                <p class="tit">ID del post del problema en OMAforos</p>
+                <div class="stretch">
+                    <input name="omaforos_post_id" type="integer">
+                </div>
+                <p class="tit">Respuesta</p>
+                <div class="stretch">
+                    <input name="answer" type="integer">
+                </div>
+                <p class="tit">Fecha y Hora de inicio</p>
+                <div class="stretch">
+                    <input type="date" name="date:release_date">
+                    <input type="time" name="time:release_date">
+                </div>
+                <p class="tit">Fecha y Hora de fin</p>
+                <div class="stretch">
+                    <input type="date" name="date:deadline">
+                    <input type="time" name="time:deadline">
+                </div>
+                <p class="tit">Tags</p>
+                <div class="stretch">
+                    <input type="text" name="tags" value="serie:A,tema:combinatoria"><br>
+                </div>
+                <p class="tit">Anotaciones</p>
+                <div class="stretch padded">
+                    <textarea class="input" name="annotations" type="text" rows="10" id="previewed">anotaciones</textarea>
+                </div>
+                <div class="left">
+                    <p class="tit">draft?</p>
+                    <input type="checkbox" list="boolean" name="is_draft" value="true">
+                </div>
+                <button class="margin" type="button" onclick="create_problem(this)">Crear Problema</button>
+            </form>
         </main>
     </body>
 </html>

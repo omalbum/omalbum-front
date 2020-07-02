@@ -57,9 +57,12 @@ main section h1 {
     font-weight: bold;
 }
 
-@media(max-width: 900px) {
+
+@media(max-width: 700px) {
     html {
         --side: 20px;
+        --inset: -17px;
+        --outset: 20px;
     }
     nav h1 {
         flex-basis: 100%;
@@ -83,12 +86,26 @@ main section h1 {
         flex-grow: 2;
     }
 }
-@media(min-width: 901px) {
+
+@media(min-width: 701px) {
     html {
-        --side: 20vw;
+        --inset: 0;
+        --outset: 10px;
     }
     .problem-list {
         justify-content: left;
+    }
+}
+
+@media(min-width: 701px) and (max-width: 1000px) {
+    html {
+        --side: calc(50vw - 330px)
+    }
+}
+
+@media(min-width: 1001px) {
+    html {
+        --side: 20vw;
     }
 }
 
@@ -215,8 +232,6 @@ main h1 i {
 
 textarea {
     width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 .problem {
@@ -238,7 +253,6 @@ form {
     display: flex;
     align-items: stretch;
     flex-flow: column;
-    max-width: 30rem;
     margin: auto;
 }
 
@@ -247,23 +261,17 @@ input {
     padding: 5px;
 }
 
-button {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    padding: 10px;
-}
-
 dt, dd {
     margin: 0;
     font-size: 1.2rem;
 }
 
-dt {
-    margin-top: 1rem;
+.tit, dt {
+    margin: 0;
+    padding: 0;
+    margin: 1px;
     color: #349;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 dd {
@@ -276,13 +284,70 @@ dd {
     padding-left: 0.2rem;
 }
 
-input {
-    border-width: 0px;
-    border-bottom-width: 1px;
-    border-bottom-color: #ddd;
-}
-
 legend {
     padding-top: 2rem;
     font-size: 1.5rem;
+}
+
+button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stretch {
+    display: flex;
+    justify-content: stretch;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.boxed {
+    margin-left: var(--inset);
+    margin-right: var(--inset);
+    padding-right: var(--outset);
+    padding-left: var(--outset);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.boxed * {
+    margin: 0;
+}
+
+.stretch * {
+    flex-basis: 100%;
+}
+
+.stretch p {
+    margin: 0.5rem;
+}
+
+.light-bg {
+    background: #cdf;
+}
+
+p {
+    margin: 1rem;
+}
+
+.spacer {
+    height: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.left {
+    display: flex;
+    justify-content: space-between;
+}
+
+.padded {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.margin {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }

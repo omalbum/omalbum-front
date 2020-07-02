@@ -1,8 +1,8 @@
 var host = "http://localhost:8080/";
 
-function update_preview() {
+function update_preview(button) {
     previewer = document.getElementById("preview");
-    previewed = document.getElementById("previewed");
+    previewed = document.getElementById(button.getAttribute("for"));
     previewer.innerHTML = previewed.value;
     MathJax.typeset();
 }
@@ -27,7 +27,7 @@ function get_request(endpoint, payload, authorize, method) {
             if(authorize && is_logged_in()) {
                 xhr.setRequestHeader(
                     "Authorization",
-                    "Bearer " + localStorage.getItem('token').token);
+                    "Bearer " + localStorage.getItem('token'));
             }
             xhr.onreadystatechange = function () {
                 if (200 <= xhr.status && xhr.status < 300) {
@@ -110,15 +110,6 @@ function insert_problems(problems) {
     }
 }
 
-function on_event(class_name, action, event="click") {
-    for(e of document.getElementsByClassName(class_name)) {
-        e.addEventListener(event, function(ev) {
-            if(ev) ev.preventDefault();
-            action(this);
-        });
-    }
-}
-
 function fill_with(class_name, action) {
     for(e of document.getElementsByClassName(class_name)) {
         e.innerHTML = action(e);
@@ -127,9 +118,14 @@ function fill_with(class_name, action) {
 
 function extract_data(form) {
     var data = {};
-    for(elem of form.childNodes) {
+    for(elem of Array.from(form.getElementsByTagName("input")).concat(Array.from(form.getElementsByClassName("input")))) {
         if(elem.name) {
-            data[elem.name] = elem.value;
+            if(elem.type == "checkbox") {
+                value = elem.checked;
+            } else {
+                value = elem.value;
+            }
+            data[elem.name] = value
         }
     }
     return data;
@@ -138,8 +134,6 @@ function extract_data(form) {
 function init() {
     console.log("init");
     login_or_profile();
-    on_event("register", register);
-    on_event("login", login);
     if(is_logged_in()) {
         var user = JSON.parse(localStorage.getItem('user'));
         fill_with("fill-user_name", () => user.user_name);
@@ -180,7 +174,7 @@ function is_logged_in() {
 }
 
 function register(form) {
-    data = extract_data(form.parentElement);
+    data = extract_data(form.closest("form"));
     console.log("DATA: " + JSON.stringify(data));
     get_request("api/v1/register", data, false, "POST").then(token => {
         localStorage.setItem('token', token.token);
@@ -191,7 +185,7 @@ function register(form) {
 }
 
 function login(form) {
-    data = extract_data(form.parentElement);
+    data = extract_data(form.closest("form"));
     get_request("api/v1/auth/login", data, false, "POST").then(token => {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
@@ -201,3 +195,31 @@ function login(form) {
 }
 
 window.onload = init;
+
+function date_string(date, time) {
+    var offset = new Date().getTimezoneOffset();
+    if(offset >= 0) tz = "-"
+    else {
+        tz = "+";
+        offset = -offset;
+    }
+    tz += (offset/60).toString().padStart(2, '0') + ":" + (offset%60).toString().padStart(2, '0');
+    return date + "T" + time + ":00" + tz;
+}
+
+function create_problem(form) {
+    data = extract_data(form.closest("form"));
+    real_data = {};
+    real_data["deadline"] = date_string(data["date:deadline"], data["time:deadline"]);
+    real_data["release_date"] = date_string(data["date:release_date"], data["time:release_date"]);
+
+    real_data["tags"] = data["tags"].split(",");
+    real_data["statement"] = data["statement"];
+    real_data["problem_id"] = data["problem_id"];
+    real_data["omaforos_problem_id"] = data["omaforos_problem_id"];
+    real_data["answer"] = data["answer"];
+    real_data["annotations"] = data["annotations"];
+    real_data["hint"] = data["hint"];
+    real_data["official_solution"] = data["official_solution"];
+    get_request("api/v1/admin/problem", real_data, true, "POST");
+}
