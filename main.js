@@ -12,7 +12,7 @@ function get_request(endpoint, payload, authorize, method) {
     return new Promise (
         function(callback, fail) {
             var xhr = new XMLHttpRequest();
-            if(method=="GET") {
+            if(method=="GET" && payload) {
                 var url = host
                     + endpoint
                     + "?data="
@@ -21,7 +21,7 @@ function get_request(endpoint, payload, authorize, method) {
                 url = host + endpoint;
             }
             xhr.open(method, url, true);
-            if(method != "GET") {
+            if(method != "GET" && payload) {
                 xhr.setRequestHeader("Content-Type", "application/json");
             }
             if(authorize && is_logged_in()) {
@@ -30,19 +30,21 @@ function get_request(endpoint, payload, authorize, method) {
                     "Bearer " + localStorage.getItem('token'));
             }
             xhr.onreadystatechange = function () {
-                if (200 <= xhr.status && xhr.status < 300) {
-                    console.log(xhr.responseText);
-                    var json = JSON.parse(xhr.responseText);
-                    callback(json);
-                } else {
-                    console.log("request failed")
-                    console.log(url)
-                    console.log(xhr.readyState)
-                    console.log(xhr.status)
-                    fail(undefined);
+                if(xhr.readyState == XMLHttpRequest.DONE) {
+                    if (200 <= xhr.status && xhr.status < 300) {
+                        console.log("PAYLAOD: " + endpoint + " + " + payload + " => " + xhr.responseText);
+                        var json = JSON.parse(xhr.responseText);
+                        callback(json);
+                    } else {
+                        console.log("request failed")
+                        console.log(url)
+                        console.log(xhr.readyState)
+                        console.log(xhr.status)
+                        fail(undefined);
+                    }
                 }
             };
-            if(method == "GET") {
+            if(method == "GET" || !payload) {
                 xhr.send();
             } else {
                 xhr.send(JSON.stringify(payload));
@@ -58,11 +60,14 @@ function read_cookie(a) {
 }
 
 function get_problems() {
-    return post_request("/api/v1/problems/all", {});
+    return get_request("api/v1/problems/all", null, false, "GET");
 }
 
 function user() {
-
+    if(is_logged_in()){
+        return JSON.parse(localStorage.getItem("user"))
+    }
+    else return null;
 }
 
 function login_or_profile() {
@@ -84,29 +89,62 @@ function logout() {
 }
 
 function problem_html(p) {
+    tags = {}
+    for(t of p.tags) {
+        s = t.split(":")
+        tags[s[0]] = s[1]
+    }
+
+    icon = "play_arrow"
     if(p.status == "success") icon = "done";
     if(p.status == "star") icon = "star";
     if(p.status == "failure") icon = "close";
-    if(p.status == "new") icon = "play_arrow";
 
+    css_class = "normal"
     if(p.status == "success") css_class = "success";
     if(p.status == "star") css_class = "success";
     if(p.status == "failure") css_class = "failure";
-    if(p.status == "new") css_class = "normal";
+
+    if(p.tries) intentos = `<p>${p.tries} intento${p!=1 ? "s" : ""}</p>`
+    else intentos = `<p><br></p>`
+
     return `
-    <a class="problem ${css_class}" href="problems?id=${p.id}">
-        <p class="code">${p.id}</p>
+    <a class="problem ${css_class}" href="problema.html?id=${p.problem_id}">
+        <p class="code">#${tags.serie}${p.problem_id}</p>
         <i class="material-icons problem-icon">${icon}</i>
-        <p>${p.tries} intento${p!=1 ? "s" : ""}</p>
-        <p class="date">${p.deadline}</p>
+        ${intentos}
+        <p class="date">${new Date(p.deadline).toLocaleDateString('sv')}</p>
     </a>
     `
 }
 
-function insert_problems(problems) {
+function insert_given_problems(element, problems) {
+    console.log(element);
+    element.innerHTML = "";
     for(p of problems) {
         html = problem_html(p);
-        document.getElementById("problem-list").innerHTML += html
+        element.innerHTML += html
+    }
+    if(is_logged_in && user().user_name == "admin") {
+        element.innerHTML += `
+                <a class="problem normal" href="crear.html">
+                    <p class="code"><br></p>
+                    <i class="material-icons problem-icon">plus_one</i>
+                    <p><br></p>
+                    <p class="date"><br></p>
+                </a>
+`
+    }
+}
+
+function insert_problems() {
+    var elements = document.getElementsByClassName("problem-list");
+    if(!elements.length == 0) {
+        get_problems().then(problems => {
+            for(e of elements) {
+                insert_given_problems(e, problems.all_problems);
+            }
+        });
     }
 }
 
@@ -142,6 +180,7 @@ function init() {
         fill_with("fill-user_id", () => user.user_id);
         fill_with("fill-email", () => user.email);
     }
+    insert_problems();
     ele = document.getElementById("province");
     if(ele) {
         for(k in locations) {
@@ -222,4 +261,16 @@ function create_problem(form) {
     real_data["hint"] = data["hint"];
     real_data["official_solution"] = data["official_solution"];
     get_request("api/v1/admin/problem", real_data, true, "POST");
+}
+
+function load_problem() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const param = urlParams.get('id')
+    get_request(`api/v1/problems/problem/${param}`, null, false, "GET").then(data => {
+        var ele = document.getElementById("enunciado");
+        ele.innerHTML = data.statement;
+        var ele = document.getElementById("titulo");
+        ele.innerHTML = "Problema #" + data.problem_id + ele.innerHTML;
+        MathJax.typesetPromise();
+    });
 }
