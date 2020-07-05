@@ -1,4 +1,4 @@
-var host = ""
+var host = "http://localhost:8080/";
 
 function update_preview(button) {
     previewer = document.getElementById("preview");
@@ -40,7 +40,9 @@ function get_request(endpoint, payload, authorize, method) {
                         console.log(url)
                         console.log(xhr.readyState)
                         console.log(xhr.status)
-                        fail(undefined);
+                        console.log(xhr.response)
+                        var json = JSON.parse(xhr.responseText);
+                        fail(json);
                     }
                 }
             };
@@ -215,11 +217,12 @@ function is_logged_in() {
 function register(form) {
     data = extract_data(form.closest("form"));
     console.log("DATA: " + JSON.stringify(data));
-    get_request("api/v1/register", data, false, "POST").then(token => {
-        localStorage.setItem('token', token.token);
-        localStorage.setItem('expiration', token.expiration);
-        localStorage.setItem('user', JSON.stringify(token.User));
-        console.log(token);
+    get_request("api/v1/register", data, false, "POST").catch(function(err) {
+        if(err.user_id) {
+            notify("notification good", "Bien!", "Te registraste correctamente! ahora loggeate!");
+        } else {
+            notify("notification urgent", "Error!", html_escape(err.code));
+        }
     });
 }
 
@@ -230,6 +233,8 @@ function login(form) {
         localStorage.setItem('expiration', token.expiration);
         localStorage.setItem('user', JSON.stringify(token.User));
         window.location.href = "index.html";
+    }).catch(err => {
+        notify("notification urgent", "Error!", html_escape(err.code));
     });
 }
 
@@ -273,4 +278,15 @@ function load_problem() {
         ele.innerHTML = "Problema #" + data.problem_id + ele.innerHTML;
         MathJax.typesetPromise();
     });
+}
+
+function html_escape(text) {
+    var text_node = document.createTextNode(text);
+    return text_node.textContent;
+}
+
+function notify(urgency, title, text) {
+    var main = document.getElementsByTagName("main")[0];
+    // var body = document.getElementsByTagName("body")[0];
+    main.insertAdjacentHTML('beforebegin', `<div class="${urgency}"><h1>${title}</h1><p>${text}</p><div>`)
 }
