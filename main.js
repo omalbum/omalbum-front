@@ -1,4 +1,7 @@
-var host = "http://localhost:8080/";
+var host = "/"
+
+// Hack para que ande en production y en testing
+if(location.hostname == "localhost") host = "http://localhost:8080/";
 
 function update_preview(button) {
     previewer = document.getElementById("preview");
