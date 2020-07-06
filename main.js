@@ -72,18 +72,6 @@ function user() {
     else return null;
 }
 
-function login_or_profile() {
-    if(is_logged_in()) {
-        var user = JSON.parse(localStorage.getItem('user'));
-        document.getElementsByTagName("nav")[0].innerHTML
-            += `<a href="profile.html">profile<span class="username">(${user.user_name})</span></a>
-            <a href="index.html" onclick="logout();">logout</a>`
-    } else {
-        document.getElementsByTagName("nav")[0].innerHTML
-            += `<a href="login.html">login</a><a href="register.html">register</a>`
-    }
-}
-
 function logout() {
     localStorage.setItem("expiration", "");
     localStorage.setItem("token", "");
@@ -173,7 +161,6 @@ function extract_data(form) {
 
 function init() {
     console.log("init");
-    login_or_profile();
     if(is_logged_in()) {
         var user = JSON.parse(localStorage.getItem('user'));
         fill_with("fill-user_name", () => user.user_name);
@@ -181,6 +168,13 @@ function init() {
         fill_with("fill-last_name", () => user.last_name);
         fill_with("fill-user_id", () => user.user_id);
         fill_with("fill-email", () => user.email);
+        for(elem of document.getElementsByClassName("logged-out")) {
+            elem.style.display = "none";
+        }
+    } else {
+        for(elem of document.getElementsByClassName("logged-in")) {
+            elem.style.display = "none";
+        }
     }
     insert_problems();
     ele = document.getElementById("province");
