@@ -78,6 +78,16 @@ function logout() {
     localStorage.setItem("user", "");
 }
 
+function problem_view(data) {
+    return `
+<a class="problem ${data.status}" href="${data.url}">
+    <p class="code">${data.code}</p>
+    <i class="material-icons problem-icon">${data.icon}</i>
+    <p>${data.attempts}</p>
+    <p class="date">${data.date}</p>
+</a>`;
+}
+
 function problem_html(p) {
     tags = {}
     for(t of p.tags) {
@@ -90,22 +100,21 @@ function problem_html(p) {
     if(p.status == "star") icon = "star";
     if(p.status == "failure") icon = "close";
 
-    css_class = "normal"
-    if(p.status == "success") css_class = "success";
-    if(p.status == "star") css_class = "success";
-    if(p.status == "failure") css_class = "failure";
+    status = "normal"
+    if(p.status == "success") status = "success";
+    if(p.status == "star") status = "success";
+    if(p.status == "failure") status = "failure";
 
-    if(p.tries) intentos = `<p>${p.tries} intento${p!=1 ? "s" : ""}</p>`
-    else intentos = `<p><br></p>`
+    attempts = (p.attempts||0) + " intento" + (p.attempts == 1 ? "" : "s");
 
-    return `
-    <a class="problem ${css_class}" href="problema.html?id=${p.problem_id}">
-        <p class="code">#${tags.serie}${p.problem_id}</p>
-        <i class="material-icons problem-icon">${icon}</i>
-        ${intentos}
-        <p class="date">${new Date(p.deadline).toLocaleDateString('sv')}</p>
-    </a>
-    `
+    return problem_view({
+        "date": new Date(p.deadline).toLocaleDateString('sv'),
+        "attempts": attempts,
+        "code": `#${tags.series || "A"}${p.problem_id.toString().padStart(4, '0')}`,
+        "icon": icon,
+        "status": status,
+        "url": `problema.html?id=${p.problem_id}`
+    });
 }
 
 function insert_given_problems(element, problems) {
@@ -113,17 +122,16 @@ function insert_given_problems(element, problems) {
     element.innerHTML = "";
     for(p of problems) {
         html = problem_html(p);
-        element.innerHTML += html
+        element.innerHTML += html;
     }
-    if(is_logged_in && user().user_name == "admin") {
-        element.innerHTML += `
-                <a class="problem normal" href="crear.html">
-                    <p class="code"><br></p>
-                    <i class="material-icons problem-icon">plus_one</i>
-                    <p><br></p>
-                    <p class="date"><br></p>
-                </a>
-`
+    if(is_logged_in() && user().user_name == "admin") {
+        element.innerHTML += problem_view({
+            "status": "normal",
+            "code": "<br>",
+            "icon": "plus_one",
+            "attempts": "<br>",
+            "date": "<br>"
+        });
     }
 }
 
