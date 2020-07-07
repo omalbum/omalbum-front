@@ -238,20 +238,19 @@ function is_logged_in() {
 }
 
 function register(data) {
-    return get_request("api/v1/register", data, false, "POST").catch(function(err) {
-        if(err.user_id) {
-            return login({
-                "user_name": data.user_name,
-                "password": data.password,
-            })
-        } else {
-            notify("notification urgent", "Registración Fallida", html_escape(err.code));
-        }
+    return get_request("api/v1/register", data, false, "POST").then(() => {
+        return login({
+            "user_name": data.user_name,
+            "password": data.password,
+        });
+    }).catch(err => {
+        notify("notification urgent", "Registración Fallida", html_escape(err.code));
     });
 }
 
 function register_event(form) {
     data = extract_data(form.closest("form"));
+    data.school_year = parseInt(data.school_year);
     return register(data);
 }
 
@@ -327,8 +326,8 @@ function notify(urgency, title, text) {
 function attempt_problem_event(from) {
     form = form.closest("form")
     attempt_problem({
-        "problem_id": form.problem_id,
-        "answer": form.solution
+        "problem_id": parseInt(form.problem_id),
+        "answer": parseInt(form.solution),
     });
 }
 
