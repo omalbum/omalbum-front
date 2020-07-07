@@ -78,7 +78,7 @@ function user() {
     else return null;
 }
 
-function logout() {
+function logout_update() {
     localStorage.setItem("expiration", "");
     localStorage.setItem("token", "");
     localStorage.setItem("user", "");
@@ -86,6 +86,21 @@ function logout() {
         elem.style.display = "none";
     }
     for(elem of document.getElementsByClassName("logged-out")) {
+        elem.style.display = "block";
+    }
+}
+
+function login_update() {
+    my_user = user();
+    fill_with("fill-user_name", () => my_user.user_name);
+    fill_with("fill-name", () => my_user.name);
+    fill_with("fill-last_name", () => my_user.last_name);
+    fill_with("fill-user_id", () => my_user.user_id);
+    fill_with("fill-email", () => my_user.email);
+    for(elem of document.getElementsByClassName("logged-out")) {
+        elem.style.display = "none";
+    }
+    for(elem of document.getElementsByClassName("logged-in")) {
         elem.style.display = "block";
     }
 }
@@ -181,21 +196,16 @@ function extract_data(form) {
 }
 
 function init() {
-    console.log("init");
     if(is_logged_in()) {
-        var user = JSON.parse(localStorage.getItem('user'));
-        fill_with("fill-user_name", () => user.user_name);
-        fill_with("fill-name", () => user.name);
-        fill_with("fill-last_name", () => user.last_name);
-        fill_with("fill-user_id", () => user.user_id);
-        fill_with("fill-email", () => user.email);
-        for(elem of document.getElementsByClassName("logged-out")) {
-            elem.style.display = "none";
-        }
+        login_update();
     } else {
-        logout();
+        logout_update();
     }
     insert_problems();
+    province_selector();
+}
+
+function province_selector() {
     ele = document.getElementById("province");
     if(ele) {
         for(k in locations) {
@@ -312,4 +322,18 @@ function notify(urgency, title, text) {
     var main = document.getElementsByTagName("main")[0];
     // var body = document.getElementsByTagName("body")[0];
     main.insertAdjacentHTML('beforebegin', `<div class="${urgency}"><h1>${title}</h1><p>${text}</p><div>`)
+}
+
+function attempt_problem_event(from) {
+    form = form.closest("form")
+    attempt_problem({
+        "problem_id": form.problem_id,
+        "answer": form.solution
+    });
+}
+
+function attempt_problem(data) {
+    get_request("api/v1/users/answer/", data).then(x => {
+        notify("notification urgent", x, "la");
+    });
 }
