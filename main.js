@@ -102,7 +102,7 @@ function problem_view(data) {
 
 function problem_html(p) {
     tags = {}
-    for(t of p.tags) {
+    for(t of p.tags || []) {
         s = t.split(":")
         tags[s[0]] = s[1]
     }
@@ -142,7 +142,8 @@ function insert_given_problems(element, problems) {
             "code": "<br>",
             "icon": "plus_one",
             "attempts": "<br>",
-            "date": "<br>"
+            "date": "<br>",
+            "url": "crear.html"
         });
     }
 }
