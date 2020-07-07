@@ -29,18 +29,26 @@
             <a href="login.html" class="logged-out">login</a>
             <a href="register.html" class="logged-out">register</a>
             <a href="profile.html" class="logged-in">profile</a>
+            <a onclick="logout();" class="logged-in">logout</a>
         </nav>
         <main>
             <h1 id="titulo"><i class="icono material-icons"></i></h1>
             <div id="enunciado" class="enunciado math light-bg boxed">
             </div>
-            <h1>Respuesta</h1>
-            <form>
-                <div class="stretch">
-                    <input type="text" id="solution" placeholder="respuesta">
-                </div>
-                <input class="center" type="submit" value="Enviar Respuesta">
-            </form>
+            <div class="logged-in">
+                <h1>Respuesta</h1>
+                <form>
+                    <div class="stretch">
+                        <input type="text" id="solution" placeholder="respuesta">
+                    </div>
+                    <input class="center" type="submit" value="Enviar Respuesta">
+                </form>
+            </div>
+            <div class="logged-out">
+                <p>
+                    Registrate para intentar este problema!
+                </p>
+            </div>
             <p><a href="https://omaforos.com.ar/">link al foro</a> para discutir este problema</p>
         </main>
     </body>
