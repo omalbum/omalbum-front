@@ -227,28 +227,38 @@ function is_logged_in() {
     return false;
 }
 
-function register(form) {
-    data = extract_data(form.closest("form"));
-    console.log("DATA: " + JSON.stringify(data));
-    get_request("api/v1/register", data, false, "POST").catch(function(err) {
+function register(data) {
+    return get_request("api/v1/register", data, false, "POST").catch(function(err) {
         if(err.user_id) {
-            notify("notification good", "Bien!", "Te registraste correctamente! ahora loggeate!");
+            return login({
+                "user_name": data.user_name,
+                "password": data.password,
+            })
         } else {
-            notify("notification urgent", "Error!", html_escape(err.code));
+            notify("notification urgent", "Registración Fallida", html_escape(err.code));
         }
     });
 }
 
-function login(form) {
+function register_event(form) {
     data = extract_data(form.closest("form"));
-    get_request("api/v1/auth/login", data, false, "POST").then(token => {
+    return register(data);
+}
+
+function login(data) {
+    return get_request("api/v1/auth/login", data, false, "POST").then(token => {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
         localStorage.setItem('user', JSON.stringify(token.User));
         window.location.href = "index.html";
     }).catch(err => {
-        notify("notification urgent", "Error!", html_escape(err.code));
+        notify("notification urgent", "Login fallido", html_escape(err.code));
     });
+}
+
+function login_event(form) {
+    data = extract_data(form.closest("form"));
+    return login(data);
 }
 
 window.onload = init;
