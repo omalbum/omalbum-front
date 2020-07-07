@@ -62,7 +62,13 @@ function read_cookie(a) {
 }
 
 function get_problems() {
-    return get_request("api/v1/problems/all", null, false, "GET");
+    if(is_logged_in()) {
+        return get_request(`api/v1/users/${user().user_id}/album`, null, true, "GET")
+            .then(x => x.album);
+    } else {
+        return get_request("api/v1/problems/all", null, false, "GET")
+            .then(x => x.all_problems);
+    }
 }
 
 function user() {
@@ -76,6 +82,12 @@ function logout() {
     localStorage.setItem("expiration", "");
     localStorage.setItem("token", "");
     localStorage.setItem("user", "");
+    for(elem of document.getElementsByClassName("logged-in")) {
+        elem.style.display = "none";
+    }
+    for(elem of document.getElementsByClassName("logged-out")) {
+        elem.style.display = "block";
+    }
 }
 
 function problem_view(data) {
@@ -140,7 +152,7 @@ function insert_problems() {
     if(!elements.length == 0) {
         get_problems().then(problems => {
             for(e of elements) {
-                insert_given_problems(e, problems.all_problems);
+                insert_given_problems(e, problems);
             }
         });
     }
@@ -180,9 +192,7 @@ function init() {
             elem.style.display = "none";
         }
     } else {
-        for(elem of document.getElementsByClassName("logged-in")) {
-            elem.style.display = "none";
-        }
+        logout();
     }
     insert_problems();
     ele = document.getElementById("province");
