@@ -291,12 +291,12 @@ function create_problem(form) {
 
     real_data["tags"] = data["tags"].split(",");
     real_data["statement"] = data["statement"];
-    real_data["problem_id"] = data["problem_id"];
-    real_data["omaforos_problem_id"] = data["omaforos_problem_id"];
-    real_data["answer"] = data["answer"];
+    real_data["problem_id"] = parseInt(data["problem_id"]);
+    real_data["omaforos_problem_id"] = parseInt(data["omaforos_problem_id"]);
+    real_data["answer"] = parseInt(data["answer"]);
     real_data["annotations"] = data["annotations"];
     real_data["hint"] = data["hint"];
-    real_data["official_solution"] = data["official_solution"];
+    real_data["official_solution"] = parseInt(data["official_solution"]);
     get_request("api/v1/admin/problem", real_data, true, "POST");
 }
 
