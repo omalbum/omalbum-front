@@ -1,4 +1,4 @@
-# TeleOMA Frontend
+# OMAlbum Frontend
 
 ## Testing locally
 To start the server, run `./server.py`.
