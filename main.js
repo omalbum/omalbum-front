@@ -323,16 +323,18 @@ function notify(urgency, title, text) {
     main.insertAdjacentHTML('beforebegin', `<div class="${urgency}"><h1>${title}</h1><p>${text}</p><div>`)
 }
 
-function attempt_problem_event(from) {
+function attempt_problem_event(form) {
+    const urlParams = new URLSearchParams(window.location.search);
+	const param = parseInt(urlParams.get('id'));
     form = form.closest("form")
     attempt_problem({
-        "problem_id": parseInt(form.problem_id),
-        "answer": parseInt(form.solution),
+        "problem_id": param,
+        "answer": parseInt(form.solution.value),
     });
 }
 
 function attempt_problem(data) {
-    get_request("api/v1/users/answer/", data).then(x => {
-        notify("notification urgent", x, "la");
+    get_request("api/v1/users/answer/", data,true,"POST").then(x => {
+        notify("notification urgent", x.result, x.result);
     });
 }
