@@ -324,9 +324,11 @@ function notify(urgency, title, text) {
 }
 
 function attempt_problem_event(form) {
+    const urlParams = new URLSearchParams(window.location.search);
+	const param = parseInt(urlParams.get('id'));
     form = form.closest("form")
     attempt_problem({
-        "problem_id": parseInt(urlParams.get('id')),
+        "problem_id": param,
         "answer": parseInt(form.solution.value),
     });
 }
