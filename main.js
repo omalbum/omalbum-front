@@ -326,8 +326,8 @@ function notify(urgency, title, text) {
 function attempt_problem_event(form) {
     form = form.closest("form")
     attempt_problem({
-        "problem_id": parseInt(form.problem_id),
-        "answer": parseInt(form.solution),
+        "problem_id": parseInt(urlParams.get('id')),
+        "answer": parseInt(form.solution.value),
     });
 }
 
