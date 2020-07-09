@@ -137,7 +137,7 @@ function problem_html(p) {
     return problem_view({
         "date": new Date(p.deadline).toLocaleDateString('sv'),
         "attempts": attempts,
-        "code": `#${tags.series || "A"}${p.problem_id.toString().padStart(4, '0')}`,
+        "code": `#${p.series}${p.problem_id.toString().padStart(4, '0')}`,
         "icon": icon,
         "status": status,
         "url": `problema.html?id=${p.problem_id}`
@@ -296,6 +296,7 @@ function create_problem(form) {
     real_data["answer"] = parseInt(data["answer"]);
     real_data["annotations"] = data["annotations"];
     real_data["hint"] = data["hint"];
+    real_data["series"] = data["series"];
     real_data["official_solution"] = parseInt(data["official_solution"]);
     get_request("api/v1/admin/problem", real_data, true, "POST");
 }
