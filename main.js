@@ -334,7 +334,7 @@ function attempt_problem_event(form) {
 }
 
 function attempt_problem(data) {
-    get_request("api/v1/users/answer/", data).then(x => {
-        notify("notification urgent", x, "la",true,"POST");
+    get_request("api/v1/users/answer/", data,true,"POST").then(x => {
+        notify("notification urgent", x, "la");
     });
 }
