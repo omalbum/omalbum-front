@@ -1,9 +1,10 @@
+/*
 // https://stackoverflow.com/a/25490531
 function read_cookie(a) {
     var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
 }
-
+*/
 
 function is_logged_in() {
     expiration = localStorage.getItem('expiration')

@@ -18,20 +18,7 @@ function register_event(form) {
 	return register_with_validation(payload);
 }
 
-function validate_register_payload(payload){
-	// to do: agregar todas las validaciones
-	var validation_failures = [];
-	if(! is_nontrivial(payload["name"]) ){
-		validation_failures.push({ field:"Nombre", error: "No puede quedar vacío" });
-	}
-	if(! is_nontrivial(payload["last_name"]) ){
-		validation_failures.push({ field:"Apellido", error: "No puede quedar vacío" });
-	}
-	if(! is_email(payload["email"]) ){
-		validation_failures.push({ field:"Email", error: "Email no válido" });
-	}
-	return validation_failures;
-}
+
 
 function feedback_register_validation_fails(validation_failures){
 	clear_notifications();

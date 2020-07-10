@@ -25,17 +25,6 @@ function create_problem_with_validation(payload){
 	create_problem_request(payload); //acá sería mejor manejar el error
 }
 
-function validate_create_problem_payload(payload){
-	// to do: agregar todas las validaciones
-	var validation_failures = [];
-	if(! is_nontrivial( payload["statement"] ) ){
-		validation_failures.push({ field:"Enunciado", error: "No puede quedar vacío" });
-	}
-	if(! is_nontrivial( payload["series"] ) ){
-		validation_failures.push({ field:"Serie", error: "No puede quedar vacío" });
-	}
-	return validation_failures;
-}
 
 function feedback_create_problem_validation_fails(validation_failures){
 	clear_notifications();
