@@ -1,10 +1,13 @@
-function register(data) {
-    return get_request("api/v1/register", data, false, "POST").then(() => {
-        return login({
-            "user_name": data.user_name,
-            "password": data.password,
-        });
+function register_with_validation(payload) {
+	validation_failures = validate_register_payload(payload);
+	if( validation_failures.length >0 ){
+		feedback_register_validation_fails(validation_failures);
+		return;
+	}
+    return register_request(payload).then(() => {
+        return login(payload.user_name, payload.password);
     }).catch(err => {
+		clear_notifications();
         notify("notification urgent", "Registración Fallida", html_escape(err.code));
     });
 }
@@ -12,12 +15,7 @@ function register(data) {
 function register_event(form) {
     payload = extract_data(form.closest("form"));
     payload.school_year = parseInt(payload.school_year);
-	validation_failures = validate_register_payload(payload);
-	if( validation_failures.length == 0 ){
-	    return register(data);
-	}else{
-		feedback_register_validation_fails(validation_failures);
-	}
+	return register_with_validation(payload);
 }
 
 function validate_register_payload(payload){

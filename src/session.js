@@ -12,8 +12,8 @@ function is_logged_in() {
 }
 
 
-function login(data) {
-    return get_request("api/v1/auth/login", data, false, "POST").then(token => {
+function login(user_name, password) {
+    return login_request({ "user_name": user_name, "password": password }).then(token => {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
         localStorage.setItem('user', JSON.stringify(token.User));
@@ -25,7 +25,7 @@ function login(data) {
 
 function login_event(form) {
     data = extract_data(form.closest("form"));
-    return login(data);
+    return login(data["user_name"], data["password"]);
 }
 
 function user() {
@@ -49,11 +49,11 @@ function logout_update() {
 
 function login_update() {
     my_user = user();
-    fill_with("fill-user_name", () => my_user.user_name);
-    fill_with("fill-name", () => my_user.name);
-    fill_with("fill-last_name", () => my_user.last_name);
-    fill_with("fill-user_id", () => my_user.user_id);
-    fill_with("fill-email", () => my_user.email);
+    fill_with("fill-user_name", () => my_user["user_name"]);
+    fill_with("fill-name", () => my_user["name"]);
+    fill_with("fill-last_name", () => my_user["last_name"]);
+    fill_with("fill-user_id", () => my_user["user_id"]);
+    fill_with("fill-email", () => my_user["email"]);
     for(elem of document.getElementsByClassName("logged-out")) {
         elem.style.display = "none";
     }

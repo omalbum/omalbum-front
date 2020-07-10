@@ -1,7 +1,7 @@
 function load_problem() {
     const urlParams = new URLSearchParams(window.location.search);
-    const param = urlParams.get('id')
-    get_request(`api/v1/problems/problem/${param}`, null, false, "GET").then(data => {
+    const problem_id = urlParams.get('id');
+    get_problem_request(problem_id).then(data => {
         var ele = document.getElementById("enunciado");
         ele.innerHTML = data.statement;
         var ele = document.getElementById("titulo");
@@ -14,16 +14,17 @@ function load_problem() {
 function attempt_problem_event(form) {
     const urlParams = new URLSearchParams(window.location.search);
 	const param = parseInt(urlParams.get('id'));
-    form = form.closest("form")
-    attempt_problem({
+    form = form.closest("form");
+	payload = {
         "problem_id": param,
         "answer": parseInt(form.solution.value),
-    });
+    };
+    attempt_problem(payload);
 }
 
-function attempt_problem(data) {
+function attempt_problem(payload) {
 	clear_notifications();
-    get_request("api/v1/users/answer/", data,true,"POST").then(attempt_feedback_for_user, attempt_error_manager);
+    attempt_problem_request(payload).then(attempt_feedback_for_user, attempt_error_manager);
 }
 
 function attempt_feedback_for_user(x){

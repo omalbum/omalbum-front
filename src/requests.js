@@ -1,3 +1,27 @@
+function register_request(payload){
+	return get_request("api/v1/register", payload, false, "POST");
+}
+
+function login_request(payload){
+	return get_request("api/v1/auth/login", payload, false, "POST");
+}
+
+function get_all_problems_request(){
+	return get_request("api/v1/problems/all", null, false, "GET");
+}
+
+function get_album_request(user_id){
+	return get_request("api/v1/users/" + user_id.toString() + "/album", null, true, "GET");
+}
+
+function get_problem_request(problem_id){
+	return get_request("api/v1/problems/problem/" + problem_id.toString(), null, false, "GET");
+}
+
+function attempt_problem_request(payload){
+    return get_request("api/v1/users/answer/",payload,true,"POST");
+}
+
 // https://stackoverflow.com/a/24468752
 function get_request(endpoint, payload, authorize, method) {
     return new Promise (

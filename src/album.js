@@ -1,10 +1,8 @@
 function get_problems() {
     if(is_logged_in()) {
-        return get_request(`api/v1/users/${user().user_id}/album`, null, true, "GET")
-            .then(x => x.album);
+        return get_album_request( user().user_id ).then(x => x.album);
     } else {
-        return get_request("api/v1/problems/all", null, false, "GET")
-            .then(x => x.all_problems);
+        return get_all_problems_request().then(x => x.all_problems);
     }
 }
 
