@@ -1,29 +1,33 @@
 function register_request(payload){
-	return get_request("api/v1/register", payload, false, "POST");
+	return do_request("api/v1/register", payload, false, "POST");
 }
 
 function login_request(payload){
-	return get_request("api/v1/auth/login", payload, false, "POST");
+	return do_request("api/v1/auth/login", payload, false, "POST");
 }
 
 function get_all_problems_request(){
-	return get_request("api/v1/problems/all", null, false, "GET");
+	return do_request("api/v1/problems/all", null, false, "GET");
 }
 
 function get_album_request(user_id){
-	return get_request("api/v1/users/" + user_id.toString() + "/album", null, true, "GET");
+	return do_request("api/v1/users/" + user_id.toString() + "/album", null, true, "GET");
 }
 
 function get_problem_request(problem_id){
-	return get_request("api/v1/problems/problem/" + problem_id.toString(), null, false, "GET");
+	return do_request("api/v1/problems/problem/" + problem_id.toString(), null, false, "GET");
 }
 
 function attempt_problem_request(payload){
-    return get_request("api/v1/users/answer/",payload,true,"POST");
+    return do_request("api/v1/users/answer/",payload,true,"POST");
+}
+
+function create_problem_request(payload){
+	return 	do_request("api/v1/admin/problem", payload, true, "POST");
 }
 
 // https://stackoverflow.com/a/24468752
-function get_request(endpoint, payload, authorize, method) {
+function do_request(endpoint, payload, authorize, method) {
     return new Promise (
         function(callback, fail) {
             var xhr = new XMLHttpRequest();
