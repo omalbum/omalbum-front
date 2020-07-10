@@ -392,6 +392,12 @@ p {
     color: white;
 }
 
+.wait {
+    background: #87CEFA;
+    color: white;
+}
+
+
 .notification h1, .notification p {
     margin: 0;
     padding: 0;

@@ -22,7 +22,24 @@ function attempt_problem_event(form) {
 }
 
 function attempt_problem(data) {
-    get_request("api/v1/users/answer/", data,true,"POST").then(x => {
-        notify("notification urgent", x.result, x.result);
-    });
+    get_request("api/v1/users/answer/", data,true,"POST").then(attempt_feedback_for_user, attempt_error_manager);
+}
+
+function attempt_feedback_for_user(x){
+	if(x.result=="correct"){
+		return notify("notification good", "Bien!", "La solución es correcta");
+	}
+	if(x.result=="incorrect"){
+		return notify("notification urgent", "Qué lástima!", "La solución es incorrecta");
+	}
+	if(x.result=="wait"){
+		return notify("notification wait", "Paciencia!", "Tenés que esperar hasta las "+ x.deadline + " para saber si tu solución es correcta.");
+	}
+}
+
+function attempt_error_manager(x){
+	if(x.code=="problem_already_attempted_during_contest"){
+		return notify("notification urgent", "Error!", "Ya intentaste este problema durante la prueba.");
+
+	}
 }
