@@ -29,6 +29,9 @@ function validate_register_payload(payload){
 	if(payload["last_name"]==""){
 		validation_failures.push({ field:"Apellido", error: "No puede quedar vacío" });
 	}
+	if(! payload["email"].includes("@") ){
+		validation_failures.push({ field:"Email", error: "Email no válido" });
+	}
 	return validation_failures;
 }
 
