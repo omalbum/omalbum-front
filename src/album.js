@@ -28,7 +28,7 @@ function problem_html(p) {
     return problem_view({
         "date": new Date(p.deadline).toLocaleDateString('sv'),
         "attempts": attempts,
-        "code": `#${p.series}${p.problem_id.toString().padStart(4, '0')}`,
+        "code": `#${p.series}${p.number_in_series.toString().padStart(4, '0')}`,
         "icon": icon,
         "status": status,
         "url": `problema.html?id=${p.problem_id}`

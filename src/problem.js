@@ -5,7 +5,7 @@ function load_problem() {
         var ele = document.getElementById("enunciado");
         ele.innerHTML = data.statement;
         var ele = document.getElementById("titulo");
-        ele.innerHTML = "Problema #" + data.problem_id + ele.innerHTML;
+        ele.innerHTML = "Problema #" +data.series+ data.number_in_series.toString().padStart(4, '0') + ele.innerHTML;
         MathJax.typesetPromise();
     });
 }
