@@ -17,6 +17,11 @@ function is_alphanumeric_without_accents(s){
 	return s.match(/^[0-9a-zA-Z]+$/)!=null;
 }
 
+function is_valid_password(s){
+	l = s.length;
+	return (6<= l ) && (l<=20);
+}
+
 
 function validate_register_payload(payload){
 	// to do: agregar todas las validaciones
@@ -30,6 +35,10 @@ function validate_register_payload(payload){
 	if(! is_valid_email(payload["email"]) ){
 		validation_failures.push({ field:"Email", error: "Email no válido" });
 	}
+	if(! is_valid_email(payload["password"]) ){
+		validation_failures.push({ field:"Password", error: "Debe tener entre 6 y 20 caracteres." });
+	}
+
 	if(! is_valid_user_name(payload["user_name"]) ){
 		validation_failures.push({ field:"Nombre de usuario", error: "Solamente puede tener letras minúsculas, mayúsculas y números (sin acentos ni espacios)." });
 	}
