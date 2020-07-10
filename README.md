@@ -2,6 +2,9 @@
 
 ## Testing locally
 To start the server, run `./server.py`.
+
+To recompile run `make`
+
 The webpage can be accessed at `https://localhost:8003/index.html`
 
 ## Build and Run on Testing Server -
