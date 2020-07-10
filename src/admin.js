@@ -5,10 +5,10 @@ function create_problem_event(form) {
 		release_date : date_string(data["date:release_date"], data["time:release_date"]),
 		tags : data["tags"].split(","),
 		statement : data["statement"],
-		problem_id : parseInt(data["problem_id"]), // ojo con esto!
 		omaforos_post_id : parseInt(data["omaforos_post_id"]),
 		answer : parseInt(data["answer"]),
 		annotations : data["annotations"],
+		is_draft : data["is_draft"],
 		hint : data["hint"],
 		series : data["series"],
 		official_solution : parseInt(data["official_solution"]),
