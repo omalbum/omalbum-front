@@ -35,6 +35,10 @@ function user() {
     else return null;
 }
 
+function is_admin(){
+	return user()["is_admin"];
+}
+
 function logout_update() {
     localStorage.setItem("expiration", "");
     localStorage.setItem("token", "");

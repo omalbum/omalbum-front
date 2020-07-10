@@ -42,7 +42,7 @@ function insert_given_problems(element, problems) {
         html = problem_html(p);
         element.innerHTML += html;
     }
-    if(is_logged_in() && user().user_name == "admin") {
+    if( is_logged_in() && is_admin() ) {
         element.innerHTML += problem_view({
             "status": "normal",
             "code": "<br>",
