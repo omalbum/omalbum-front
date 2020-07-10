@@ -22,6 +22,7 @@ function attempt_problem_event(form) {
 }
 
 function attempt_problem(data) {
+	clear_notifications();
     get_request("api/v1/users/answer/", data,true,"POST").then(attempt_feedback_for_user, attempt_error_manager);
 }
 
@@ -38,6 +39,7 @@ function attempt_feedback_for_user(x){
 }
 
 function attempt_error_manager(x){
+	clear_notifications();
 	if(x.code=="problem_already_attempted_during_contest"){
 		return notify("notification urgent", "Error!", "Ya intentaste este problema durante la prueba.");
 
