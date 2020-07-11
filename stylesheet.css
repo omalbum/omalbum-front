@@ -407,3 +407,10 @@ p {
     background: #800;
     color: white;
 }
+
+.logged-in{
+	display:none;
+}
+.logged-out{
+	display:none;
+}
