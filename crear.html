@@ -37,19 +37,17 @@
             <form>
                 <p class="tit">Enunciado</p>
                 <div class="stretch padded">
-                    <textarea class="input" name="statement" type="text" rows="2" id="statement">Sea \(n \in \mathbb{Z}\). Demostrar que \(n^2 \geq 0\).
-                    </textarea>
+                    <textarea class="input" name="statement" type="text" rows="2" id="statement" placeholder="Sea \(n \in \mathbb{Z}\). Demostrar que \(n^2 \geq 0\)."></textarea>
                 </div>
                 <button class="margin" type="button" onclick="update_preview(this)" for="statement">Preview</button>
                 <p class="tit">Solución Oficial</p>
                 <div class="stretch padded">
-                    <textarea class="input" name="official_solution" type="text" rows="2" id="solution">anotaciones
-                    </textarea>
+                    <textarea class="input" name="official_solution" type="text" rows="2" id="solution" placeholder="Menos por menos es más."></textarea>
                 </div>
                 <button type="button" class="margin" onclick="update_preview(this)" for="solution">Preview</button>
                 <p class="tit">Hint</p>
                 <div class="stretch padded">
-                    <textarea class="input" name="hint" type="text" rows="2" id="hint">hints</textarea>
+                    <textarea class="input" name="hint" type="text" rows="2" id="hint" placeholder="Acá se puede poner hints"></textarea>
                 </div>
                 <button type="button" class="margin" onclick="update_preview(this)" for="hint">Preview</button>
                 <div class="boxed light-bg">
@@ -62,11 +60,11 @@
                 </div>
                 <p class="tit">ID del post del problema en OMAforos</p>
                 <div class="stretch">
-                    <input name="omaforos_post_id" type="integer">
+                    <input name="omaforos_post_id" type="number" min="0" step="1">
                 </div>
                 <p class="tit">Respuesta</p>
                 <div class="stretch">
-                    <input name="answer" type="integer">
+                    <input name="answer" type="number" step="1">
                 </div>
                 <p class="tit">Fecha y Hora de inicio</p>
                 <div class="stretch">
@@ -89,7 +87,7 @@
                 </div>
                 <div class="left">
                     <p class="tit">draft?</p>
-                    <input type="checkbox" list="boolean" name="is_draft" value="true">
+                    <input type="checkbox" list="boolean" name="is_draft" checked="true">
                 </div>
                 <button class="margin" type="button" onclick="create_problem_event(this)">Crear Problema</button>
             </form>

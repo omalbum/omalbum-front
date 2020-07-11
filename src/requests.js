@@ -51,7 +51,7 @@ function do_request(endpoint, payload, authorize, method) {
             xhr.onreadystatechange = function () {
                 if(xhr.readyState == XMLHttpRequest.DONE) {
                     if (200 <= xhr.status && xhr.status < 300) {
-                        console.log("PAYLAOD: " + endpoint + " + " + payload + " => " + xhr.responseText);
+                        console.log("PAYLOAD: " + endpoint + " + " + payload + " => " + xhr.responseText);
                         var json = JSON.parse(xhr.responseText);
                         callback(json);
                     } else {
