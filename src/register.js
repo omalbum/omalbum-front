@@ -58,7 +58,28 @@ function reset_departments() {
 }
 
 function event_updated_country(elem) {
-    if(elem.value == "Argentina") {
+    for(e of document.getElementsByClassName("if-argentinian")) {
+        e.style.display = elem.value == "Argentina" ? "block" : "none";
+    }
+    for(e of document.getElementsByClassName("if-not-argentinian")) {
+        e.style.display = elem.value == "Argentina" ? "none" : "block";
+    }
+}
 
+function event_updated_student(elem) {
+    for(e of document.getElementsByClassName("if-student")) {
+        e.style.display = elem.value == "true" ? "block" : "none";
+    }
+    for(e of document.getElementsByClassName("if-not-student")) {
+        e.style.display = elem.value == "true" ? "none" : "block";
+    }
+}
+
+function event_updated_professor(elem) {
+    for(e of document.getElementsByClassName("if-professor")) {
+        e.style.display = elem.value == "true" ? "block" : "none";
+    }
+    for(e of document.getElementsByClassName("if-not-professor")) {
+        e.style.display = elem.value == "true" ? "none" : "block";
     }
 }
