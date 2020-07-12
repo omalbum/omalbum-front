@@ -23,7 +23,7 @@ function fill_with(class_name, action) {
 function extract_data(form) {
     var data = {};
     for(elem of Array.from(form.getElementsByTagName("input")).concat(Array.from(form.getElementsByClassName("input")))) {
-        if(elem.name) {
+        if(elem.name && elem.offsetParent) {
             if(elem.type == "checkbox") {
                 value = elem.checked;
             } else {

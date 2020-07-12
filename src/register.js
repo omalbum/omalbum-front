@@ -15,6 +15,10 @@ function register_with_validation(payload) {
 function register_event(form) {
     payload = extract_data(form.closest("form"));
     payload.school_year = parseInt(payload.school_year);
+    payload.gender = {
+        "masculino": "male",
+        "femenino": "female",
+        "prefiero no responder": ""}[payload.gender] || "other";
 	return register_with_validation(payload);
 }
 
@@ -53,3 +57,8 @@ function reset_departments() {
     }
 }
 
+function event_updated_country(elem) {
+    if(elem.value == "Argentina") {
+
+    }
+}
