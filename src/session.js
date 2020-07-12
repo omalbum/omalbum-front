@@ -6,6 +6,11 @@ function read_cookie(a) {
 }
 */
 
+function do_logout() {
+	logout_update();
+	location.reload();
+}
+
 function is_logged_in() {
     expiration = localStorage.getItem('expiration')
     if(expiration) return Date.parse(expiration) > Date.now();
