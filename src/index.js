@@ -63,7 +63,7 @@ function insert_index_problems(){
 function index_problem_view(p, is_active, tbdy) {
 	var tr = document.createElement("TR");
 	tbdy.appendChild(tr);
-	problem_code = get_problem_code_to_show(p);
+	var problem_code = get_problem_code_to_show(p);
 	if (is_active){
 		return get_problem_stats(user().user_id, p.problem_id).then(stats => {
 			var link = document.createElement("a");
@@ -74,7 +74,7 @@ function index_problem_view(p, is_active, tbdy) {
 			td.appendChild(link);
 			tr.appendChild(td);
 			var td2=document.createElement("TD");
-			td2.appendChild(document.createTextNode(get_nice_date_to_show(p.release_date)));
+			td2.appendChild(document.createTextNode(get_nice_date_to_show(p.deadline)));
 			tr.appendChild(td2);
 			var td3=document.createElement("TD");
 			if (stats.solved){
@@ -85,7 +85,6 @@ function index_problem_view(p, is_active, tbdy) {
 				td3.appendChild(document.createTextNode("Todavía no lo intentas, mandate!"));
 			}
 			tr.appendChild(td3);
-			return tr;
 		});
 	} else {
 		var td = document.createElement("TD");
@@ -94,7 +93,6 @@ function index_problem_view(p, is_active, tbdy) {
 		var td = document.createElement("TD");
 		td.appendChild(document.createTextNode(get_nice_date_to_show(p.release_date)));
 		tr.appendChild(td);
-		return tr;
 	}
 }
 
