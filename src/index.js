@@ -20,7 +20,7 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	var td = document.createElement("th");
 	td.appendChild(document.createTextNode("Hasta cuando está activo"));
 	head.appendChild(td);
-	if (is_active){
+	if (is_active && is_logged_in()){
 		var td = document.createElement("th");
 		td.appendChild(document.createTextNode("Intentado?"));
 		head.appendChild(td);
@@ -65,7 +65,29 @@ function index_problem_view(p, is_active, tbdy) {
 	tbdy.appendChild(tr);
 	var problem_code = get_problem_code_to_show(p);
 	if (is_active){
-		return get_problem_stats(user().user_id, p.problem_id).then(stats => {
+		if (is_logged_in()){
+			return get_problem_stats(user().user_id, p.problem_id).then(stats => {
+				var link = document.createElement("a");
+				link.appendChild(document.createTextNode(problem_code));
+				link.href = get_problem_url(p);
+				var td = document.createElement("TD");
+				td.width = "75";
+				td.appendChild(link);
+				tr.appendChild(td);
+				var td2=document.createElement("TD");
+				td2.appendChild(document.createTextNode(get_nice_date_to_show(p.deadline)));
+				tr.appendChild(td2);
+				var td3=document.createElement("TD");
+				if (stats.solved){
+					td3.appendChild(document.createTextNode("Ya lo resolviste!"));
+				} else if (stats.attempts > 0){
+					td3.appendChild(document.createTextNode("Ya enviaste una respuesta incorrecta, no podés seguir enviando hasta que se termine la competencia"));
+				} else {
+					td3.appendChild(document.createTextNode("Todavía no lo intentas, mandate!"));
+				}
+				tr.appendChild(td3);
+			});
+		} else {
 			var link = document.createElement("a");
 			link.appendChild(document.createTextNode(problem_code));
 			link.href = get_problem_url(p);
@@ -76,16 +98,7 @@ function index_problem_view(p, is_active, tbdy) {
 			var td2=document.createElement("TD");
 			td2.appendChild(document.createTextNode(get_nice_date_to_show(p.deadline)));
 			tr.appendChild(td2);
-			var td3=document.createElement("TD");
-			if (stats.solved){
-				td3.appendChild(document.createTextNode("Ya lo resolviste!"));
-			} else if (stats.attempts > 0){
-				td3.appendChild(document.createTextNode("Ya enviaste una respuesta incorrecta, no podés seguir enviando hasta que se termine la competencia"));
-			} else {
-				td3.appendChild(document.createTextNode("Todavía no lo intentas, mandate!"));
-			}
-			tr.appendChild(td3);
-		});
+		}
 	} else {
 		var td = document.createElement("TD");
 		td.appendChild(document.createTextNode(problem_code));

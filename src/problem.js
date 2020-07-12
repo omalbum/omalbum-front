@@ -15,6 +15,9 @@ function load_problem() {
     });
 }
 
+function is_valid_answer(answer_string){
+	return answer_string.match(/^-?[0-9]+$/) != null;
+}
 
 function attempt_problem_event(form) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -25,6 +28,10 @@ function attempt_problem_event(form) {
 		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero.");
 	}
     form = form.closest("form");
+    var answer = form.solution.value
+    if (!is_valid_answer(answer)){
+    	return notify("notification wait", "Intento incorrecto", "La solución debe constar únicamente de números");
+    }
 	payload = {
         "problem_id": param,
         "answer": parseInt(answer),
