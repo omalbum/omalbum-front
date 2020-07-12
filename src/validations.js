@@ -22,6 +22,16 @@ function is_valid_password(s){
 	return (6<= l ) && (l<=20);
 }
 
+function is_valid_birth_date(s) {
+	if (s === "") return false;
+	nums = s.split("-");
+	return parseInt(nums[0]) > 1920; 
+}
+
+function is_valid_country(s) {
+	return is_nontrivial(s);
+}
+
 
 function validate_register_payload(payload){
 	// to do: agregar todas las validaciones
@@ -41,6 +51,14 @@ function validate_register_payload(payload){
 
 	if(! is_valid_user_name(payload["user_name"]) ){
 		validation_failures.push({ field:"Nombre de usuario", error: "Solamente puede tener letras minúsculas, mayúsculas y números (sin acentos ni espacios)." });
+	}
+	
+	if(! is_valid_birth_date(payload["birth_date"]) ){
+		validation_failures.push({ field:"Fecha de nacimiento", error: "No puede quedar vacía" });
+	}
+	
+	if(! is_valid_country(payload["country"]) ){
+		validation_failures.push({ field:"País", error: "No puede quedar vacío" });
 	}
 
 	return validation_failures;
