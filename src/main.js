@@ -1,3 +1,11 @@
+function create_header_button(link, text, clsName) {
+	var link_object = document.createElement("a");
+	link_object.href = link;
+	link_object.className = clsName;
+	link_object.appendChild(document.createTextNode(text));
+	return link_object;
+}
+
 function create_header_nav() {
 	var navs = document.getElementsByClassName("header-nav");
 	if (navs.length > 0) {
@@ -12,44 +20,22 @@ function create_header_nav() {
 			omalbum.className = "h1";
 			omalbum.appendChild(document.createTextNode("OMAlbum"));
 			span.appendChild(omalbum);
-			var inicio = document.createElement("a");
-			inicio.href = "index.html";
-			inicio.appendChild(document.createTextNode("inicio"));
-			nav.appendChild(inicio);
-			
-			var problemas = document.createElement("a");
-			problemas.href = "problemas.html";
-			problemas.appendChild(document.createTextNode("problemas"));
-			nav.appendChild(problemas);
-			
-			var login = document.createElement("a");
-			login.href = "login.html";
-			login.className = "logged-out";
-			login.appendChild(document.createTextNode("login"));
-			nav.appendChild(login);
-			
-			var register = document.createElement("a");
-			register.href = "register.html";
-			register.className = "logged-out";
-			register.appendChild(document.createTextNode("register"));
-			nav.appendChild(register);
-			
-			var profile = document.createElement("a");
-			profile.href = "profile.html";
-			profile.className = "logged-in";
-			profile.appendChild(document.createTextNode("profile "));
+
+			nav.appendChild(create_header_button("index.html", "inicio", null));
+			nav.appendChild(create_header_button("problemas.html", "problemas", null));
+			nav.appendChild(create_header_button("login.html", "login", "logged-out"));
+			nav.appendChild(create_header_button("register.html", "register", "logged-out"));
+
+			var profile = create_header_button("profile.html", "profile ", "logged-in")
 			var profile_em = document.createElement("em");
 			profile_em.className = "fill-user_name";
 			profile.appendChild(profile_em);
 			nav.appendChild(profile);
 			
-			var logout = document.createElement("a");
-			logout.href = "";
+			var logout = create_header_button("", "logout", "logged-in");
 			logout.onclick = function() {
 				do_logout();
 			}
-			logout.className = "logged-in";
-			logout.appendChild(document.createTextNode("logout"));
 			nav.appendChild(logout);
 		}
 	}
