@@ -50,6 +50,7 @@ function init() {
     }
     insert_problems();
     province_selector();
+    insert_index_problems();
 }
 
 window.onload = init;

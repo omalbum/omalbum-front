@@ -33,10 +33,10 @@ function problem_html(p) {
     return problem_view({
         "date": (p.solved ? new Date(p.date_solved).toLocaleDateString('sv') : ""),
         "attempts": attempts,
-        "code": `#${p.series}${p.number_in_series.toString().padStart(4, '0')}`,
+        "code": get_problem_code_to_show(p),
         "icon": icon,
         "status": status,
-        "url": `problema.html?id=${p.problem_id}`
+        "url": get_problem_url(p)
     });
 }
 

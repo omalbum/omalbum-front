@@ -37,6 +37,14 @@ function attempt_problem(payload) {
     attempt_problem_request(payload).then(attempt_feedback_for_user, attempt_error_manager);
 }
 
+function get_problem_code_to_show(p){
+	return `#${p.series}${p.number_in_series.toString().padStart(4, '0')}`;
+}
+
+function get_problem_url(p){
+	return `problema.html?id=${p.problem_id}`;
+}
+
 function attempt_feedback_for_user(x){
 	if(x.result=="correct"){
 		return notify("notification good", "Bien!", "La solución es correcta");
