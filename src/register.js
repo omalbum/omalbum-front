@@ -19,6 +19,8 @@ function register_event(form) {
         "masculino": "male",
         "femenino": "female",
         "prefiero no responder": ""}[payload.gender] || "other";
+    payload.is_professor = undefined;
+    payload.is_student = payload.is_student == "true";
 	return register_with_validation(payload);
 }
 
