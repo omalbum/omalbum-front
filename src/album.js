@@ -14,14 +14,19 @@ function problem_html(p) {
     }
 
     icon = "play_arrow"
-    if(p.solved) icon = "done";
-    if(p.solved_during_contest) icon = "star";
-    if(p.status == "failure") icon = "close";
-
     status = "normal"
-    if(p.status == "success") status = "success";
-    if(p.status == "star") status = "success";
-    if(p.status == "failure") status = "failure";
+    if (p.solved) {
+    	icon = "done";
+    	status = "success";
+    }
+    if (p.solved_during_contest){
+    	icon = "star";
+    	status = "success";
+    }
+    if (p.status == "failure") {
+    	icon = "close";
+    	status = "failure";
+    }
 
     attempts = (p.attempts||0) + " intento" + (p.attempts == 1 ? "" : "s");
 
