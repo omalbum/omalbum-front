@@ -14,19 +14,24 @@ function problem_html(p) {
     }
 
     icon = "play_arrow"
-    if(p.status == "success") icon = "done";
-    if(p.status == "star") icon = "star";
-    if(p.status == "failure") icon = "close";
-
     status = "normal"
-    if(p.status == "success") status = "success";
-    if(p.status == "star") status = "success";
-    if(p.status == "failure") status = "failure";
+    if (p.solved) {
+    	icon = "done";
+    	status = "success";
+    }
+    if (p.solved_during_contest){
+    	icon = "star";
+    	status = "success";
+    }
+    if (p.status == "failure") {
+    	icon = "close";
+    	status = "failure";
+    }
 
     attempts = (p.attempts||0) + " intento" + (p.attempts == 1 ? "" : "s");
 
     return problem_view({
-        "date": new Date(p.deadline).toLocaleDateString('sv'),
+        "date": (p.solved ? new Date(p.date_solved).toLocaleDateString('sv') : ""),
         "attempts": attempts,
         "code": `#${p.series}${p.number_in_series.toString().padStart(4, '0')}`,
         "icon": icon,
