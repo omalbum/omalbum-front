@@ -43,19 +43,19 @@ function problem_html(p) {
 function insert_given_problems(element, problems) {
     console.log(element);
     element.innerHTML = "";
-    for(p of problems.sort(compare_problems)) {
-        html = problem_html(p);
-        element.innerHTML += html;
-    }
     if( is_logged_in() && is_admin() ) {
         element.innerHTML += problem_view({
             "status": "normal",
             "code": "<br>",
-            "icon": "plus_one",
+            "icon": "create",
             "attempts": "<br>",
             "date": "<br>",
-            "url": "crear.html"
+            "url": "admin.html"
         });
+    }
+    for(p of problems.sort(compare_problems)) {
+        html = problem_html(p);
+        element.innerHTML += html;
     }
 }
 
