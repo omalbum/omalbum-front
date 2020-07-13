@@ -67,6 +67,10 @@ function get_problem_stats(user_id, problem_id){
 	return do_request("api/v1/users/"+ user_id.toString() + "/attempts/" + problem_id.toString(), null, true, "GET");
 }
 
+function get_schools_matching_request(payload){
+	return 	do_request("api/v1/schools/" + payload.text, null, false, "GET");
+}
+
 // https://stackoverflow.com/a/24468752
 function do_request(endpoint, payload, authorize, method) {
     return new Promise (
