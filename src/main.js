@@ -49,6 +49,7 @@ function init() {
         logout_update();
     }
     insert_problems();
+	insert_problems_admin();
     province_selector();
 }
 

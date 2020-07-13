@@ -10,6 +10,11 @@ function get_all_problems_request(){
 	return do_request("api/v1/problems/all", null, false, "GET");
 }
 
+function get_all_problems_admin_request(){
+	return do_request("api/v1/admin/problems/all", null, true, "GET");
+}
+
+
 function get_album_request(user_id){
 	return do_request("api/v1/users/" + user_id.toString() + "/album", null, true, "GET");
 }

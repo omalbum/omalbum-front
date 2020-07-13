@@ -35,3 +35,24 @@ function extract_data(form) {
     return data;
 }
 
+function padding_number_in_series(n){
+	return n.toString().padStart(4, '0');
+
+}
+
+function compare_problems (p,q){
+	// horribleee
+	if (p["series"] <= q["series"]){
+		if (p["series"] == q["series"]){
+			if (p["number_in_series"]<q["number_in_series"]){
+				return -1;
+			}
+			if (p["number_in_series"]==q["number_in_series"]){
+				return 0;
+			}
+			return 1;
+		}
+		return -1	
+	}
+	return 1;
+}
