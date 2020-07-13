@@ -324,8 +324,9 @@
                             <input type="text" name="location" placeholder="lugar">
                         </div>
                         <div class="stretch">
-                            <input type="text" name="school" placeholder="escuela">
+                            <input type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
                         </div>
+                        <datalist id="school"></datalist>
                     </div>
                 </div>
                 <div class="if-not-student" style="display:none">
@@ -348,12 +349,14 @@
                             <input type="text" name="location" placeholder="lugar">
                         </div>
                         <div class="stretch">
-                            <input type="text" name="school" placeholder="escuela">
+                            <input type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
                         </div>
+                        <datalist id="school"></datalist>
                     </div>
                 </div>
+
                 <div class="spacer"></div>
-                <button type="button" onclick="register_event(this)">Registrarse</button>
+                <button type="button" id="register_button" onclick="register_event(this)">Registrarse</button>
             </form>
         </main>
     </body>

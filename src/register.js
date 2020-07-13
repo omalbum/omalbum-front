@@ -85,3 +85,28 @@ function event_updated_professor(elem) {
         e.style.display = elem.value == "true" ? "none" : "block";
     }
 }
+
+function checkSchoolsInput(input) {
+	if (input.value.length == 3) {
+		// por alguna razon en chrome no me anda el disabled, mientras no lleve mucho tiempo la carga no pasa nada
+		document.getElementById("register_button").disabled = true;
+		askForSchools(input.value);
+		document.getElementById("register_button").disabled = false;
+	} else if (input.value.length < 3){
+		setSchoolsOptions([]);
+	}
+}
+
+function setSchoolsOptions(schools){
+	schools_datalist = document.getElementById("school");
+    schools_datalist.innerHTML = ""
+    for(school of schools) {
+        schools_datalist.innerHTML += `<option>${school.Name}</option>`
+    }
+}
+
+function askForSchools(txt) {
+	get_schools_matching_request({"text": txt}).then(x => {
+		setSchoolsOptions(x);
+	});
+}

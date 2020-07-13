@@ -26,6 +26,10 @@ function create_problem_request(payload){
 	return 	do_request("api/v1/admin/problem", payload, true, "POST");
 }
 
+function get_schools_matching_request(payload){
+	return 	do_request("api/v1/schools/" + payload.text, null, false, "GET");
+}
+
 // https://stackoverflow.com/a/24468752
 function do_request(endpoint, payload, authorize, method) {
     return new Promise (
