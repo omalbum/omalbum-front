@@ -17,6 +17,10 @@ function is_alphanumeric_without_accents(s){
 	return s.match(/^[0-9a-zA-Z]+$/)!=null;
 }
 
+function is_integer(s){
+	return s.match(/^([+-]?[0-9]\d*|0)$/) != null;
+}
+
 function is_valid_password(s){
 	l = s.length;
 	return (6<= l ) && (l<=20);
@@ -73,6 +77,11 @@ function validate_create_problem_payload(payload){
 	if(! is_nontrivial( payload["series"] ) ){
 		validation_failures.push({ field:"Serie", error: "No puede quedar vacío" });
 	}
+	if(! is_integer( payload["answer"] ) ){
+		validation_failures.push({ field:"Respuesta", error: "Debe ser un entero" });
+	}
+
+
 	return validation_failures;
 }
 

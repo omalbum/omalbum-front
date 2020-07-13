@@ -19,10 +19,14 @@ function load_problem() {
 function attempt_problem_event(form) {
     const urlParams = new URLSearchParams(window.location.search);
 	const param = parseInt(urlParams.get('id'));
+	answer = document.getElementById("solution").value;
+	if( !is_integer(answer.toString())){
+		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero.");
+	}
     form = form.closest("form");
 	payload = {
         "problem_id": param,
-        "answer": parseInt(form.solution.value),
+        "answer": parseInt(answer),
     };
     attempt_problem(payload);
 }
