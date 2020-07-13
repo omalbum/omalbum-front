@@ -27,7 +27,7 @@ function create_problem_request(payload){
 }
 
 function get_schools_matching_request(payload){
-	return 	do_request("api/v1/schools/" + payload.text, null, false, "GET");
+	return 	do_request("api/v1/schools/" + payload.province + "/" + payload.department + "/" + payload.text, null, false, "GET");
 }
 
 // https://stackoverflow.com/a/24468752
