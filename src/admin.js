@@ -37,3 +37,62 @@ function update_preview(button) {
     previewer.innerHTML = previewed.value;
     MathJax.typeset();
 }
+
+function insert_problems_admin(){
+	var elements = document.getElementsByClassName("problems-admin");
+    if(!elements.length == 0) {
+	    get_problems_admin().then(problems => {
+	        for(e of elements) {
+	            insert_given_problems_admin(e, problems);
+        	}
+    	});
+	}
+}
+
+function get_problems_admin() {
+	if( is_logged_in() && is_admin() ) {
+		return get_all_problems_admin_request().then( x => x.all_problems ); 
+	}
+}
+
+function insert_given_problems_admin(element, problems) {
+    console.log(element);
+    element.innerHTML = "";
+	drafts = [];
+	scheduled = [];
+	released = [];
+    for(p of problems.sort(compare_problems)) {
+		if (p["is_draft"]){
+			drafts.push(p);
+		}else{
+			release = new Date(p["release_date"]);
+			now =  new Date();
+			if( now < release){
+				scheduled.push(p); 
+			}else{
+				released.push(p);
+			}
+		}
+    }
+	element.innerHTML =  `<h2><a href="http://localhost:8003/crear.html"> Crear problema </a><h2><br/>`+ "<h2>Drafts</h2>"+ drafts.map(problem_admin_html).join("\n") + "<br/><br/> <h2>Scheduled</h2>"+ scheduled.map(problem_admin_html).join("\n") + "<br/><br/><h2>Released</h2>"+ released.map(problem_admin_html).join("\n");
+    MathJax.typesetPromise();
+}
+
+function problem_admin_html(data){
+	if (data.omaforos_post_id>0 ){
+		link_omaforos = `<a href=\"https://omaforos.com.ar/viewtopic.php?p=${data.omaforos_post_id}">link a omaforos </a><br/>`;
+	}else{
+		link_omaforos = "";	
+	}
+    return `
+	<div>
+		<h3>Problema ${data.problem_id} - ${get_problem_code_to_show(data)} - <a href = "editar.html?id=${data.problem_id}">editar</a> </h3>
+		<div  class="enunciado math light-bg boxed">${data.statement}</div>
+		Respuesta: ${data.answer}<br/>
+		${link_omaforos}
+		Fecha publicación: ${new Date(data.release_date)}<br/>
+		Deadline: ${new Date(data.deadline)}
+		<br/><br/>
+	</div>`;
+}
+

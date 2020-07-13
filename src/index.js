@@ -18,7 +18,7 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	td.appendChild(document.createTextNode("Problema"));
 	head.appendChild(td);
 	var td = document.createElement("th");
-	td.appendChild(document.createTextNode("Hasta cuando está activo"));
+	td.appendChild(document.createTextNode("Hasta cuando estará activo"));
 	head.appendChild(td);
 	if (is_active && is_logged_in()){
 		var td = document.createElement("th");

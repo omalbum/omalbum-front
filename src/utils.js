@@ -35,6 +35,7 @@ function extract_data(form) {
     return data;
 }
 
+
 function get_nice_date_to_show(date){
 	date = new Date(date);
 	ret = get_day_string(date) + " " + date.getDate().toString() + " de " + get_month_string(date);
@@ -122,5 +123,36 @@ function get_day_string(date){
 	if (day_of_week == 6){
 		return "Sabado";
 	}
+}
+
+function get_problem_code_to_show(p){
+	if(p.is_draft){
+		return `#${p.series}???`;
+	}
+	return `#${p.series}${padding_number_in_series(p.number_in_series)}`;
+}
+
+
+function padding_number_in_series(n){
+	return n.toString().padStart(3, '0');
+
+}
+
+
+function compare_problems (p,q){
+	// horribleee
+	if (p["series"] <= q["series"]){
+		if (p["series"] == q["series"]){
+			if (p["number_in_series"]<q["number_in_series"]){
+				return -1;
+			}
+			if (p["number_in_series"]==q["number_in_series"]){
+				return 0;
+			}
+			return 1;
+		}
+		return -1	
+	}
+	return 1;
 }
 

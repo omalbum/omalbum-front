@@ -43,7 +43,7 @@ function problem_html(p) {
 function insert_given_problems(element, problems) {
     console.log(element);
     element.innerHTML = "";
-    for(p of problems) {
+    for(p of problems.sort(compare_problems)) {
         html = problem_html(p);
         element.innerHTML += html;
     }
