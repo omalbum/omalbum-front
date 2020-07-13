@@ -74,7 +74,7 @@ function insert_given_problems_admin(element, problems) {
 			}
 		}
     }
-	element.innerHTML = "<h1>Drafts</h1>"+ drafts.map(problem_admin_html).join("\n") + "<h1>Scheduled</h1>"+ scheduled.map(problem_admin_html).join("\n") + "<h1>Released</h1>"+ released.map(problem_admin_html).join("\n")  +  "\n <p> LINK CREAR PROBLEMA </p>";
+	element.innerHTML =  `<h2><a href="http://localhost:8003/crear.html"> Crear problema </a><h2>\n`+ "<h2>Drafts</h2>"+ drafts.map(problem_admin_html).join("\n") + "<h2>Scheduled</h2>"+ scheduled.map(problem_admin_html).join("\n") + "<h2>Released</h2>"+ released.map(problem_admin_html).join("\n");
     MathJax.typesetPromise();
 }
 
@@ -91,7 +91,7 @@ function problem_admin_html(data){
 	}
     return `
 	<div>
-		<h2>Problema ${data.problem_id} - #${data.series}${number_in_series} - <a href = "editar.html?id=${data.problem_id}">editar</a> </h2>
+		<h3>Problema ${data.problem_id} - #${data.series}${number_in_series} - <a href = "editar.html?id=${data.problem_id}">editar</a> </h3>
 		<div  class="enunciado math light-bg boxed">${data.statement}</div>
 		Respuesta: ${data.answer}<br/>
 		${link_omaforos}
