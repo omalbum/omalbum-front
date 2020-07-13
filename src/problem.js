@@ -5,7 +5,7 @@ function load_problem() {
         var ele = document.getElementById("enunciado");
         ele.innerHTML = data.statement;
         var ele = document.getElementById("titulo");
-        ele.innerHTML = "Problema #" +data.series+ data.number_in_series.toString().padStart(4, '0') + ele.innerHTML;
+        ele.innerHTML = "Problema #" +data.series+ padding_number_in_series(data.number_in_series) + ele.innerHTML;
         MathJax.typesetPromise();
 		post_id = data["omaforos_post_id"];
 		if(post_id != 0){

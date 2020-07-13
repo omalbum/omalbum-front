@@ -33,7 +33,7 @@ function problem_html(p) {
     return problem_view({
         "date": (p.solved ? new Date(p.date_solved).toLocaleDateString('sv') : ""),
         "attempts": attempts,
-        "code": `#${p.series}${p.number_in_series.toString().padStart(4, '0')}`,
+        "code": `#${p.series}${padding_number_in_series(p.number_in_series)}`,
         "icon": icon,
         "status": status,
         "url": `problema.html?id=${p.problem_id}`
@@ -43,7 +43,7 @@ function problem_html(p) {
 function insert_given_problems(element, problems) {
     console.log(element);
     element.innerHTML = "";
-    for(p of problems) {
+    for(p of problems.sort(compare_problems)) {
         html = problem_html(p);
         element.innerHTML += html;
     }
