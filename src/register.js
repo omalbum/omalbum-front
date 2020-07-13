@@ -63,21 +63,29 @@ function reset_departments() {
 }
 
 function event_updated_country(elem) {
-    for(e of document.getElementsByClassName("if-argentinian")) {
-        e.style.display = elem.value == "Argentina" ? "block" : "none";
+	update_with_country_value(elem.value);
+}
+
+function update_with_country_value(value) {
+	for(e of document.getElementsByClassName("if-argentinian")) {
+        e.style.display = value == "Argentina" ? "block" : "none";
     }
     for(e of document.getElementsByClassName("if-not-argentinian")) {
-        e.style.display = elem.value == "Argentina" ? "none" : "block";
+        e.style.display = value == "Argentina" ? "none" : "block";
     }
     maybeShowSchoolForm();
 }
 
 function event_updated_student(elem) {
+	update_with_is_student_value(elem.value);
+}
+
+function update_with_is_student_value(value) {
     for(e of document.getElementsByClassName("if-student")) {
-        e.style.display = elem.value == "true" ? "block" : "none";
+        e.style.display = value == "true" ? "block" : "none";
     }
     for(e of document.getElementsByClassName("if-not-student")) {
-        e.style.display = elem.value == "true" ? "none" : "block";
+        e.style.display = value == "true" ? "none" : "block";
     }
     maybeShowSchoolForm();
 }
@@ -144,6 +152,8 @@ function isDatalistValid(datalist_id) {
 $(document).ready(function(){
 	$(".school_input").prop("disabled", true);
 	$(".school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+	update_with_country_value($("input[name=country]").val());
+	update_with_is_student_value($("input[name='is_student']:checked").val());
 });
 
 function setSchoolsOptions(schools){
