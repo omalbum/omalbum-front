@@ -21,6 +21,7 @@ function attempt_problem_event(form) {
 	const param = parseInt(urlParams.get('id'));
 	answer = document.getElementById("solution").value;
 	if( !is_integer(answer.toString())){
+		clear_notifications();
 		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero.");
 	}
     form = form.closest("form");
