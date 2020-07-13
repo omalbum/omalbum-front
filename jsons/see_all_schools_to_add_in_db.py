@@ -1,5 +1,13 @@
+# -*- coding: utf-8 -*-
+
+import mysql.connector as mysql
 import json
 import os
+
+TELEOMA = "teleoma"
+HOST = "localhost"
+
+db = mysql.connect(host=HOST, user=TELEOMA, passwd=TELEOMA, database=TELEOMA)
 
 def normalize(s):
 	s = s.upper()
@@ -11,8 +19,11 @@ def normalize(s):
 
 values = []
 all_jsons_folder = "."
+all_values = []
+set_vals = set()
 for province_folder_or_file in os.listdir(all_jsons_folder + "/provincias"):
 	if ".json" in province_folder_or_file: continue
+	print province_folder_or_file
 	for department_folder_or_file in os.listdir(all_jsons_folder + "/provincias/" + province_folder_or_file):
 		if ".json" in department_folder_or_file: continue
 		for schools_file in os.listdir(all_jsons_folder + "/provincias/" + province_folder_or_file + "/" + department_folder_or_file):
@@ -24,7 +35,28 @@ for province_folder_or_file in os.listdir(all_jsons_folder + "/provincias"):
 				s = normalize(school)
 				prov = normalize(province_folder_or_file)
 				depto = normalize(department_folder_or_file)
-				values.append((s, prov, depto))
+				if s not in set_vals:
+					values.append((s, prov, depto))
+					set_vals.add(s)
+					all_values.append(s)
+	                                all_values.append(prov)
+	                                all_values.append(depto)
 
-query = u"insert into schools (name, province, department) values "
+
+SCHOOLS_TO_ADD = 50
+offset = 0
+schools_added_count = 0
+while offset < len(all_values):
+	chunk_values = all_values[offset:offset + SCHOOLS_TO_ADD * 3]
+	cursor = db.cursor()
+	mysql_query = "INSERT INTO schools (name, province, department) VALUES " + ", ".join("(%s, %s, %s)" for _ in xrange(SCHOOLS_TO_ADD))
+	try:
+		cursor.execute(mysql_query, chunk_values)
+		db.commit()
+		schools_added_count += len(chunk_values) / 3
+		print "Van ", schools_added_count, "escuelas"
+	except: pass
+	offset += SCHOOLS_TO_ADD * 3
+print "En total pude obtener {} de las cuales se agregaron {}".format(len(values), schools_added_count)
+#query = u"insert into schools (name, province, department) values "
 # query += u", ".join([u'("{}", "{}", "{}")'.format(x[0].replace('"', "").replace("'", ""), x[1].replace('"', "").replace("'", ""), x[2].replace('"', "").replace("'", "")) for x in values])
