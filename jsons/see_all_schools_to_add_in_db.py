@@ -29,7 +29,9 @@ for province_folder_or_file in os.listdir(all_jsons_folder + "/provincias"):
 		for schools_file in os.listdir(all_jsons_folder + "/provincias/" + province_folder_or_file + "/" + department_folder_or_file):
 			try:
 				f=open(all_jsons_folder + "/provincias/" + province_folder_or_file + "/" + department_folder_or_file + "/" + schools_file)
-			except: continue
+			except:
+				print "no pude abrir el archivo de ", province_folder_or_file, department_folder_or_file, schools_file
+				continue
 			data = json.load(f)
 			for school in data:
 				s = normalize(school)
@@ -55,7 +57,17 @@ while offset < len(all_values):
 		db.commit()
 		schools_added_count += len(chunk_values) / 3
 		print "Van ", schools_added_count, "escuelas"
-	except: pass
+	except:
+		mysql_query = "INSERT INTO schools (name, province, department) VALUES (%s, %s, %s)"
+		for vidx in xrange(len(chunk_values) / 3):
+			try:
+				cursor.execute(mysql_query, (chunk_values[vidx*3], chunk_values[vidx*3+1], chunk_values[vidx*3+2]))
+				db.commit()
+				schools_added_count += 1
+			except:
+				print "No puedo meter ", chunk_values[vidx*3], chunk_values[vidx*3+1], chunk_values[vidx*3+2]
+				pass
+		pass
 	offset += SCHOOLS_TO_ADD * 3
 print "En total pude obtener {} de las cuales se agregaron {}".format(len(values), schools_added_count)
 #query = u"insert into schools (name, province, department) values "
