@@ -33,29 +33,29 @@ function problem_html(p) {
     return problem_view({
         "date": (p.solved ? new Date(p.date_solved).toLocaleDateString('sv') : ""),
         "attempts": attempts,
-        "code": `#${p.series}${p.number_in_series.toString().padStart(4, '0')}`,
+        "code": get_problem_code_to_show(p),
         "icon": icon,
         "status": status,
-        "url": `problema.html?id=${p.problem_id}`
+        "url": get_problem_url(p)
     });
 }
 
 function insert_given_problems(element, problems) {
     console.log(element);
     element.innerHTML = "";
-    for(p of problems) {
-        html = problem_html(p);
-        element.innerHTML += html;
-    }
     if( is_logged_in() && is_admin() ) {
         element.innerHTML += problem_view({
             "status": "normal",
             "code": "<br>",
-            "icon": "plus_one",
+            "icon": "create",
             "attempts": "<br>",
             "date": "<br>",
-            "url": "crear.html"
+            "url": "admin.html"
         });
+    }
+    for(p of problems.sort(compare_problems)) {
+        html = problem_html(p);
+        element.innerHTML += html;
     }
 }
 
@@ -79,5 +79,27 @@ function problem_view(data) {
     <p>${data.attempts}</p>
     <p class="date">${data.date}</p>
 </a>`;
+}
+
+function get_problems_with_attempts(problems, user_id){
+	if (!is_logged_in()){
+		return problems;
+	}
+	return get_album_request( user().user_id ).then(x => {
+		album = x.album;
+		var current_problems_with_attempts = [];
+		album_ids = new Map();
+		for (problem of album){
+			album_ids.set(problem.problem_id, problem);
+		}
+		for (problem of problems){
+			if (album_ids.has(problem.problem_id)){
+				current_problems_with_attempts.push(album_ids[problem.problem_id]);
+			} else {
+				current_problems_with_attempts.push(problem);
+			}
+		}
+		return current_problems_with_attempts;
+	});
 }
 

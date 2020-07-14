@@ -167,7 +167,7 @@ function setSchoolsOptions(schools){
 }
 
 function askForSchools(txt, province, department) {
-	get_schools_matching_request({"text": txt, "province": province, "department": department}).then(x => {
+	get_schools_matching_request(province, department, txt).then(x => {
 		setSchoolsOptions(x);
 	});
 }

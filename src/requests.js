@@ -10,12 +10,27 @@ function get_all_problems_request(){
 	return do_request("api/v1/problems/all", null, false, "GET");
 }
 
+
+function get_current_problems(){
+	return do_request("api/v1/problems/current", null, false, "GET");
+}
+
+
+function get_all_problems_admin_request(){
+	return do_request("api/v1/admin/problems/all", null, true, "GET");
+}
+
+
 function get_album_request(user_id){
 	return do_request("api/v1/users/" + user_id.toString() + "/album", null, true, "GET");
 }
 
 function get_problem_request(problem_id){
 	return do_request("api/v1/problems/problem/" + problem_id.toString(), null, false, "GET");
+}
+
+function get_next_problems_request(){
+	return do_request("api/v1/problems/next", null, false, "GET");
 }
 
 function attempt_problem_request(payload){
@@ -26,8 +41,15 @@ function create_problem_request(payload){
 	return 	do_request("api/v1/admin/problem", payload, true, "POST");
 }
 
-function get_schools_matching_request(payload){
-	return 	do_request("api/v1/schools/" + payload.province + "/" + payload.department + "/" + payload.text, null, false, "GET");
+
+function get_schools_matching_request(province, department, text){
+	return 	do_request("api/v1/schools/" + province + "/" + department + "/" + text, null, false, "GET");
+}
+
+
+function get_problem_stats(user_id, problem_id){
+	return do_request("api/v1/users/"+ user_id.toString() + "/attempts/" + problem_id.toString(), null, true, "GET");
+
 }
 
 // https://stackoverflow.com/a/24468752
