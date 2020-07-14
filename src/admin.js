@@ -74,7 +74,7 @@ function insert_given_problems_admin(element, problems) {
 			}
 		}
     }
-	element.innerHTML =  `<h2><a href="http://localhost:8003/crear.html"> Crear problema </a><h2>\n`+ "<h2>Drafts</h2>"+ drafts.map(problem_admin_html).join("\n") + "<h2>Scheduled</h2>"+ scheduled.map(problem_admin_html).join("\n") + "<h2>Released</h2>"+ released.map(problem_admin_html).join("\n");
+	element.innerHTML =  `<h2><a href="./crear.html"> Crear problema </a><h2><br/>`+ "<h2>Drafts</h2>"+ drafts.map(problem_admin_html).join("\n") + "<br/><br/> <h2>Scheduled</h2>"+ scheduled.map(problem_admin_html).join("\n") + "<br/><br/><h2>Released</h2>"+ released.map(problem_admin_html).join("\n");
     MathJax.typesetPromise();
 }
 
@@ -84,19 +84,14 @@ function problem_admin_html(data){
 	}else{
 		link_omaforos = "";	
 	}
-	if (data.is_draft){
-		number_in_series ="????";
-	}else{
-		number_in_series = padding_number_in_series(data.number_in_series);
-	}
     return `
 	<div>
-		<h3>Problema ${data.problem_id} - #${data.series}${number_in_series} - <a href = "editar.html?id=${data.problem_id}">editar</a> </h3>
+		<h3>Problema ${data.problem_id} - ${get_problem_code_to_show(data)} - <a href = "editar.html?id=${data.problem_id}">editar</a> </h3>
 		<div  class="enunciado math light-bg boxed">${data.statement}</div>
 		Respuesta: ${data.answer}<br/>
 		${link_omaforos}
-		Fecha publicación: ${new Date(data.release_date)}<br/>
-		Deadline: ${new Date(data.deadline)}
+		Fecha publicación: ${get_nice_date_to_show(new Date(data.release_date))}<br/>
+		Deadline: ${get_nice_date_to_show(new Date(data.deadline))}
 		<br/><br/>
 	</div>`;
 }

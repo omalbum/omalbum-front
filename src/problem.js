@@ -5,7 +5,7 @@ function load_problem() {
         var ele = document.getElementById("enunciado");
         ele.innerHTML = data.statement;
         var ele = document.getElementById("titulo");
-        ele.innerHTML = "Problema #" +data.series+ padding_number_in_series(data.number_in_series) + ele.innerHTML;
+        ele.innerHTML = "Problema " + get_problem_code_to_show(data) + ele.innerHTML;
         MathJax.typesetPromise();
 		post_id = data["omaforos_post_id"];
 		if(post_id != 0){
@@ -15,7 +15,6 @@ function load_problem() {
     });
 }
 
-
 function attempt_problem_event(form) {
     const urlParams = new URLSearchParams(window.location.search);
 	const param = parseInt(urlParams.get('id'));
@@ -24,7 +23,6 @@ function attempt_problem_event(form) {
 		clear_notifications();
 		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero.");
 	}
-    form = form.closest("form");
 	payload = {
         "problem_id": param,
         "answer": parseInt(answer),
@@ -35,6 +33,11 @@ function attempt_problem_event(form) {
 function attempt_problem(payload) {
 	clear_notifications();
     attempt_problem_request(payload).then(attempt_feedback_for_user, attempt_error_manager);
+}
+
+
+function get_problem_url(p){
+	return `problema.html?id=${p.problem_id}`;
 }
 
 function attempt_feedback_for_user(x){

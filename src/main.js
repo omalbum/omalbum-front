@@ -51,6 +51,7 @@ function init() {
     insert_problems();
 	insert_problems_admin();
     province_selector();
+    insert_index_problems();
 }
 
 window.onload = init;
