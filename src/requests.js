@@ -52,10 +52,6 @@ function get_problem_stats(user_id, problem_id){
 
 }
 
-function get_schools_matching_request(province, department, text){
-	return 	do_request("api/v1/schools/" + province + "/" + department + "/" + text, null, false, "GET");
-}
-
 // https://stackoverflow.com/a/24468752
 function do_request(endpoint, payload, authorize, method) {
     return new Promise (
