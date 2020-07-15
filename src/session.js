@@ -25,7 +25,10 @@ function login(user_name, password) {
         localStorage.setItem('user', JSON.stringify(token.User));
         window.location.href = "index.html";
     }).catch(err => {
-        notify("notification urgent", "Login fallido", html_escape(err.code));
+    	clear_notifications();
+    	setTimeout(function(){
+        	notify("notification urgent", "Login fallido", html_escape(err.code));
+        }, 500);
     });
 }
 

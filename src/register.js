@@ -29,6 +29,7 @@ function register_event(form) {
 function feedback_register_validation_fails(validation_failures){
 	clear_notifications();
 	validation_failures.forEach( x => notify("notification urgent", x.field, x.error) );
+	window.scrollTo(0, 0);
 }
 
 
