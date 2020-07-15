@@ -11,7 +11,7 @@ function create_problem_event(form) {
 		is_draft : data["is_draft"],
 		hint : data["hint"],
 		series : data["series"],
-		official_solution : parseInt(data["official_solution"]),
+		official_solution : data["official_solution"],
 	};
 	create_problem_with_validation(payload);
 }
@@ -22,13 +22,26 @@ function create_problem_with_validation(payload){
 		feedback_create_problem_validation_fails(validation_failures);
 		return;
 	}
-	create_problem_request(payload); //acá sería mejor manejar el error
+	create_problem_request(payload).then(p => { //acá sería mejor manejar el error
+		var txt = "Problema agregado";
+		if (payload.is_draft){
+			txt = "Problema creado como draft";
+		}
+		clear_notifications();
+		notify("notification good", txt, "Para verlo podés ir <a href=\"" + host + get_problem_url(p) + "\">acá</a>  :)");
+		window.scrollTo(0, 0);
+	}).catch(err => {
+		clear_notifications();
+		notify("notification urgent", "No se pudo agregar", html_escape(err.code) || "Error desconocido");
+		window.scrollTo(0, 0);
+	});
 }
 
 
 function feedback_create_problem_validation_fails(validation_failures){
 	clear_notifications();
 	validation_failures.forEach( x => notify("notification urgent", x.field, x.error) );
+	window.scrollTo(0, 0);
 }
 
 function update_preview(button) {

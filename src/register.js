@@ -23,22 +23,37 @@ function custom_validate_register_payload(payload){
 		} else if (! isDatalistValid("school")){
 			custom_validation_failures.push({ field:"Escuela", error: "Debe ser una opción válida" });
 		}
+		if (! (is_integer(document.getElementById("school_year_input").value) && 1 <= parseInt(payload.school_year) &&  parseInt(payload.school_year) <= 15) ){
+			custom_validation_failures.push({ field:"Año de escolaridad", error: "Debe ser un número válido" });
+		}
+		if (! isDatalistValid("gender")){
+			custom_validation_failures.push({ field:"Género", error: "Debe ser una opción válida" });
+		}
 	}
-	return custom_validation_failures
+	return custom_validation_failures;
 }
 
 function register_event(form) {
     payload = extract_data(form.closest("form"));
     payload.school_year = parseInt(payload.school_year);
-    payload.gender = {
-        "masculino": "male",
-        "femenino": "female",
-        "prefiero no responder": ""}[payload.gender] || "other";
+    payload.gender = getGenderValueForPayload(payload.gender);
     payload.is_professor = undefined;
     payload.is_student = payload.is_student == "true";
 	return register_with_validation(payload);
 }
 
+function getGenderValueForPayload(gender_input_val) {
+	console.log(gender_input_val);
+	if (gender_input_val == "masculino"){
+		return "male";
+	} else if (gender_input_val == "femenino"){
+		return "female";
+	} else if (gender_input_val == "prefiero no responder"){
+		return "";
+	} else if (gender_input_val == "otro"){
+		return document.getElementById("gender_other_input").value || "other";
+	}
+}
 
 
 function feedback_register_validation_fails(validation_failures){
@@ -74,6 +89,7 @@ function reset_departments() {
 	    for(j of locations[tag.value]) {
 	        loc.innerHTML += `<option>${j}</option>`
 	    }
+	    document.getElementById("department_input").value = "";
 	}
     onDepartmentOrProvinceChange();
 }
@@ -149,6 +165,15 @@ function onDepartmentOrProvinceChange(){
 	} else {
 		$("#school_input").prop("disabled", true);
 		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+	}
+	$("#school_input").val("");
+}
+
+function onGenderChange() {
+	if (document.getElementById("gender_input").value == "otro"){
+		$("#gender_other").css("display", "block");
+	} else {
+		$("#gender_other").css("display", "none");
 	}
 }
 

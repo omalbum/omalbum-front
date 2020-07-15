@@ -59,7 +59,11 @@
                     <input type="date" name="birth_date" placeholder="fecha de nacimiento">
                 </div>
                 <div class="stretch">
-                    <input type="text" list="gender" name="gender" placeholder="género">
+                    <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
+                </div>
+                <div id="gender_other" style="display: none">
+                	<label style="float: left;">Género:</label>
+                	<input type="text" id="gender_other_input" style="float: left;"></input>
                 </div>
                 <datalist id="gender">
                     <option>femenino</option>
@@ -317,8 +321,12 @@
                 <div class="if-student" style="display:none">
                     <p class="tit">año de escolaridad</p>
                     <div class="stretch">
-                        <input type="number" name="school_year" placeholder="desde primer grado de primaria">
+                        <input type="number" id="school_year_input" name="school_year" placeholder="desde primer grado de primaria">
                     </div>
+                    <p>(Por ejemplo: si estás en el cuarto año de secundaria en la provincia de Misiones
+                    (donde hay 7 años de primaria y 5 de secundaria) tenés que responder <b>11</b>; si estás en el
+                    cuarto año de secundaria en la provincia de Córdoba (donde hay 6 años de primaria y 6 de secundaria), tenés que responder <b>10</b>.)
+                    </p>
                 </div>
                 <div class="if-not-student" style="display:none">
                     <p class="tit">¿Sos docente de matemática en alguna escuela de Argentina?</p>
@@ -342,7 +350,7 @@
                     </div>
                     <datalist id="department"></datalist>
                     <div class="stretch">
-                        <input type="text" name="location" placeholder="lugar">
+                        <input type="text" name="location" placeholder="localidad">
                     </div>
                     <div class="stretch">
                         <input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
