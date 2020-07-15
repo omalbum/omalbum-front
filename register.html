@@ -7,6 +7,17 @@
         <script src="utils/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172622724-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-172622724-1');
+		</script>
+
         <script type="text/javascript" src="locations.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <title>OMAlbum</title>
@@ -128,7 +139,6 @@
                     <option value="Eritrea" />
                     <option value="Estonia" />
                     <option value="Ethiopia" />
-                    <option value="Islas Malvinas" />
                     <option value="Faroe Islands" />
                     <option value="Fiji" />
                     <option value="Finland" />
@@ -335,7 +345,7 @@
                         <input type="text" name="location" placeholder="lugar">
                     </div>
                     <div class="stretch">
-                        <input class="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
+                        <input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
                     </div>
                     <datalist id="school"></datalist>
                 </div>

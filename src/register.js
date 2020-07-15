@@ -1,7 +1,8 @@
 function register_with_validation(payload) {
 	validation_failures = validate_register_payload(payload);
-	if( validation_failures.length >0 ){
-		feedback_register_validation_fails(validation_failures);
+	all_validation_failures = validation_failures.concat(custom_validate_register_payload(payload));
+	if( all_validation_failures.length > 0 ){
+		feedback_register_validation_fails(all_validation_failures);
 		return;
 	}
     return register_request(payload).then(() => {
@@ -10,6 +11,20 @@ function register_with_validation(payload) {
 		clear_notifications();
         notify("notification urgent", "Registración Fallida", html_escape(err.code));
     });
+}
+
+function custom_validate_register_payload(payload){
+	var custom_validation_failures = [];
+	if ($(".if-professor-or-arg-student").css("display") == "block"){
+		if (! isDatalistValid("province")){
+			custom_validation_failures.push({ field:"Provincia", error: "Debe ser una opción válida" });
+		} else if (! isDatalistValid("department")){
+			custom_validation_failures.push({ field:"Departamento", error: "Debe ser una opción válida" });
+		} else if (! isDatalistValid("school")){
+			custom_validation_failures.push({ field:"Escuela", error: "Debe ser una opción válida" });
+		}
+	}
+	return custom_validation_failures
 }
 
 function register_event(form) {
@@ -129,11 +144,11 @@ function checkSchoolsInput(input) {
 
 function onDepartmentOrProvinceChange(){
 	if (isDatalistValid("department") && isDatalistValid("province")){
-		$(".school_input").prop("disabled", false);
-		$(".school_input").prop("placeholder", "escuela");
+		$("#school_input").prop("disabled", false);
+		$("#school_input").prop("placeholder", "escuela");
 	} else {
-		$(".school_input").prop("disabled", true);
-		$(".school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+		$("#school_input").prop("disabled", true);
+		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
 	}
 }
 
@@ -151,8 +166,8 @@ function isDatalistValid(datalist_id) {
 }
 
 $(document).ready(function(){
-	$(".school_input").prop("disabled", true);
-	$(".school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+	$("#school_input").prop("disabled", true);
+	$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
 	update_with_country_value($("input[name=country]").val());
 	update_with_is_student_value($("input[name='is_student']:checked").val());
 });
@@ -168,7 +183,5 @@ function setSchoolsOptions(schools){
 }
 
 function askForSchools(txt, province, department) {
-	get_schools_matching_request({"text": txt, "province": province, "department": department}).then(x => {
-		setSchoolsOptions(x);
-	});
+	get_schools_matching_request(province, department, txt).then(setSchoolsOptions);
 }
