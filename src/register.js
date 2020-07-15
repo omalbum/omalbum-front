@@ -9,7 +9,14 @@ function register_with_validation(payload) {
         return login(payload.user_name, payload.password);
     }).catch(err => {
 		clear_notifications();
-        notify("notification urgent", "Registración Fallida", html_escape(err.code));
+		if(err.code=="username_already_taken"){
+	        notify("notification urgent", "Registración Fallida", html_escape("Nombre de usuario ya utilizado"));
+		}else if(err.code=="email_already_taken"){
+	        notify("notification urgent", "Registración Fallida", html_escape("Email ya utilizado"));
+		} else{
+	        notify("notification urgent", "Registración Fallida", html_escape(err.message));
+		}
+
     });
 }
 
