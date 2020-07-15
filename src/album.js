@@ -81,3 +81,24 @@ function problem_view(data) {
 </a>`;
 }
 
+function get_problems_with_attempts(problems, user_id){
+	if (!is_logged_in()){
+		return problems;
+	}
+	return get_album_request( user().user_id ).then(x => {
+		album = x.album;
+		var current_problems_with_attempts = [];
+		album_ids = new Map();
+		for (problem of album){
+			album_ids.set(problem.problem_id, problem);
+		}
+		for (problem of problems){
+			if (album_ids.has(problem.problem_id)){
+				current_problems_with_attempts.push(album_ids[problem.problem_id]);
+			} else {
+				current_problems_with_attempts.push(problem);
+			}
+		}
+		return current_problems_with_attempts;
+	});
+}
