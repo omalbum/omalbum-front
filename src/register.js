@@ -29,6 +29,7 @@ function register_event(form) {
 function feedback_register_validation_fails(validation_failures){
 	clear_notifications();
 	validation_failures.forEach( x => notify("notification urgent", x.field, x.error) );
+	window.scrollTo(0, 0);
 }
 
 
@@ -167,7 +168,5 @@ function setSchoolsOptions(schools){
 }
 
 function askForSchools(txt, province, department) {
-	get_schools_matching_request(province, department, txt).then(x => {
-		setSchoolsOptions(x);
-	});
+	get_schools_matching_request(province, department, txt).then(setSchoolsOptions);
 }
