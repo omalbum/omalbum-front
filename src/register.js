@@ -73,18 +73,12 @@ function feedback_register_validation_fails(validation_failures){
 
 function province_selector() {
     ele = document.getElementById("province");
+	opts = [];
     if(ele) {
         for(k in locations) {
-            ele.innerHTML += `<option>${k}</option>`
+			opts.push(`<option>${k}</option>`);
         }
-		/*
-        loc = document.getElementById("department");
-        for(k in locations) {
-            for(j of locations[k]) {
-                loc.innerHTML += `<option>${j}</option>`
-            }
-        }
-		*/
+        ele.innerHTML = opts.join("\n");
     }
 }
 
@@ -228,11 +222,13 @@ $(document).ready(function(){
 function setSchoolsOptions(schools){
 	schools_datalist = document.getElementById("school");
     schools_datalist.innerHTML = ""
+	var fragment = new DocumentFragment()
     for(school of schools) {
     	var option = document.createElement( 'option' );
     	option.value = school.Name;
-    	schools_datalist.appendChild(option);
+    	fragment.appendChild(option);
     }
+	schools_datalist.appendChild(fragment);
 }
 
 function askForSchools(txt, province, department) {
@@ -243,11 +239,13 @@ function setLocationOptions(localities){
 	console.log(localities);
 	localities_datalist = document.getElementById("locality");
     localities_datalist.innerHTML = ""
+	var fragment = new DocumentFragment()
     for(locality of localities) {
     	var option = document.createElement( 'option' );
     	option.value = locality;
-    	localities_datalist.appendChild(option);
+    	fragment.appendChild(option);
     }
+	localities_datalist.appendChild(fragment);
 }
 
 function askForLocations(province,department){
