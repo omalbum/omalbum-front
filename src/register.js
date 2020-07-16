@@ -176,19 +176,20 @@ function onDepartmentOrProvinceChange(){
 	if (isDatalistValid("department") && isDatalistValid("province")){
 		$("#school_input").prop("disabled", false);
 		$("#school_input").prop("placeholder", "escuela");
-		$("#location_input").prop("disabled", false);
-		$("#location_input").prop("placeholder", "localidad");
-
-
+		$("#locality_input").prop("disabled", false);
+		$("#locality_input").prop("placeholder", "localidad");
+		province = $("#province_input").val();
+		department = $("#department_input").val();
+		askForLocations(province,department);
 	} else {
 		$("#school_input").prop("disabled", true);
 		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
-		$("#location_input").prop("disabled", true);
-		$("#location_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
+		$("#locality_input").prop("disabled", true);
+		$("#locality_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
 
 	}
 	$("#school_input").val("");
-	$("#location_input").val("");
+	$("#locality_input").val("");
 }
 
 function onGenderChange() {
@@ -215,10 +216,10 @@ function isDatalistValid(datalist_id) {
 
 $(document).ready(function(){
 	$("#department_input").prop("disabled", true);
-	$("#location_input").prop("disabled", true);
+	$("#locality_input").prop("disabled", true);
 	$("#school_input").prop("disabled", true);
 	$("#department_input").placeholder = "departamento o partido (primero selecciona provincia)";
-	$("#location_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
+	$("#locality_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
 	$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
 	update_with_country_value($("input[name=country]").val());
 	update_with_is_student_value($("input[name='is_student']:checked").val());
@@ -237,3 +238,19 @@ function setSchoolsOptions(schools){
 function askForSchools(txt, province, department) {
 	get_schools_matching_request(province, department, txt).then(setSchoolsOptions);
 }
+
+function setLocationOptions(localities){
+	console.log(localities);
+	localities_datalist = document.getElementById("locality");
+    localities_datalist.innerHTML = ""
+    for(locality of localities) {
+    	var option = document.createElement( 'option' );
+    	option.value = locality;
+    	localities_datalist.appendChild(option);
+    }
+}
+
+function askForLocations(province,department){
+	$.getJSON( "./jsons/provincias/"+province+"/"+department+".json", setLocationOptions);
+}
+
