@@ -26,17 +26,40 @@
 		  gtag('js', new Date());
 
 		  gtag('config', 'UA-172622724-1');
+		  $(function(){
+		  	add_stats_to_frontend_admin();
+		  });
 		</script>
 
         <script type="text/javascript" src="main.js"></script>
         <title>OMAlbum</title>
+        <style>
+        	table, th, td {
+			  border: 1px solid black;
+			}
+			table {
+			  border-collapse: collapse;
+			}
+			.active-problem-h2 {
+				background-color: #64D89F;
+			}
+			.next-problems-h2 {
+				background-color: #5890E5;
+			}
+			.tr-odd {
+				background-color: #F1F5F5;
+			}
+			.tr-even {
+				background-color: #FDF5F1;
+			}
+        </style>
     </head>
     <body>
         <nav class="header-nav"></nav>
 		<div id="notifications"></div>
         <main>
-            <h1>Admin</h1>
-            <div class="problems-admin"></div>
+            <h1>Stats para nerdear un poco</h1>
+            <div id="problems-stats-admin"></div>
         </main>
     </body>
 </html>

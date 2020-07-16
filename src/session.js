@@ -67,6 +67,8 @@ function login_update() {
     fill_with("fill-last_name", () => my_user["last_name"]);
     fill_with("fill-user_id", () => my_user["user_id"]);
     fill_with("fill-email", () => my_user["email"]);
+    fill_with("fill-gender", () => my_user["gender"]);
+    fill_with("fill-country", () => my_user["country"]);
     for(elem of document.getElementsByClassName("logged-out")) {
         elem.style.display = "none";
     }

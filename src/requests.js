@@ -2,6 +2,10 @@ function register_request(payload){
 	return do_request("api/v1/register", payload, false, "POST");
 }
 
+function update_user_request(payload){
+	return do_request("api/v1/users/" + user().user_id + "/profile", payload, true, "PUT");
+}
+
 function login_request(payload){
 	return do_request("api/v1/auth/login", payload, false, "POST");
 }
@@ -18,6 +22,10 @@ function get_current_problems(){
 
 function get_all_problems_admin_request(){
 	return do_request("api/v1/admin/problems/all", null, true, "GET");
+}
+
+function get_all_problems_stats_admin_request(){
+	return do_request("api/v1/admin/problems/all/stats", null, true, "GET");
 }
 
 
