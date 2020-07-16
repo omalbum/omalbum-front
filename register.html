@@ -30,15 +30,15 @@
             <h1>Registrate!</h1>
             <form>
                 <legend>Elegí el nombre de usuario y la contraseña que usarás para acceder a OMAlbum</legend>
-                <p class="tit">
-                    El nombre de usuario debe contener entre 5 y 20 letras o dígitos del español
-                </p>
+                <p class="tit">Nombre de usuario (entre 5 y 20 letras o dígitos del español)</p>
                 <div class="stretch">
                     <input type="text" name="user_name" placeholder="nombre de usuario">
                 </div>
+                <p class="tit">Contraseña</p>
                 <div class="stretch">
                     <input type="password" name="password" placeholder="contraseña">
                 </div>
+                <p class="tit">Email</p>
                 <div class="stretch">
                     <input type="text" name="email" placeholder="dirección de email">
                 </div>
@@ -48,16 +48,19 @@
                 <div class="stretch">
                 <legend>Completá tus datos</legend>
                 </div>
+                <p class="tit">Nombre</p>
                 <div class="stretch">
                     <input type="text" name="name" placeholder="nombres">
                 </div>
+                <p class="tit">Apellido</p>
                 <div class="stretch">
                     <input type="text" name="last_name" placeholder="apellidos">
                 </div>
-                <p class="tit">fecha de nacimiento</p>
+                <p class="tit">Fecha de nacimiento</p>
                 <div class="stretch">
                     <input type="date" name="birth_date" placeholder="fecha de nacimiento">
                 </div>
+                <p class="tit">Género</p>
                 <div class="stretch">
                     <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
                 </div>
@@ -71,6 +74,7 @@
                     <option>prefiero no responder</option>
                     <option>otro</option>
                 </datalist>
+                <p class="tit">País</p>
                 <div class="stretch">
                     <input type="text" list="country" name="country" placeholder="país de residencia" onchange="event_updated_country(this);" value="Argentina">
                 </div>
@@ -319,7 +323,7 @@
                     <span><input type="radio" name="is_student" value="false" onchange="event_updated_student(this);">No</span>
                 </div>
                 <div class="if-student" style="display:none">
-                    <p class="tit">año de escolaridad</p>
+                    <p class="tit">Año de escolaridad</p>
                     <div class="stretch">
                         <input type="number" id="school_year_input" name="school_year" placeholder="desde primer grado de primaria">
                     </div>
@@ -341,21 +345,26 @@
                     </div>
                 </div>
                 <div class="if-professor-or-arg-student" style="display:none">
+	                <p class="tit">Provincia</p>
                     <div class="stretch">
                         <input id="province_input" type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">
                     </div>
                     <datalist id="province"></datalist>
+	                <p class="tit">Departamento o partido</p>
                     <div class="stretch">
                         <input id="department_input" onchange="onDepartmentOrProvinceChange()" type="text" list="department" name="department" placeholder="departamento o partido (primero selecciona provincia)">
                     </div>
                     <datalist id="department"></datalist>
+	                <p class="tit">Localidad</p>
                     <div class="stretch">
                         <input id="locality_input" type="text" name="location" placeholder="localidad" list="locality">
                     </div>
                     <datalist id="locality"></datalist>
+	                <p class="tit">Escuela</p>
                     <div class="stretch">
                         <input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
                     </div>
+
                     <datalist id="school"></datalist>
                 </div>
                 <div class="spacer"></div>
