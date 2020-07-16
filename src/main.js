@@ -52,6 +52,15 @@ function init() {
 	insert_problems_admin();
     province_selector();
     insert_index_problems();
+    var reloading = sessionStorage.getItem("reloading");
+    if (reloading) {
+    	// No anda pero la pantalla deberia ser chica: window.scrollTo(0, 0);
+    	notify(sessionStorage.getItem("notif"), sessionStorage.getItem("notif_text"), sessionStorage.getItem("notif_code"));
+        sessionStorage.removeItem("reloading");
+        sessionStorage.removeItem("notif");
+        sessionStorage.removeItem("notif_text");
+        sessionStorage.removeItem("notif_code");
+    }
 }
 
 window.onload = init;

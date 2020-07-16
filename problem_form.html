@@ -1,0 +1,57 @@
+<form>
+    <p class="tit">Enunciado</p>
+    <div class="stretch padded">
+        <textarea class="input" name="statement" type="text" rows="2" id="statement" placeholder="Sea \(n \in \mathbb{Z}\). Demostrar que \(n^2 \geq 0\)."></textarea>
+    </div>
+    <button class="margin" type="button" onclick="update_preview(this)" for="statement">Preview</button>
+    <p class="tit">Solución Oficial</p>
+    <div class="stretch padded">
+        <textarea class="input" name="official_solution" type="text" rows="2" id="solution" placeholder="Menos por menos es más."></textarea>
+    </div>
+    <button type="button" class="margin" onclick="update_preview(this)" for="solution">Preview</button>
+    <p class="tit">Hint</p>
+    <div class="stretch padded">
+        <textarea class="input" name="hint" type="text" rows="2" id="hint" placeholder="Acá se puede poner hints"></textarea>
+    </div>
+    <button type="button" class="margin" onclick="update_preview(this)" for="hint">Preview</button>
+    <div class="boxed light-bg">
+    <p id="preview">Apriete "Preview" para ver el contenido renderizado con Mathjax</p>
+    </div>
+    <div class="spacer"></div>
+    <p class="tit">Serie</p>
+    <div class="stretch">
+        <input id="series_input" name="series" type="text" placeholder="A">
+    </div>
+    <p class="tit">ID del post del problema en OMAforos</p>
+    <div class="stretch">
+        <input id="omaforos_post_id_input" name="omaforos_post_id" type="number" min="0" step="1">
+    </div>
+    <p class="tit">Respuesta</p>
+    <div class="stretch">
+        <input id="answer_input" name="answer" type="number" step="1">
+    </div>
+    <p class="tit">Fecha y Hora de inicio</p>
+    <div class="stretch">
+        <input id="release_date_input" type="date" name="date:release_date">
+        <input id="release_time_input" type="time" name="time:release_date">
+    </div>
+    <p class="tit">Fecha y Hora de fin</p>
+    <div class="stretch">
+        <input id="deadline_date_input" type="date" name="date:deadline">
+        <input id="deadline_time_input" type="time" name="time:deadline">
+    </div>
+    <p class="tit">Tags</p>
+    <div class="stretch">
+        <input id="tags_input" type="text" name="tags" value=""><br>
+		Insertar las tags separadas por comas. Por ejemplo Combinatoria,Juegos
+    </div>
+    <p class="tit">Anotaciones</p>
+    <div class="stretch padded">
+        <textarea class="input" name="annotations" type="text" rows="10" id="previewed">anotaciones</textarea>
+    </div>
+    <div class="left">
+        <p class="tit">draft?</p>
+        <input id="is_draft_input" type="checkbox" list="boolean" name="is_draft" checked="true">
+    </div>
+    <button id="submit_button" class="margin" type="button"></button>
+</form>

@@ -2,6 +2,10 @@ function register_request(payload){
 	return do_request("api/v1/register", payload, false, "POST");
 }
 
+function update_user_request(payload){
+	return do_request("api/v1/users/" + user().user_id + "/profile", payload, true, "PUT");
+}
+
 function login_request(payload){
 	return do_request("api/v1/auth/login", payload, false, "POST");
 }
@@ -20,6 +24,10 @@ function get_all_problems_admin_request(){
 	return do_request("api/v1/admin/problems/all", null, true, "GET");
 }
 
+function get_all_problems_stats_admin_request(){
+	return do_request("api/v1/admin/problems/all/stats", null, true, "GET");
+}
+
 
 function get_album_request(user_id){
 	return do_request("api/v1/users/" + user_id.toString() + "/album", null, true, "GET");
@@ -27,6 +35,10 @@ function get_album_request(user_id){
 
 function get_problem_request(problem_id){
 	return do_request("api/v1/problems/problem/" + problem_id.toString(), null, false, "GET");
+}
+
+function get_admin_problem_request(problem_id) {
+	return do_request("api/v1/admin/problem/" + problem_id.toString(), null, true, "GET");
 }
 
 function get_next_problems_request(){
@@ -39,6 +51,10 @@ function attempt_problem_request(payload){
 
 function create_problem_request(payload){
 	return 	do_request("api/v1/admin/problem", payload, true, "POST");
+}
+
+function update_problem_request(payload, problem_id){
+	return 	do_request("api/v1/admin/problem/" + problem_id.toString(), payload, true, "PUT");
 }
 
 function get_problem_stats(user_id, problem_id){

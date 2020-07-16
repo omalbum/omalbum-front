@@ -44,8 +44,8 @@ function register_event(form) {
     payload = extract_data(form.closest("form"));
     payload.school_year = parseInt(payload.school_year);
     payload.gender = getGenderValueForPayload(payload.gender);
-    payload.is_professor = undefined;
-    payload.is_student = payload.is_student == "true";
+    payload.is_teacher = (payload.is_professor=="true");
+    payload.is_student = (payload.is_student == "true");
 	return register_with_validation(payload);
 }
 

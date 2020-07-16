@@ -26,10 +26,12 @@
 		  gtag('js', new Date());
 
 		  gtag('config', 'UA-172622724-1');
+		  $(function(){
+		  	add_stats_to_frontend_admin();
+		  });
 		</script>
 
         <script type="text/javascript" src="main.js"></script>
-
         <title>OMAlbum</title>
         <style>
         	table, th, td {
@@ -44,43 +46,20 @@
 			.next-problems-h2 {
 				background-color: #5890E5;
 			}
-			.result_incorrect {
-				background-color: #FA9B9B;
+			.tr-odd {
+				background-color: #F1F5F5;
 			}
-			.result_correct {
-				background-color: #AAFDAB;
-			}
-			.result_wait {
-				background-color: #BDFCF3;
+			.tr-even {
+				background-color: #FDF5F1;
 			}
         </style>
     </head>
-    <body onload="init(); load_problem();">
+    <body>
         <nav class="header-nav"></nav>
-		<div id="notifications">
-		</div>
+		<div id="notifications"></div>
         <main>
-            <h1 id="titulo"><i class="icono material-icons"></i></h1>
-            <div id="enunciado" class="enunciado math light-bg boxed">
-            </div>
-            <div class="logged-in">
-                <h1>Respuesta</h1>
-                <form>
-                    <div class="stretch">
-                        <input id="solution" type="number" step="1" placeholder="respuesta"> (la respuesta es un número entero)
-                    </div>
-                    <input class="center" type="button" onclick="attempt_problem_event(this);" value="Enviar Respuesta">
-                </form>
-            </div>
-            <div class="logged-out">
-                <p>
-                    Registrate para intentar este problema!
-                </p>
-            </div>
-			<div id="link-omaforos">
-			</div>
-			<div id="intentos" class="logged-in">
-			</div>
+            <h1>Stats para nerdear un poco</h1>
+            <div id="problems-stats-admin"></div>
         </main>
     </body>
 </html>

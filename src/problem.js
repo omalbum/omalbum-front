@@ -40,7 +40,7 @@ function add_intentos_to_table(attempts) {
 	for (attempt of attempts){
 		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date));
 		var td2 = $("<td>").text(attempt.given_answer.toString());
-		table.append($("<tr>").append(td1).append(td2));
+		table.append($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
 	}
 }
 
@@ -70,7 +70,7 @@ function get_problem_url(p){
 }
 
 function attempt_feedback_for_user(x){
-	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value)}]);
+	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value), result: x.result}]);
 	if(x.result=="correct"){
 		return notify("notification good", "Bien!", "La solución es correcta");
 	}
