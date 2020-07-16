@@ -176,11 +176,19 @@ function onDepartmentOrProvinceChange(){
 	if (isDatalistValid("department") && isDatalistValid("province")){
 		$("#school_input").prop("disabled", false);
 		$("#school_input").prop("placeholder", "escuela");
+		$("#location_input").prop("disabled", false);
+		$("#location_input").prop("placeholder", "localidad");
+
+
 	} else {
 		$("#school_input").prop("disabled", true);
 		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+		$("#location_input").prop("disabled", true);
+		$("#location_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
+
 	}
 	$("#school_input").val("");
+	$("#location_input").val("");
 }
 
 function onGenderChange() {
@@ -204,8 +212,13 @@ function isDatalistValid(datalist_id) {
 	return optionFound;
 }
 
+
 $(document).ready(function(){
+	$("#department_input").prop("disabled", true);
+	$("#location_input").prop("disabled", true);
 	$("#school_input").prop("disabled", true);
+	$("#department_input").placeholder = "departamento o partido (primero selecciona provincia)";
+	$("#location_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
 	$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
 	update_with_country_value($("input[name=country]").val());
 	update_with_is_student_value($("input[name='is_student']:checked").val());
