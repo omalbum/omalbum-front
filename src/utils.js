@@ -156,3 +156,7 @@ function compare_problems (p,q){
 	return 1;
 }
 
+
+function replaceEntersWithBr(text) {
+	return text.split("\n").join("<br>");
+}

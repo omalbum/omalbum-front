@@ -4,7 +4,7 @@ function create_problem_event(form) {
 		deadline : date_string(data["date:deadline"], data["time:deadline"]),
 		release_date : date_string(data["date:release_date"], data["time:release_date"]),
 		tags : data["tags"].split(","),
-		statement : data["statement"],
+		statement : replaceEntersWithBr(data["statement"]),
 		omaforos_post_id : parseInt(data["omaforos_post_id"]),
 		answer : parseInt(data["answer"]),
 		annotations : data["annotations"],
@@ -47,7 +47,7 @@ function feedback_create_problem_validation_fails(validation_failures){
 function update_preview(button) {
     previewer = document.getElementById("preview");
     previewed = document.getElementById(button.getAttribute("for"));
-    previewer.innerHTML = previewed.value;
+    previewer.innerHTML = replaceEntersWithBr(previewed.value);
     MathJax.typeset();
 }
 
