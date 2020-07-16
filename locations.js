@@ -164,7 +164,7 @@ const locations = {
 ]
 ,
 "Ciudad de Buenos Aires": [
-  "Ciudad de Buenos Aires"
+  "CIUDAD DE BUENOS AIRES"
 ]
 ,
 "Chaco": [

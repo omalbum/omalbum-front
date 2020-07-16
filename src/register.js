@@ -77,12 +77,14 @@ function province_selector() {
         for(k in locations) {
             ele.innerHTML += `<option>${k}</option>`
         }
+		/*
         loc = document.getElementById("department");
         for(k in locations) {
             for(j of locations[k]) {
                 loc.innerHTML += `<option>${j}</option>`
             }
         }
+		*/
     }
 }
 
@@ -96,8 +98,11 @@ function reset_departments() {
 	    for(j of locations[tag.value]) {
 	        loc.innerHTML += `<option>${j}</option>`
 	    }
-	    document.getElementById("department_input").value = "";
+	}else{
+		document.getElementById("department_input").placeholder = "primero seleccionar provincia";
+		document.getElementById("department_input").disabled = true;
 	}
+	document.getElementById("department_input").value = "";
     onDepartmentOrProvinceChange();
 }
 
