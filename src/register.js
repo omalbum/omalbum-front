@@ -98,8 +98,10 @@ function reset_departments() {
 	    for(j of locations[tag.value]) {
 	        loc.innerHTML += `<option>${j}</option>`
 	    }
+		document.getElementById("department_input").placeholder = "departamento o partido";
+		document.getElementById("department_input").disabled = false;
 	}else{
-		document.getElementById("department_input").placeholder = "primero seleccionar provincia";
+		document.getElementById("department_input").placeholder = "departamento o partido (primero seleccionar provincia)";
 		document.getElementById("department_input").disabled = true;
 	}
 	document.getElementById("department_input").value = "";
