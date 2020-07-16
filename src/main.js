@@ -23,16 +23,16 @@ function create_header_nav() {
 
 			nav.appendChild(create_header_button("index.html", "inicio", null));
 			nav.appendChild(create_header_button("problemas.html", "problemas", null));
-			nav.appendChild(create_header_button("login.html", "login", "logged-out"));
-			nav.appendChild(create_header_button("register.html", "register", "logged-out"));
+			nav.appendChild(create_header_button("login.html", "ingresar", "logged-out"));
+			nav.appendChild(create_header_button("register.html", "registrarse", "logged-out"));
 
-			var profile = create_header_button("profile.html", "profile ", "logged-in")
+			var profile = create_header_button("profile.html", "perfil ", "logged-in")
 			var profile_em = document.createElement("em");
 			profile_em.className = "fill-user_name";
 			profile.appendChild(profile_em);
 			nav.appendChild(profile);
 			
-			var logout = create_header_button("", "logout", "logged-in");
+			var logout = create_header_button("", "salir", "logged-in");
 			logout.onclick = function() {
 				do_logout();
 			}
