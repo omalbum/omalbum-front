@@ -75,6 +75,10 @@ function province_selector() {
     ele = document.getElementById("province");
 	opts = [];
     if(ele) {
+		if (is_logged_in()){
+			window.location.replace(".");
+			return;
+		}
         for(k in locations) {
 			opts.push(`<option>${k}</option>`);
         }
