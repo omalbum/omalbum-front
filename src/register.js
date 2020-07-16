@@ -221,14 +221,12 @@ $(document).ready(function(){
 
 function setSchoolsOptions(schools){
 	schools_datalist = document.getElementById("school");
-    schools_datalist.innerHTML = ""
-	var fragment = new DocumentFragment()
+    schools_datalist.innerHTML = "";
+	opts = [];
     for(school of schools) {
-    	var option = document.createElement( 'option' );
-    	option.value = school.Name;
-    	fragment.appendChild(option);
+		opts.push(`<option>${school.Name}</option>`);
     }
-	schools_datalist.appendChild(fragment);
+	schools_datalist.innerHTML = opts.join("\n");
 }
 
 function askForSchools(txt, province, department) {
@@ -238,14 +236,12 @@ function askForSchools(txt, province, department) {
 function setLocationOptions(localities){
 	console.log(localities);
 	localities_datalist = document.getElementById("locality");
-    localities_datalist.innerHTML = ""
-	var fragment = new DocumentFragment()
+    localities_datalist.innerHTML = "";
+	opts = [];
     for(locality of localities) {
-    	var option = document.createElement( 'option' );
-    	option.value = locality;
-    	fragment.appendChild(option);
+		opts.push(`<option>${locality}</option>`);
     }
-	localities_datalist.appendChild(fragment);
+	localities_datalist.innerHTML = opts.join("\n");
 }
 
 function askForLocations(province,department){
