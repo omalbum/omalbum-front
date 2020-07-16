@@ -101,6 +101,15 @@ function feedback_register_validation_fails(validation_failures){
 }
 
 
+function register_init(){
+	this_year = new Date().getFullYear();
+	ele = document.getElementById("title_student_this_year");
+	if(ele){
+		ele.innerHTML=`Durante el año ${this_year}, ¿sos estudiante regular de primaria o secundaria?`
+	}
+	province_selector();
+
+}
 
 function province_selector() {
     ele = document.getElementById("province");

@@ -50,7 +50,7 @@ function init() {
     }
     insert_problems();
 	insert_problems_admin();
-    province_selector();
+    register_init();
     insert_index_problems();
     var reloading = sessionStorage.getItem("reloading");
     if (reloading) {
