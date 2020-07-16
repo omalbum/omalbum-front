@@ -39,13 +39,17 @@ function extract_data(form) {
 function get_nice_date_to_show(date){
 	date = new Date(date);
 	ret = get_day_string(date) + " " + date.getDate().toString() + " de " + get_month_string(date);
-	ret += " (faltan " + get_date_diff_from_now(date) + ")";
+	ret += " (" + get_date_diff_string_from_now(date) + ")";
 	return ret;
 }
 
-function get_date_diff_from_now(date) {
+function get_date_diff_string_from_now(date) {
 	var now = new Date();
-	var seconds = parseInt(Math.abs(now-date) / 1000);
+	var past_or_future = (now < date) ? "faltan " : "hace ";
+	return past_or_future + get_short_diff_string_from_now(parseInt(Math.abs(now-date) / 1000));
+}
+
+function get_short_diff_string_from_now(seconds) {
 	if (seconds < 60){
 		return seconds.toString() + " segundos";
 	}

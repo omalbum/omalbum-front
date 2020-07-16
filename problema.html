@@ -31,6 +31,20 @@
         <script type="text/javascript" src="main.js"></script>
 
         <title>OMAlbum</title>
+        <style>
+        	table, th, td {
+			  border: 1px solid black;
+			}
+			table {
+			  border-collapse: collapse;
+			}
+			.active-problem-h2 {
+				background-color: #64D89F;
+			}
+			.next-problems-h2 {
+				background-color: #5890E5;
+			}
+        </style>
     </head>
     <body onload="init(); load_problem();">
         <nav class="header-nav"></nav>
@@ -55,6 +69,8 @@
                 </p>
             </div>
 			<div id="link-omaforos">
+			</div>
+			<div id="intentos" class="logged-in">
 			</div>
         </main>
     </body>
