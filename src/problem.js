@@ -13,6 +13,35 @@ function load_problem() {
 			document.getElementById("link-omaforos").innerHTML = l.join("");
 		}
     });
+    if (is_logged_in()){
+    	$("#intentos").append($("<h2>").text("INTENTOS"));
+	    get_problem_stats(user().user_id, problem_id).then(x => {
+	    	if (x.attempt_list.length > 0) {
+	    		add_intentos_to_table(x.attempt_list);
+	    	} else {
+	    		$("#intentos").append($("<label id='no_attempts'>").text("No hiciste intentos todavía"));
+	    	}
+	    });
+	}
+}
+
+function add_intentos_to_table(attempts) {
+	var table = undefined;
+	if ($("#intentos_table").length > 0) {
+		table = $("#intentos_table");
+	} else {
+		$("#no_attempts").css("display", "none");
+		table = $("<table id='intentos_table'>");
+		var th1 = $("<th>").text("Fecha intento");
+		var th2 = $("<th>").text("Repuesta enviada");
+		table.append($("<tr>").append(th1).append(th2));
+		$("#intentos").append(table);
+	}
+	for (attempt of attempts){
+		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date));
+		var td2 = $("<td>").text(attempt.given_answer.toString());
+		table.append($("<tr>").append(td1).append(td2));
+	}
 }
 
 function attempt_problem_event(form) {
@@ -41,6 +70,7 @@ function get_problem_url(p){
 }
 
 function attempt_feedback_for_user(x){
+	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value)}]);
 	if(x.result=="correct"){
 		return notify("notification good", "Bien!", "La solución es correcta");
 	}
