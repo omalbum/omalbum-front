@@ -26,12 +26,32 @@
 		  gtag('js', new Date());
 
 		  gtag('config', 'UA-172622724-1');
-		  $(function(){
+		  const urlParams = new URLSearchParams(window.location.search);
+		  const problem_id = urlParams.get('id');
+
+		  $(document).ready(function() {
 		  	$("#formContent").load("problem_form.html", function(){
 		  		$("#submit_button").on("click", function(){
-		  			create_problem_event(this);
-		  		}).text("Crear Problema");
-		  	}); 
+		  			update_problem_event(this, problem_id);
+		  		}).text("Editar Problema");
+		  	});
+		  	get_admin_problem_request(problem_id).then(p => {
+		  		$("#statement").val(p.statement);
+		  		$("#solution").val(p.official_solution);
+		  		$("#hint").val(p.hint);
+		  		$("#series_input").val(p.series);
+		  		$("#omaforos_post_id_input").val(p.omaforos_post_id || "");
+		  		$("#answer_input").val(p.answer);
+		  		var release_date_splited = p.release_date.split("T");
+		  		$("#release_date_input").val(release_date_splited[0]);
+		  		$("#release_time_input").val(release_date_splited[1].substr(0, 5));
+		  		var deadline_date_splited = p.deadline.split("T");
+		  		$("#deadline_date_input").val(deadline_date_splited[0]);
+		  		$("#deadline_time_input").val(deadline_date_splited[1].substr(0, 5));
+		  		$("#tags_input").val(p.tags.join(","));
+		  		$("#previewed").val(p.annotations);
+		  		$("#is_draft_input").prop('checked', p.is_draft);
+		  	});
 		  });
 		</script>
 
@@ -43,7 +63,7 @@
 		<div id="notifications">
 		</div>
         <main>
-            <h1>Crear Nuevo Problema</h1>
+            <h1>Editar Problema </h1>
             <div id="formContent"></div>
         </main>
     </body>

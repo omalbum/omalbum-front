@@ -1,6 +1,5 @@
-function create_problem_event(form) {
-    data = extract_data(form.closest("form"));
-    payload = {
+function get_new_problem_payload(data) {
+	return {
 		deadline : date_string(data["date:deadline"], data["time:deadline"]),
 		release_date : date_string(data["date:release_date"], data["time:release_date"]),
 		tags : data["tags"].split(","),
@@ -13,7 +12,18 @@ function create_problem_event(form) {
 		series : data["series"],
 		official_solution : data["official_solution"],
 	};
+}
+
+function create_problem_event(form) {
+    data = extract_data(form.closest("form"));
+    payload = get_new_problem_payload(data);
 	create_problem_with_validation(payload);
+}
+
+function update_problem_event(form, problem_id) {
+    data = extract_data(form.closest("form"));
+    payload = get_new_problem_payload(data);
+	update_problem_with_validation(payload, problem_id);
 }
 
 function create_problem_with_validation(payload){
@@ -33,6 +43,36 @@ function create_problem_with_validation(payload){
 	}).catch(err => {
 		clear_notifications();
 		notify("notification urgent", "No se pudo agregar", html_escape(err.code) || "Error desconocido");
+		window.scrollTo(0, 0);
+	});
+}
+
+function update_problem_with_validation(payload, problem_id){
+	// TODO: No anda bien esto, supongo que por el back
+	// No se puede editar la serie
+	// No cambia el valor de draft de true a false
+	// pasan cosas raras con la hora
+	validation_failures = validate_create_problem_payload(payload);
+	if( validation_failures.length > 0 ){
+		feedback_create_problem_validation_fails(validation_failures);
+		return;
+	}
+	update_problem_request(payload, problem_id).then(p => { //acá sería mejor manejar el error
+		var txt = "";
+		if (payload.is_draft){
+			txt = "Problema editado (sigue como draft)";
+		} else {
+			txt = "Problema editado! Code: " + get_problem_code_to_show(p);
+		}
+		clear_notifications();
+		notify("notification good", txt, "Para verlo podés ir <a href=\"" + host + get_problem_url(p) + "\">acá</a>  :)");
+		if (!payload.is_draft){
+			notify("notification urgent", "Atencion, ...", "Por alguna razón todavía no anda sacar un problema de draft, estamos trabajando para solucionarlo (?");
+		}
+		window.scrollTo(0, 0);
+	}).catch(err => {
+		clear_notifications();
+		notify("notification urgent", "No se pudo editar", html_escape(err.code) || "Error desconocido");
 		window.scrollTo(0, 0);
 	});
 }
