@@ -12,7 +12,11 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	td.appendChild(document.createTextNode("Problema"));
 	head.appendChild(td);
 	var td = document.createElement("th");
-	td.appendChild(document.createTextNode("Hasta cuando estará activo"));
+	if (is_active){
+		td.appendChild(document.createTextNode("La prueba termina"));
+	}else{
+		td.appendChild(document.createTextNode("Será publicado"));
+	}
 	head.appendChild(td);
     for(p of problems) {
         index_problem_view(p, is_active, tbdy);
