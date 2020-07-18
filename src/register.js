@@ -3,12 +3,14 @@ all_countries = [' Santo Tomé y Príncipe', 'Afganistán', 'Albania', 'Alemania
 
 function setCountries(){
 	country_datalist = document.getElementById("country");
-    country_datalist.innerHTML = "";
-	opts = [];
-    for(c of all_countries) {
-		opts.push(`<option>${c}</option>`);
-    }
-	country_datalist.innerHTML = opts.join("\n");
+	if (country_datalist){
+		country_datalist.innerHTML = "";
+		opts = [];
+		for(c of all_countries) {
+			opts.push(`<option>${c}</option>`);
+		}
+		country_datalist.innerHTML = opts.join("\n");
+	}
 }
 
 function register_with_validation(payload) {
