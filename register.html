@@ -21,11 +21,6 @@
         <script type="text/javascript" src="locations.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <title>OMAlbum</title>
-		<style>
-			input::-webkit-calendar-picker-indicator {
-				opacity: 100;
-			}
-		</style>
     </head>
     <body>
         <nav class="header-nav"></nav>
@@ -83,6 +78,8 @@
                     <input type="date" name="birth_date" placeholder="fecha de nacimiento">
                 </div>
                 <p class="tit">Género</p>
+                <!--
+                // COMENTADO, REEMPLAZADO POR RADIOBUTTON LO DE GENDER
                 <div class="stretch">
                     <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
                 </div>
@@ -96,6 +93,19 @@
                     <option>prefiero no responder</option>
                     <option>otro</option>
                 </datalist>
+                // HASTA ACA
+                -->
+                <div style="text-align: left;">
+	                <input type="radio" id="femenino" name="gender" value="femenino">
+	                <label for="femenino">Femenino</label><br>
+	                <input type="radio" id="masculino" name="gender" value="masculino">
+	                <label for="masculino" style="">Masculino</label><br>
+	                <input type="radio" id="no_response" name="gender" value="no_response">
+	                <label for="no_response">Prefiero no responder</label><br>
+	                <input type="radio" id="otro" name="gender" value="otro">
+	                <label for="otro">Otro:</label>
+	                <input type="text" id="gender_other_input" style="" disabled></input><br>
+                </div>
                 <p class="tit">País</p>
                 <div class="stretch">
                     <input id="country_input" type="text" list="country" name="country" placeholder="país de residencia" onchange="event_updated_country(this);" value="Argentina">
@@ -126,8 +136,8 @@
                 <div class="if-not-student" style="display:none">
                     <p class="tit">¿Sos docente de matemática en alguna escuela de Argentina?</p>
                     <div class="stretch">
-                        <span><input type="radio" name="is_professor" value="true" onchange="event_updated_professor(this);">Sí</span>
-                        <span><input type="radio" name="is_professor" value="false" onchange="event_updated_professor(this);">No</span>
+                        <span><input type="radio" name="is_teacher" value="true" onchange="event_updated_teacher(this);">Sí</span>
+                        <span><input type="radio" name="is_teacher" value="false" onchange="event_updated_teacher(this);">No</span>
                     </div>
                 </div>
                 <div class="if-argentinian" style="display:none">
@@ -135,34 +145,53 @@
                     	<legend>Completá la siguiente información sobre la escuela donde estudiás.</legend>
                     </div>
                 </div>
-            	<div class="if-professor" style="display:none">
+            	<div class="if-teacher" style="display:none">
             		<div class="if-not-student" style="display:none">
                     	<legend>Completá la siguiente información sobre la escuela donde trabajás (si son varias, elegí una de ellas)</legend>
                     </div>
                 </div>
-                <div class="if-professor-or-arg-student" style="display:none">
-	                <p class="tit">Provincia</p>
-                    <div class="stretch">
-                        <input id="province_input" type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">
+                <div class="if-argentinian" style="display:none">
+                	<div class="if-not-student" style="display:none">
+                		<div class="if-not-teacher" style="display:none">
+                    		<legend>Completá la siguiente información sobre dónde vivís</legend>
+                    	</div>
                     </div>
-                    <datalist id="province"></datalist>
-	                <p class="tit">Departamento o partido</p>
-                    <div class="stretch">
-                        <input id="department_input" onchange="onDepartmentOrProvinceChange()" type="text" list="department" name="department" placeholder="departamento o partido (primero selecciona provincia)">
-                    </div>
-                    <datalist id="department"></datalist>
-	                <p class="tit">Localidad</p>
-                    <div class="stretch">
-                        <input id="locality_input" type="text" name="location" placeholder="localidad" list="locality">
-                    </div>
-                    <datalist id="locality"></datalist>
-	                <p class="tit">Escuela</p>
-                    <div class="stretch">
-                        <input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
-                    </div>
-
-                    <datalist id="school"></datalist>
                 </div>
+                <div id="locality_div">
+	                <p class="tit">Provincia</p>
+	                <div class="stretch">
+	                    <input autocomplete="off" id="province_input" type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">
+	                </div>
+	                <datalist id="province"></datalist>
+	                <p class="tit">Departamento o partido</p>
+	                <div class="stretch">
+	                    <input id="department_input" onchange="onDepartmentOrProvinceChange()" type="text" list="department" name="department" placeholder="departamento o partido (primero selecciona provincia)">
+	                </div>
+	                <datalist id="department"></datalist>
+	                <p class="tit">Localidad</p>
+	                <div class="stretch">
+	                    <input id="locality_input" type="text" name="location" placeholder="localidad" list="locality">
+	                </div>
+	                <datalist id="locality"></datalist>
+	                <div id="school_div">
+		                <p class="tit">Escuela</p>
+	                    <div class="stretch">
+	                        <input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
+	                    </div>
+	                    <datalist id="school"></datalist>
+	                    <div id="school_not_found_div" style="display: none; inline-size: -webkit-fill-available">
+		                    <input id="school_not_found_checkbox" type="checkbox" style="display: flex;" onclick="schoolNotFoundClick(this)">
+		                    <label>No encuentro mi escuela</label>
+		                    <input id="written_school_name" placeholder="nombre de tu escuela" style="display: none">
+		                </div>
+		                <!--
+	                    <select id="select">
+	                    </select>
+	                    -->
+	                    <br>
+	                    <br>
+	                </div>
+	            </div>
                 <div class="spacer"></div>
                 <button type="button" id="register_button" onclick="register_event(this)">Registrarse</button>
 				<br/><br/><br/>

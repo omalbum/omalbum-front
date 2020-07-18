@@ -27,14 +27,7 @@
 		</div>
         <main>
             <h1>Profile</h1>
-            <dl>
-                <dt>username</dt><dd class="fill-user_name"></dd>
-                <dt>name</dt><dd class="fill-name"></dd>
-                <dt>last name</dt><dd class="fill-last_name"></dd>
-                <dt>user id</dt><dd class="fill-user_id"></dd>
-                <dt>email</dt><dd class="fill-email"></dd>
-            </dl>
-            <font size="5" face="Comic-sans" >
+            <font face="Comic-sans" >
             <form style="display: inline-block;">
 	            <table>
 	                <tr><td style="width: 20px; text-align: left; padding: 0 20% 0 0"><dt>username</dt></td><td style="text-align: left;" class="fill-user_name"></td></tr>
@@ -42,26 +35,28 @@
 	                <tr><td style="text-align: left"><dt>last name</dt></td><td style="text-align: left;" id="last_name_td" class="fill-last_name changeable"></td></tr>
 	                <tr><td style="text-align: left"><dt>user id</dt></td><td style="text-align: left;" class="fill-user_id"></td></tr>
 	                <tr><td style="text-align: left"><dt>email</dt></td><td style="text-align: left;" id="email_td" class="fill-email changeable"></td></tr>
-	                <tr><td style="text-align: left"><dt>género</dt></td><td style="text-align: left;" id="gender_td" class="fill-gender changeable"></td>
-	                <td style="display: none" id="gender_td_datalist">
-	                	<div class="stretch">
-		                    <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
-		                </div>
-		                <div id="gender_other" style="display: none">
-		                	<label style="float: left;">Género:</label>
-		                	<input type="text" id="gender_other_input" style="float: left;"></input>
-		                </div>
-		                <datalist id="gender">
-		                    <option>femenino</option>
-		                    <option>masculino</option>
-		                    <option>prefiero no responder</option>
-		                    <option>otro</option>
-		                </datalist>
-	                </td>
-	                
+	                <tr>
+	                	<td style="text-align: left"><dt>género</dt></td>
+	                	<td style="text-align: left;" id="gender_td" class="fill-gender changeable"></td>
+		                <td style="display: none" id="gender_td_datalist">
+		                	<div class="stretch">
+			                    <input type="text" id="gender_input" list="gender" name="gender" placeholder="género">
+			                </div>
+			                <div id="gender_other" style="display: none">
+			                	<label style="float: left;">Género:</label>
+			                	<input type="text" id="gender_other_input" style="float: left;"></input>
+			                </div>
+			                <datalist id="gender">
+			                    <option>femenino</option>
+			                    <option>masculino</option>
+			                    <option>prefiero no responder</option>
+			                    <option>otro</option>
+			                </datalist>
+		                </td>
 	                </tr>
 	                <tr><td style="text-align: left; padding: 0 20% 0 0"><dt>País</dt></td><td style="text-align: left;" id="country_td" class="fill-country changeable"></td></tr>
 	            </table>
+	            <br>
 	            <button id="edit_profile_button" type="button" onclick="onEditProfileClick()">Editar perfil</button>
 	        </form>
             </font>

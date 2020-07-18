@@ -39,8 +39,13 @@ function extract_data(form) {
 function get_nice_date_to_show(date){
 	date = new Date(date);
 	ret = get_day_string(date) + " " + date.getDate().toString() + " de " + get_month_string(date);
+	ret += ", a las " + getHourTime(date);
 	ret += " (" + get_date_diff_string_from_now(date) + ")";
 	return ret;
+}
+
+function getHourTime(date) {
+	return date.getHours().toString().padStart(2, '0') + ":" + date.getMinutes().toString().padStart(2, '0');
 }
 
 function get_date_diff_string_from_now(date) {
