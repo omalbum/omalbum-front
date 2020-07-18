@@ -29,15 +29,23 @@ function problem_html(p) {
     }
 
     attempts = (p.attempts||0) + " intento" + (p.attempts == 1 ? "" : "s");
+    if (!is_logged_in()){
+    	attempts = "<br>";
+    }
 
     return problem_view({
-        "date": (p.solved ? new Date(p.date_solved).toLocaleDateString('sv') : ""),
+        "date": (p.solved ? get_album_date_format(p.date_solved) : "<br>"),
         "attempts": attempts,
         "code": get_problem_code_to_show(p),
         "icon": icon,
         "status": status,
         "url": get_problem_url(p)
     });
+}
+
+function get_album_date_format(date_solved) {
+	var d = new Date(p.date_solved);
+	return d.getDate().toString().padStart(2, '0') + "-" + d.getMonth().toString().padStart(2, '0') + "-" + d.getFullYear().toString();
 }
 
 function insert_given_problems(element, problems) {

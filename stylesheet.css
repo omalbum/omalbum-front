@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+input::-webkit-calendar-picker-indicator {
+	opacity: 100;
+}
+
 html, body {
     margin: 0px;
     font-family: "Arial";

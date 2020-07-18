@@ -37,13 +37,22 @@ function register_with_validation(payload) {
 
 function custom_validate_register_payload(payload){
 	var custom_validation_failures = [];
-	if ((isStudent() && isFromArg()) || isProfessor()){
+	if ($("#locality_div").css("display") != "none"){
 		if (! isDatalistValid("province")){
 			custom_validation_failures.push({ field:"Provincia", error: "Debe ser una opción válida" });
 		} else if (! isDatalistValid("department")){
 			custom_validation_failures.push({ field:"Departamento", error: "Debe ser una opción válida" });
-		} else if (! isDatalistValid("school")){
-			custom_validation_failures.push({ field:"Escuela", error: "Debe ser una opción válida" });
+		}
+	}
+	if ( $("#school_div").css("display") != "none" ){
+		if ($("#school_not_found_checkbox:checked").val() == undefined) {
+			if (! isDatalistValid("school")){
+				custom_validation_failures.push({ field:"Escuela", error: "Debe ser una opción válida" });
+			} 
+		} else {
+			if ($("#written_school_name").val() == "") {
+				custom_validation_failures.push({ field:"Escuela", error: "Si no encontrás tu escuela, escribí el nombre donde corresponde" });
+			}
 		}
 	}
 	if (isStudent()) {
@@ -51,35 +60,43 @@ function custom_validate_register_payload(payload){
 			custom_validation_failures.push({ field:"Año de escolaridad", error: "Debe ser un número válido" });
 		}
 	}
-	if (! isDatalistValid("gender")){
+	if ($('input[type=radio][name=gender]:checked').val() === undefined){
 		custom_validation_failures.push({ field:"Género", error: "Debe ser una opción válida" });
+	} else if ($('input[type=radio][name=gender]:checked').val() == "otro" && $("#gender_other_input").val() == "") {
+		custom_validation_failures.push({ field:"Género", error: "Si seleccionás 'otro' no podés dejar vacío el texto de al lado" });
 	}
 	if (! isDatalistValid("country")){
 		custom_validation_failures.push({ field:"País", error: "Debe ser una opción válida" });
+	}
+	if (!isStudent() && $('input[type=radio][name=is_teacher]:checked').val() === undefined){
+		custom_validation_failures.push({ field:"Sos docente?", error: "Completá con la información que corresponda" });
 	}
 	return custom_validation_failures;
 }
 
 function register_event(form) {
     payload = extract_data(form.closest("form"));
+    payload.school = getSchoolNameFromOptionOrHardcoded();
     payload.school_year = parseInt(payload.school_year);
     payload.gender = getGenderValueForPayload(payload.gender);
-    payload.is_teacher = (payload.is_professor=="true");
-    payload.is_student = (payload.is_student == "true");
+    payload.is_teacher = isTeacher();
+    payload.is_student = isStudent();
 	return register_with_validation(payload);
 }
 
 function getGenderValueForPayload(gender_input_val) {
-	if (gender_input_val == "masculino"){
-		return "masculino";
-	} else if (gender_input_val == "femenino"){
-		return "femenino";
-	} else if (gender_input_val == "prefiero no responder"){
-		return "prefiero no responder";
-	} else if (gender_input_val == "otro"){
-		return document.getElementById("gender_other_input").value || "otro";
+	if ($('input[type=radio][name=gender]:checked').val() != "otro") {
+		return $('input[type=radio][name=gender]:checked').val();
 	} else {
-		return "";
+		return $("#gender_other_input").val();
+	}
+}
+
+function getSchoolNameFromOptionOrHardcoded() {
+	if ($("#school_not_found_checkbox:checked").val() == undefined) {
+		return $("#school_input").val();
+	} else {
+		return $("#written_school_name").val();
 	}
 }
 
@@ -147,6 +164,7 @@ function update_with_country_value(value) {
         e.style.display = value == "Argentina" ? "none" : "block";
     }
     maybeShowSchoolForm();
+    maybeShowLocalityDiv();
 }
 
 function event_updated_student(elem) {
@@ -154,6 +172,11 @@ function event_updated_student(elem) {
 }
 
 function update_with_is_student_value(value) {
+	if (value == 'true' || $('input[type=radio][name=is_teacher]:checked').val() == 'true') {
+		$("#school_div").css("display", "block");
+	} else {
+		$("#school_div").css("display", "none");
+	}
     for(e of document.getElementsByClassName("if-student")) {
         e.style.display = value == "true" ? "block" : "none";
     }
@@ -161,24 +184,41 @@ function update_with_is_student_value(value) {
         e.style.display = value == "true" ? "none" : "block";
     }
     maybeShowSchoolForm();
+    maybeShowLocalityDiv();
 }
 
-function event_updated_professor(elem) {
-    for(e of document.getElementsByClassName("if-professor")) {
+function schoolNotFoundClick() {
+	if ($("#school_not_found_checkbox:checked").val() != undefined) {
+		$("#written_school_name").css("display", "block");
+		$("#written_school_name").prop("disabled", false);
+		$("#written_school_name").focus();
+	} else {
+		$("#written_school_name").prop("disabled", true);
+	}
+}
+
+function event_updated_teacher(elem) {
+	if (elem.value == 'true' || $('input[type=radio][name=is_student]:checked').val() == 'true') {
+		$("#school_div").css("display", "block");
+	} else {
+		$("#school_div").css("display", "none");
+	}
+    for(e of document.getElementsByClassName("if-teacher")) {
         e.style.display = elem.value == "true" ? "block" : "none";
     }
-    for(e of document.getElementsByClassName("if-not-professor")) {
+    for(e of document.getElementsByClassName("if-not-teacher")) {
         e.style.display = elem.value == "true" ? "none" : "block";
     }
     maybeShowSchoolForm();
+    maybeShowLocalityDiv();
 }
 
 function isStudent() {
 	return $("input[name='is_student']:checked").val() == "true";
 }
 
-function isProfessor() {
-	return !isStudent() && $("input[name='is_professor']:checked").val() == "true";
+function isTeacher() {
+	return !isStudent() && $("input[name='is_teacher']:checked").val() == "true";
 }
 
 function isFromArg() {
@@ -187,11 +227,19 @@ function isFromArg() {
 
 function maybeShowSchoolForm() {
 	var should_show = false;
-	if (isProfessor() || (isStudent() && isFromArg())) {
+	if (isTeacher() || (isStudent() && isFromArg())) {
 		should_show = true;
 	}
-	for(e of document.getElementsByClassName("if-professor-or-arg-student")) {
+	for(e of document.getElementsByClassName("if-argentinian-and-student-or-teacher-defined")) {
         e.style.display = (should_show ? "block" : "none");
+    }
+}
+
+function maybeShowLocalityDiv() {
+	if ((isFromArg() && (isStudent() || $("input[name='is_teacher']:checked").val() != undefined)) || isTeacher()) {
+    	$("#locality_div").css("display", "block");
+    } else {
+    	$("#locality_div").css("display", "none");
     }
 }
 
@@ -206,6 +254,7 @@ function checkSchoolsInput(input) {
 		$("#register_button").prop("disabled", false);
 	} else if (input.value.length < MIN_LETTERS){
 		setSchoolsOptions([]);
+		$("#school_not_found_div").css("display", "none");
 	}
 }
 
@@ -227,14 +276,6 @@ function onDepartmentOrProvinceChange(){
 	}
 	$("#school_input").val("");
 	$("#locality_input").val("");
-}
-
-function onGenderChange() {
-	if (document.getElementById("gender_input").value == "otro"){
-		$("#gender_other").css("display", "block");
-	} else {
-		$("#gender_other").css("display", "none");
-	}
 }
 
 function isDatalistValid(datalist_id) {
@@ -260,7 +301,22 @@ $(document).ready(function(){
 	$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
 	update_with_country_value($("input[name=country]").val());
 	update_with_is_student_value($("input[name='is_student']:checked").val());
+	$('input[type=radio][name=gender]').change(function() {
+	    if (this.value == 'otro') {
+	        $("#gender_other_input").prop("disabled", false);
+	        $("#gender_other_input").focus();
+	    } else {
+	    	$("#gender_other_input").prop("disabled", true);
+	    }
+	});
 });
+
+/* COMENTADO POR SI QUEREMOS SELECT
+function addSelect(schools){
+	for(school of schools) {
+		$('#select').append($('<option>', {value:school.Name, text:school.Name}));
+	}
+}*/
 
 function setSchoolsOptions(schools){
 	schools_datalist = document.getElementById("school");
@@ -273,7 +329,10 @@ function setSchoolsOptions(schools){
 }
 
 function askForSchools(txt, province, department) {
-	get_schools_matching_request(province, department, txt).then(setSchoolsOptions);
+	get_schools_matching_request(province, department, txt).then(x => {
+		setSchoolsOptions(x);
+		$("#school_not_found_div").css("display", "inline-flex");
+	});
 }
 
 function setLocationOptions(localities){
