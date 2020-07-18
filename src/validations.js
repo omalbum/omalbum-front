@@ -36,7 +36,6 @@ function is_valid_country(s) {
 	return is_nontrivial(s);
 }
 
-
 function validate_register_payload(payload){
 	// to do: agregar todas las validaciones
 	var validation_failures = [];
@@ -61,10 +60,6 @@ function validate_register_payload(payload){
 		validation_failures.push({ field:"Fecha de nacimiento", error: "No puede quedar vacía" });
 	}
 	
-	if(! is_valid_country(payload["country"]) ){
-		validation_failures.push({ field:"País", error: "No puede quedar vacío" });
-	}
-
 	return validation_failures;
 }
 

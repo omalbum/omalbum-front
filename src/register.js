@@ -48,13 +48,13 @@ function register_with_validation(payload) {
 		} else{
 	        notify("notification urgent", "Registración Fallida", html_escape(err.message));
 		}
-
+		window.scrollTo(0, 0);
     });
 }
 
 function custom_validate_register_payload(payload){
 	var custom_validation_failures = [];
-	if ($(".if-professor-or-arg-student").css("display") == "block"){
+	if ((isStudent() && isFromArg()) || isProfessor()){
 		if (! isDatalistValid("province")){
 			custom_validation_failures.push({ field:"Provincia", error: "Debe ser una opción válida" });
 		} else if (! isDatalistValid("department")){
@@ -62,12 +62,17 @@ function custom_validate_register_payload(payload){
 		} else if (! isDatalistValid("school")){
 			custom_validation_failures.push({ field:"Escuela", error: "Debe ser una opción válida" });
 		}
+	}
+	if (isStudent()) {
 		if (! (is_integer(document.getElementById("school_year_input").value) && 1 <= parseInt(payload.school_year) &&  parseInt(payload.school_year) <= 15) ){
 			custom_validation_failures.push({ field:"Año de escolaridad", error: "Debe ser un número válido" });
 		}
-		if (! isDatalistValid("gender")){
-			custom_validation_failures.push({ field:"Género", error: "Debe ser una opción válida" });
-		}
+	}
+	if (! isDatalistValid("gender")){
+		custom_validation_failures.push({ field:"Género", error: "Debe ser una opción válida" });
+	}
+	if (! isDatalistValid("country")){
+		custom_validation_failures.push({ field:"País", error: "Debe ser una opción válida" });
 	}
 	return custom_validation_failures;
 }
@@ -90,6 +95,8 @@ function getGenderValueForPayload(gender_input_val) {
 		return "prefiero no responder";
 	} else if (gender_input_val == "otro"){
 		return document.getElementById("gender_other_input").value || "otro";
+	} else {
+		return "";
 	}
 }
 
@@ -127,10 +134,8 @@ function province_selector() {
 }
 
 function reset_departments() {
-    console.log("reset departamentos");
     loc = document.getElementById("department");
     tag = document.getElementsByName("province")[0];
-    console.log(tag.value);
     loc.innerHTML = ""
     if (isDatalistValid("province")){
 	    for(j of locations[tag.value]) {
@@ -184,11 +189,21 @@ function event_updated_professor(elem) {
     maybeShowSchoolForm();
 }
 
+function isStudent() {
+	return $("input[name='is_student']:checked").val() == "true";
+}
+
+function isProfessor() {
+	return !isStudent() && $("input[name='is_professor']:checked").val() == "true";
+}
+
+function isFromArg() {
+	return $("input[name=country]").val() == "Argentina";
+}
+
 function maybeShowSchoolForm() {
-	var is_student = $("input[name='is_student']:checked").val();
-	var is_professor = $("input[name='is_professor']:checked").val();
 	var should_show = false;
-	if (is_professor == "true" || (is_student == "true" && $("input[name=country]").val() == "Argentina")) {
+	if (isProfessor() || (isStudent() && isFromArg())) {
 		should_show = true;
 	}
 	for(e of document.getElementsByClassName("if-professor-or-arg-student")) {
@@ -278,7 +293,6 @@ function askForSchools(txt, province, department) {
 }
 
 function setLocationOptions(localities){
-	console.log(localities);
 	localities_datalist = document.getElementById("locality");
     localities_datalist.innerHTML = "";
 	opts = [];

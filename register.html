@@ -61,11 +61,11 @@
                 <div class="stretch">
                 <legend>Completá tus datos</legend>
                 </div>
-                <p class="tit">Nombre</p>
+                <p class="tit">Nombres</p>
                 <div class="stretch">
                     <input type="text" name="name" placeholder="nombres">
                 </div>
-                <p class="tit">Apellido</p>
+                <p class="tit">Apellidos</p>
                 <div class="stretch">
                     <input type="text" name="last_name" placeholder="apellidos">
                 </div>
@@ -89,7 +89,7 @@
                 </datalist>
                 <p class="tit">País</p>
                 <div class="stretch">
-                    <input type="text" list="country" name="country" placeholder="país de residencia" onchange="event_updated_country(this);" value="Argentina">
+                    <input id="country_input" type="text" list="country" name="country" placeholder="país de residencia" onchange="event_updated_country(this);" value="Argentina">
                 </div>
                 <datalist id="country">
                     <option value="Afghanistan" />
@@ -356,8 +356,10 @@
                         <span><input type="radio" name="is_professor" value="false" onchange="event_updated_professor(this);">No</span>
                     </div>
                 </div>
-                <div class="if-student" style="display:none">
+                <div class="if-argentinian" style="display:none">
+                	<div class="if-student" style="display:none">
                     	<legend>Completá la siguiente información sobre la escuela donde estudiás.</legend>
+                    </div>
                 </div>
             	<div class="if-professor" style="display:none">
             		<div class="if-not-student" style="display:none">
