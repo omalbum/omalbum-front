@@ -283,7 +283,7 @@ function setSchoolsOptions(schools){
     schools_datalist.innerHTML = "";
 	opts = [];
     for(school of schools) {
-		opts.push(`<option>${school.Name}</option>`);
+		opts.push(`<option>${school}</option>`);
     }
 	schools_datalist.innerHTML = opts.join("\n");
 }
