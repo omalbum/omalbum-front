@@ -25,6 +25,12 @@ function load_problem() {
 	}
 }
 
+function block_new_answers() {
+	$("#solution").prop("disabled", true);
+	$("#attempt_button").val("Ya resolviste este problema!");
+	$("#attempt_button").prop("disabled", true);
+}
+
 function add_intentos_to_table(attempts) {
 	var table = undefined;
 	if ($("#intentos_table").length > 0) {
@@ -41,6 +47,9 @@ function add_intentos_to_table(attempts) {
 		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date));
 		var td2 = $("<td>").text(attempt.given_answer.toString());
 		table.append($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
+		if(attempt.result == "correct") {
+			block_new_answers();
+		}
 	}
 }
 

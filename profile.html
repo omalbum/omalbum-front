@@ -42,7 +42,24 @@
 	                <tr><td style="text-align: left"><dt>last name</dt></td><td style="text-align: left;" id="last_name_td" class="fill-last_name changeable"></td></tr>
 	                <tr><td style="text-align: left"><dt>user id</dt></td><td style="text-align: left;" class="fill-user_id"></td></tr>
 	                <tr><td style="text-align: left"><dt>email</dt></td><td style="text-align: left;" id="email_td" class="fill-email changeable"></td></tr>
-	                <tr><td style="text-align: left"><dt>género</dt></td><td style="text-align: left;" id="gender_td" class="fill-gender changeable"></td></tr>
+	                <tr><td style="text-align: left"><dt>género</dt></td><td style="text-align: left;" id="gender_td" class="fill-gender changeable"></td>
+	                <td style="display: none" id="gender_td_datalist">
+	                	<div class="stretch">
+		                    <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
+		                </div>
+		                <div id="gender_other" style="display: none">
+		                	<label style="float: left;">Género:</label>
+		                	<input type="text" id="gender_other_input" style="float: left;"></input>
+		                </div>
+		                <datalist id="gender">
+		                    <option>femenino</option>
+		                    <option>masculino</option>
+		                    <option>prefiero no responder</option>
+		                    <option>otro</option>
+		                </datalist>
+	                </td>
+	                
+	                </tr>
 	                <tr><td style="text-align: left; padding: 0 20% 0 0"><dt>País</dt></td><td style="text-align: left;" id="country_td" class="fill-country changeable"></td></tr>
 	            </table>
 	            <button id="edit_profile_button" type="button" onclick="onEditProfileClick()">Editar perfil</button>
