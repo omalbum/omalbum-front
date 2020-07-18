@@ -115,7 +115,7 @@ function register_init(){
 		ele.innerHTML=`Durante el año ${this_year}, ¿sos estudiante regular de primaria o secundaria?`
 	}
 	province_selector();
-
+	create_footer();
 }
 
 function province_selector() {

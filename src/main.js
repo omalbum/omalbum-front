@@ -41,7 +41,12 @@ function create_header_nav() {
 	}
 }
 
+function create_footer(){
+	document.getElementById("footer").innerHTML="<br/><br/>Copyright <a href=\"http://oma.org.ar\" >Olimpíada Matemática Argentina</a> 2020.<br/><br/>"
+}
+
 function init() {
+	create_footer();
 	create_header_nav();
     if(is_logged_in()) {
         login_update();
