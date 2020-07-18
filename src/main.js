@@ -13,12 +13,20 @@ function create_header_nav() {
 			var span = document.createElement("span");
 			nav.appendChild(span);
 			span.className = "head";
+			var linkoma =document.createElement("a");
+			linkoma.href="http://oma.org.ar";
+			linkoma.style = "margin: 0; padding: 0px;"
+			span.appendChild(linkoma);
 			var img = document.createElement("img");
 			img.src = "oma-bg.svg";
-			span.appendChild(img);
+			linkoma.appendChild(img);
 			var omalbum = document.createElement("span");
 			omalbum.className = "h1";
-			omalbum.appendChild(document.createTextNode("OMAlbum"));
+			omalbumName = document.createElement("a");
+			omalbumName.href=".";
+			omalbumName.style = "margin: 0; font-size: 1.5rem;  align-items: center; text-decoration : none";
+			omalbumName.text = "OMAlbum";
+			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
 			nav.appendChild(create_header_button("index.html", "inicio", null));
