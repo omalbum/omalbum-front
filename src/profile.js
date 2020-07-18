@@ -44,21 +44,8 @@ function onEditProfileClick() {
 				}
 				$(this).append(datalist);
 			} else if(field == "gender") {
-				$(this).append($("<input id='gender_input' name='gender' list='gender' >").val(is_other_gender(txt) ? "otro" : txt));
-				var datalist = $('<datalist id="gender" onchange="onGenderChange()">');
-				datalist.append($("<option>").val("masculino"));
-				datalist.append($("<option>").val("femenino"));
-				datalist.append($("<option>").val("prefiero no responder"));
-				datalist.append($("<option>").val("otro"));
-				$(this).append(datalist);
-				var other_gender_div = $("<div id='gender_other'>").css("display", is_other_gender(txt) ? "block" : "none");
-				// other_gender_div.append($("<label style='float: left;'>").text("Género"));
-				var other_gender_input = $("<input type='text' id='gender_other_input' style='float: left;'>");
-				if (is_other_gender(txt) && txt != "otro"){
-					other_gender_input.val(txt);
-				}
-				other_gender_div.append(other_gender_input);
-				$(this).append(other_gender_div);
+				$("#gender_td_datalist").css("display", "block");
+				$("#gender_td").css("display", "none");
 			} else {
 				$(this).append($("<input name='" + field + "'>").val(txt));
 			}
