@@ -127,7 +127,7 @@ function province_selector() {
 			window.location.replace(".");
 			return;
 		}
-        for(k in locations) {
+        for(k in all_departments) {
 			opts.push(`<option>${k}</option>`);
         }
         ele.innerHTML = opts.join("\n");
@@ -139,7 +139,7 @@ function reset_departments() {
     tag = document.getElementsByName("province")[0];
     loc.innerHTML = ""
     if (isDatalistValid("province")){
-	    for(j of locations[tag.value]) {
+	    for(j of all_departments[tag.value]) {
 	        loc.innerHTML += `<option>${j}</option>`
 	    }
 		document.getElementById("department_input").placeholder = "departamento o partido";
