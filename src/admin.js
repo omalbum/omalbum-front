@@ -66,9 +66,6 @@ function update_problem_with_validation(payload, problem_id){
 		}
 		clear_notifications();
 		notify("notification good", txt, "Para verlo podés ir <a href=\"" + host + get_problem_url(p) + "\">acá</a>  :)");
-		if (!payload.is_draft){
-			notify("notification urgent", "Atencion, ...", "Por alguna razón todavía no anda sacar un problema de draft, estamos trabajando para solucionarlo (?");
-		}
 		window.scrollTo(0, 0);
 	}).catch(err => {
 		clear_notifications();
