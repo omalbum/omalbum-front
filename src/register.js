@@ -319,6 +319,7 @@ function addSelect(schools){
 }*/
 
 function setSchoolsOptions(schools){
+	/*
 	schools_datalist = document.getElementById("school");
     schools_datalist.innerHTML = "";
 	opts = [];
@@ -326,6 +327,9 @@ function setSchoolsOptions(schools){
 		opts.push(`<option>${school}</option>`);
     }
 	schools_datalist.innerHTML = opts.join("\n");
+	*/
+	$( "#school_input" ).autocomplete({ source: schools });
+
 }
 
 function askForSchools(txt, province, department) {

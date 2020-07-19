@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="utils/jquery.min.js"></script>
+		<!-- begin necesario para el autocomplete de escuela -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- end necesario para el autocomplete de escuela -->
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -176,14 +180,18 @@
 	                <div id="school_div">
 		                <p class="tit">Escuela</p>
 	                    <div class="stretch">
-	                        <input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">
+							<div class="autocomplete" style="width:100%">
+								<input id="school_input" type="text" placeholder="escuela" onkeyup="checkSchoolsInput(this)"  style="width:100%;margin: 5px; padding: 5px;">
+							</div>
 	                    </div>
-	                    <datalist id="school"></datalist>
+
 	                    <div id="school_not_found_div" style="display: none; inline-size: -webkit-fill-available">
 		                    <input id="school_not_found_checkbox" type="checkbox" style="display: flex;" onclick="schoolNotFoundClick(this)">
 		                    <label>No encuentro mi escuela</label>
 		                    <input id="written_school_name" placeholder="nombre de tu escuela" style="display: none">
 		                </div>
+
+
 		                <!--
 	                    <select id="select">
 	                    </select>
