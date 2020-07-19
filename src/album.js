@@ -44,7 +44,7 @@ function problem_html(p) {
 }
 
 function get_album_date_format(date_solved) {
-	var d = new Date(p.date_solved);
+	var d = new Date(date_solved);
 	return d.getDate().toString().padStart(2, '0') + "-" + d.getMonth().toString().padStart(2, '0') + "-" + d.getFullYear().toString();
 }
 

@@ -1,41 +1,45 @@
 function onEditProfileClick() {
 	if ($("#edit_profile_button").text() == "Guardar") {
-		var payload = extract_data(document.getElementById("edit_profile_button").closest("form"));
-		payload.gender = getGenderValueForPayload(payload.gender);
+		var payload = get_register_payload(document.getElementById("edit_profile_button").closest("form"));
+		payload.user_name = user()["user_name"];
+		var validations = custom_validate_register_payload(payload,
+														$("#country_input").val() == "Argentina",
+														$("#country_input").val() == "Argentina");
+		if (isStudent() && $("input[name='is_teacher']:checked").val() == "true"){
+			validations.push({ field:"Docente o estudiante?", error: "Seleccionaste ambas" });
+		}
 		clear_notifications();
+		if (validations.length > 0){
+			feedback_register_validation_fails(validations);
+			return;
+		}
 		update_user_request(payload).then(x => {
 			if (x.code) {
-				sessionStorage.setItem("reloading", true);
-				sessionStorage.setItem("notif", "notification urgent");
-				sessionStorage.setItem("notif_text", "Error al intentar modificar");
-				sessionStorage.setItem("notif_code", err.code);
-				//notify("notification urgent", "Error al intentar modificar", err.code);
+				clear_notifications();
+				notify("notification urgent", "Error al intentar modificar", html_escape(x.code) || "Error desconocido");
+				window.scrollTo(0, 0);
 			} else {
 				new_user_data = user();
 				for (key in x) {
-					new_user_data[key] = x[key];
+					good_case_key = key.replace(/(?:^|\.?)([A-Z])/g, function (x,y){return "_" + y.toLowerCase()}).replace(/^_/, "")
+					new_user_data[good_case_key] = x[key];
 				}
 				localStorage.setItem('user', JSON.stringify(new_user_data));
 				sessionStorage.setItem("reloading", true);
 				sessionStorage.setItem("notif", "notification good");
 				sessionStorage.setItem("notif_text", "Perfil guardado!");
 				sessionStorage.setItem("notif_code", "");
-				//notify("notification good", "Perfil guardado!", "");
+				location.reload();
 			}
-			location.reload();
 		}).catch(err => {
-			sessionStorage.setItem("reloading", true);
-			sessionStorage.setItem("notif", "notification urgent");
-			sessionStorage.setItem("notif_text", "No se pudieron guardar los cambios");
-			sessionStorage.setItem("notif_code", err.code);
-			location.reload();
-			//notify("notification urgent", "No se pudieron guardar los cambios", err.code);
+			notify("notification urgent", "No se pudieron guardar los cambios", html_escape(err.code) || "Error desconocido");
+			window.scrollTo(0, 0);
 		});
 	} else {
 		$(".changeable").each(function(){
 			var txt = $(this).text();
 			$(this).text("");
-			var field = $(this).prop("id").substr(0, $(this).prop("id").length-3);
+			/*var field = $(this).prop("id").substr(0, $(this).prop("id").length-3);
 			if (field == "country") {
 				$(this).append($("<input name='country' list='country' >").val(txt));
 				var datalist = $("<datalist id='country'>");
@@ -48,8 +52,10 @@ function onEditProfileClick() {
 				$("#gender_td").css("display", "none");
 			} else {
 				$(this).append($("<input name='" + field + "'>").val(txt));
-			}
+			}*/
 		});
+		append_user_objects_for_input();
+		fill_values_with_user_values();
 		$("#edit_profile_button").text("Guardar");
 	}
 }
@@ -57,3 +63,71 @@ function onEditProfileClick() {
 function is_other_gender(gender) {
 	return gender != "masculino" && gender != "femenino" && gender != "prefiero no responder";
 }
+
+function get_input_date_format(date_backend) {
+	var d = new Date(date_backend);
+	return  d.getFullYear().toString() + "-" + d.getMonth().toString().padStart(2, '0') + "-" + d.getDate().toString().padStart(2, '0');
+}
+
+function fill_values_with_user_values() {
+	$("#email_input").val(user()["email"]);
+	$("#name_input").val(user()["name"]);
+	$("#last_name_input").val(user()["last_name"]);
+	var user_birth_date = new Date(user()["birth_date"]);
+	$("#birth_date_input").val(get_input_date_format(user_birth_date));
+	if (is_other_gender(user()["gender"])) {
+		$("#otro").prop("checked", true);
+		$("#gender_other_input").prop("disabled", false);
+	    $("#gender_other_input").val(user()["gender"]);
+	} else {
+		if (user()["gender"] == "prefiero no responder"){
+			$("#prefiero_no_responder").prop("checked", true);
+		} else{
+			$("#" + user()["gender"]).prop("checked", true);
+		}
+	}
+	$("#country_input").val(user()["country"]);
+	if(isFromArg()){
+		reset_departments();
+	}
+	if (user()["is_student"]) {
+		$("#is_student_yes").prop("checked", true);
+	} else {
+		$("#is_student_no").prop("checked", true);
+	}
+	if (user()["is_teacher"]) {
+		$("#is_teacher_yes").prop("checked", true);
+	} else {
+		$("#is_teacher_no").prop("checked", true);
+	}
+	$("#school_year_input").val(user()["school_year"] || "");
+	if (user()["province"]) {
+		$("#province_input").val(user()["province"] || "");
+		reset_departments();
+		onDepartmentOrProvinceChange();
+	}
+	if (user()["department"]) {
+		$("#department_input").val(user()["department"] || "");
+		onDepartmentOrProvinceChange();
+	}
+	$("#locality_input").val(user()["location"] || "");
+	if(user()["school"]) {
+		$("#school_input").val(user()["school"]);
+		setSchoolsOptions([user()["school"]]);
+	}
+}
+
+$(document).ready(function(){
+	if (window.location.href.endsWith("profile.html")){
+		var display = "none";
+		if(is_logged_in() && user()["country"] == "Argentina") {
+			display = "";
+		}
+		for (var elem of document.getElementsByClassName("locality_div")) {
+			$(elem).css("display", display);
+		}
+		if(is_logged_in() && !user()["school"] ) {
+			$("#school_div").css("display", "none");
+		}
+	}
+});

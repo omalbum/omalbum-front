@@ -67,8 +67,16 @@ function login_update() {
     fill_with("fill-last_name", () => my_user["last_name"]);
     fill_with("fill-user_id", () => my_user["user_id"]);
     fill_with("fill-email", () => my_user["email"]);
+    fill_with("fill-birth_date", () => get_album_date_format(my_user["birth_date"]));
     fill_with("fill-gender", () => my_user["gender"]);
     fill_with("fill-country", () => my_user["country"]);
+    fill_with("fill-province", () => my_user["province"]);
+    fill_with("fill-department", () => my_user["department"]);
+    fill_with("fill-locality", () => my_user["location"]);
+    fill_with("fill-school", () => my_user["school"]);
+    fill_with("fill-school_year", () => my_user["school_year"] || "-");
+    fill_with("fill-is_teacher", () => my_user["is_teacher"] ? "Sí" : "No");
+    fill_with("fill-is_student", () => my_user["is_student"] ? "Sí" : "No");
     for(elem of document.getElementsByClassName("logged-out")) {
         elem.style.display = "none";
     }
