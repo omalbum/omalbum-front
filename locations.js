@@ -1,5 +1,5 @@
 const locations = {
-"Catamarca": [
+"CATAMARCA": [
   "AMBATO", 
   "ANCASTI", 
   "ANDALGALA", 
@@ -18,13 +18,13 @@ const locations = {
   "VALLE VIEJO"
 ]
 ,
-"Tierra del Fuego": [
+"TIERRA DEL FUEGO": [
   "ANTARTIDA ARGENTINA", 
   "RIO GRANDE", 
   "USHUAIA"
 ]
 ,
-"La Pampa": [
+"LA PAMPA": [
   "ATREUCO", 
   "CALEU CALEU", 
   "CAPITAL", 
@@ -49,7 +49,7 @@ const locations = {
   "UTRACAN"
 ]
 ,
-"Formosa": [
+"FORMOSA": [
   "BERMEJO", 
   "FORMOSA", 
   "LAISHI", 
@@ -61,7 +61,7 @@ const locations = {
   "RAMON LISTA"
 ]
 ,
-"Santa Cruz": [
+"SANTA CRUZ": [
   "CORPEN AIKE", 
   "DESEADO", 
   "GUER AIKE", 
@@ -71,7 +71,7 @@ const locations = {
   "RIO CHICO"
 ]
 ,
-"San Juan": [
+"SAN JUAN": [
   "25 DE MAYO", 
   "9 DE JULIO", 
   "ALBARDON", 
@@ -93,7 +93,7 @@ const locations = {
   "ZONDA"
 ]
 ,
-"Misiones": [
+"MISIONES": [
   "25 DE MAYO", 
   "APOSTOLES", 
   "CAINGUAS", 
@@ -113,7 +113,7 @@ const locations = {
   "SAN PEDRO"
 ]
 ,
-"Santa Fe": [
+"SANTA FE": [
   "9 DE JULIO", 
   "BELGRANO", 
   "CASEROS", 
@@ -135,7 +135,7 @@ const locations = {
   "VERA"
 ]
 ,
-"Corrientes": [
+"CORRIENTES": [
   "BELLA VISTA", 
   "BERON DE ASTRADA", 
   "CAPITAL", 
@@ -163,11 +163,11 @@ const locations = {
   "SAUCE"
 ]
 ,
-"Ciudad de Buenos Aires": [
+"CIUDAD DE BUENOS AIRES": [
   "CIUDAD DE BUENOS AIRES"
 ]
 ,
-"Chaco": [
+"CHACO": [
   "12 DE OCTUBRE", 
   "1§ DE MAYO", 
   "2 DE ABRIL", 
@@ -195,7 +195,7 @@ const locations = {
   "TAPENAGA"
 ]
 ,
-"Entre Ríos": [
+"ENTRE RIOS": [
   "COLON", 
   "CONCORDIA", 
   "DIAMANTE", 
@@ -215,7 +215,7 @@ const locations = {
   "VILLAGUAY"
 ]
 ,
-"Córdoba": [
+"CORDOBA": [
   "CALAMUCHITA", 
   "CAPITAL", 
   "COLON", 
@@ -244,7 +244,7 @@ const locations = {
   "UNION"
 ]
 ,
-"Tucumán": [
+"TUCUMAN": [
   "BURRUYACU", 
   "CAPITAL", 
   "CHICLIGASTA", 
@@ -264,7 +264,7 @@ const locations = {
   "YERBA BUENA"
 ]
 ,
-"Mendoza": [
+"MENDOZA": [
   "CAPITAL", 
   "GENERAL ALVEAR", 
   "GODOY CRUZ", 
@@ -285,7 +285,7 @@ const locations = {
   "TUPUNGATO"
 ]
 ,
-"La Rioja": [
+"LA RIOJA": [
   "ARAUCO", 
   "CAPITAL", 
   "CASTRO BARROS", 
@@ -306,7 +306,7 @@ const locations = {
   "VINCHINA"
 ]
 ,
-"Neuquén": [
+"NEUQUEN": [
   "ALUMINE", 
   "AÑELO", 
   "CATAN LIL", 
@@ -325,7 +325,7 @@ const locations = {
   "ÑORQUIN"
 ]
 ,
-"Jujuy": [
+"JUJUY": [
   "COCHINOCA", 
   "DOCTOR MANUEL BELGRANO", 
   "EL CARMEN", 
@@ -344,7 +344,7 @@ const locations = {
   "YAVI"
 ]
 ,
-"Buenos Aires": [
+"BUENOS AIRES": [
   "25 DE MAYO", 
   "9 DE JULIO", 
   "ADOLFO ALSINA", 
@@ -482,7 +482,7 @@ const locations = {
   "ZARATE"
 ]
 ,
-"Chubut": [
+"CHUBUT": [
   "BIEDMA", 
   "CUSHAMEN", 
   "ESCALANTE", 
@@ -500,7 +500,7 @@ const locations = {
   "TELSEN"
 ]
 ,
-"San Luis": [
+"SAN LUIS": [
   "AYACUCHO", 
   "BELGRANO", 
   "CHACABUCO", 
@@ -512,7 +512,7 @@ const locations = {
   "LIBERTADOR GRL SAN MARTIN"
 ]
 ,
-"Río Negro": [
+"RIO NEGRO": [
   "25 DE MAYO", 
   "9 DE JULIO", 
   "ADOLFO ALSINA", 
@@ -528,7 +528,7 @@ const locations = {
   "ÑORQUINCO"
 ]
 ,
-"Salta": [
+"SALTA": [
   "ANTA", 
   "CACHI", 
   "CAFAYATE", 
@@ -554,7 +554,7 @@ const locations = {
   "SANTA VICTORIA"
 ]
 ,
-"Santiago del Estero": [
+"SANTIAGO DEL ESTERO": [
   "AGUIRRE", 
   "ALBERDI", 
   "ATAMISQUI", 

@@ -329,10 +329,16 @@ function setSchoolsOptions(schools){
 }
 
 function askForSchools(txt, province, department) {
+	$.getJSON( "./jsons/provincias/"+province+"/"+department+"_escuelas.json", x => {
+		setSchoolsOptions(x);
+		$("#school_not_found_div").css("display", "inline-flex");
+	});
+	/*
 	get_schools_matching_request(province, department, txt).then(x => {
 		setSchoolsOptions(x);
 		$("#school_not_found_div").css("display", "inline-flex");
 	});
+	*/
 }
 
 function setLocationOptions(localities){
@@ -346,6 +352,6 @@ function setLocationOptions(localities){
 }
 
 function askForLocations(province,department){
-	$.getJSON( "./jsons/provincias/"+province+"/"+department+".json", setLocationOptions);
+	$.getJSON( "./jsons/provincias/"+province+"/"+department+"_localidades.json", setLocationOptions);
 }
 
