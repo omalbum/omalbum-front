@@ -50,7 +50,7 @@ function create_header_nav() {
 }
 
 function create_footer(){
-	document.getElementById("footer").innerHTML="<br/><br/>Copyright <a href=\"http://oma.org.ar\" >Olimpíada Matemática Argentina</a> 2020.<br/><br/>"
+	document.getElementById("footer").innerHTML="<br/><br/>&copy; 2020 <a href=\"http://oma.org.ar\" >Olimpíada Matemática Argentina</a>.<br/><br/>"
 }
 
 function init() {
