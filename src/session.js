@@ -8,7 +8,7 @@ function read_cookie(a) {
 
 function do_logout() {
 	logout_update();
-	location.reload();
+	window.location.href = "index.html";
 }
 
 function is_logged_in() {
