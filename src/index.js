@@ -13,7 +13,7 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	head.appendChild(td);
 	var td = document.createElement("th");
 	if (is_active){
-		td.appendChild(document.createTextNode("La prueba termina el"));
+		td.appendChild(document.createTextNode("Estará activo hasta"));
 	}else{
 		td.appendChild(document.createTextNode("Será publicado el"));
 	}
@@ -45,7 +45,7 @@ function get_next_problems(){
 
 function insert_index_problems(){
 	var h2_active_problem = document.createElement("h2");
-	h2_active_problem.appendChild(document.createTextNode("Problemas actuales"));
+	h2_active_problem.appendChild(document.createTextNode("Problemas activos"));
 	h2_active_problem.className = "active-problem-h2";
 	insert_some_problems_in_index("active-problems", get_all_current_problems, true, h2_active_problem);
 	var h2_next_problems = document.createElement("h2");
