@@ -66,7 +66,7 @@ function get_short_diff_string_from_now(seconds) {
 	if (horas < 24*3){
 		return horas.toString() + " horas";
 	}
-	return (parseInt(horas / 24)).toString() + " dias";
+	return (parseInt(horas / 24)).toString() + " días";
 }
 
 function get_month_string(date){
@@ -121,7 +121,7 @@ function get_day_string(date){
 		return "Martes";
 	}
 	if (day_of_week == 3){
-		return "Miercoles";
+		return "Miércoles";
 	}
 	if (day_of_week == 4){
 		return "Jueves";
@@ -130,7 +130,7 @@ function get_day_string(date){
 		return "Viernes";
 	}
 	if (day_of_week == 6){
-		return "Sabado";
+		return "Sábado";
 	}
 }
 
