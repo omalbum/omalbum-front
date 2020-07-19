@@ -81,20 +81,20 @@ function get_problem_url(p){
 function attempt_feedback_for_user(x){
 	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value), result: x.result}]);
 	if(x.result=="correct"){
-		return notify("notification good", "Bien!", "La solución es correcta");
+		return notify("notification good", "Bien!", "La respuesta es correcta.");
 	}
 	if(x.result=="incorrect"){
-		return notify("notification urgent", "Qué lástima!", "La solución es incorrecta");
+		return notify("notification urgent", "Pensalo un rato más!", "La respuesta es incorrecta.");
 	}
 	if(x.result=="wait"){
-		return notify("notification wait", "Paciencia!", "Tenés que esperar hasta las "+ x.deadline + " para saber si tu solución es correcta.");
+		return notify("notification wait", "Paciencia!", "Tenés que esperar hasta las "+ x.deadline + " para saber si tu respuesta es correcta.");
 	}
 }
 
 function attempt_error_manager(x){
 	clear_notifications();
 	if(x.code=="problem_already_attempted_during_contest"){
-		return notify("notification urgent", "Error!", "Ya intentaste este problema durante la prueba.");
+		return notify("notification urgent", "Error!", "Ya enviaste tu respuesta a este problema.");
 
 	}
 }
