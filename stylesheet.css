@@ -241,6 +241,12 @@ main section h1 {
 	border-style: dashed;
 }
 
+.admin{
+    background: #073763;
+    color: white;
+    border-color: #073763;
+}
+
 .problem p {
     padding: 0px;
     margin: 0;
@@ -536,4 +542,66 @@ p {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+
+.active-problem-h2 {
+	background-color: #64D89F;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+}
+.next-problems-h2 {
+	background-color: #5890E5;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+}
+
+/*
+table, th, td {
+  border: 1px solid black;
+}*/
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table {
+	border-style: none;
+}
+
+th {
+    line-height: 150%;
+}
+
+td {
+    line-height: 150%;
+    text-align: center;
+}
+tr {
+    border-bottom: 1px solid lightgrey;
+    /*border-top: 1px solid grey;*/
+    border-collapse: collapse;
+}​
+
+
+tbody td {
+  text-align: center;
+}
+
+ th {
+  text-align: center;
+}
+
+
+.result_incorrect {
+	background-color: #FA9B9B;
+}
+.result_correct {
+	background-color: #AAFDAB;
+}
+.result_wait {
+	background-color: #BDFCF3;
 }

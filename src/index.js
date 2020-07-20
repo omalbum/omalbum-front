@@ -17,7 +17,6 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	}else{
 		td.appendChild(document.createTextNode("Será publicado el"));
 	}
-	td.align="left";
 	head.appendChild(td);
 	var td = document.createElement("th");
 	td.appendChild(document.createTextNode("Timer"));

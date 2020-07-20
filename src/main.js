@@ -25,7 +25,7 @@ function create_header_nav() {
 			omalbumName = document.createElement("a");
 			omalbumName.href=".";
 			omalbumName.style = "margin: 0; font-size: 1.5rem;  align-items: center; text-decoration : none;font-family: 'Righteous';";
-			omalbumName.innerHTML = "OMA<span style=\"color:#0096da;font-size: 1.5rem;\">LBUM</span>";
+			omalbumName.innerHTML = "&nbsp;OMA<span style=\"color:#0096da;font-size: 1.5rem;\">LBUM</span>";
 			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
@@ -50,7 +50,7 @@ function create_header_nav() {
 }
 
 function create_footer(){
-	document.getElementById("footer").innerHTML="&copy; 2020 <a href=\"http://oma.org.ar\" style=\"font-size:1.0rem;padding-right:0px;\" >Olimpíada Matemática Argentina</a>";
+	document.getElementById("footer").innerHTML="&copy; 2020 &nbsp; <a href=\"http://oma.org.ar\" style=\"font-size:1.0rem;padding-right:0px;\" >Olimpíada Matemática Argentina</a>";
 }
 
 function init() {

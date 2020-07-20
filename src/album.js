@@ -53,11 +53,11 @@ function insert_given_problems(element, problems) {
     element.innerHTML = "";
     if( is_logged_in() && is_admin() ) {
         element.innerHTML += problem_view({
-            "status": "normal",
-            "code": "<br>",
+            "status": "admin",
+            "code": "<br/>",
             "icon": "create",
-            "attempts": "<br>",
-            "date": "<br>",
+            "attempts": "<br/>",
+            "date": "<br/>",
             "url": "admin.html"
         });
     }
@@ -87,6 +87,8 @@ function problem_view(data) {
 		icon_filename="Icon-done-white";		
 	}else if (data.icon=="star"){
 		icon_filename="Icon-star-white";
+	}else if (data.icon=="create"){
+		icon_filename="Icon-pencil";
 	}
     return `
 <a class="problem ${data.status}" href="${data.url}">
