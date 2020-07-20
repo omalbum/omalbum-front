@@ -76,15 +76,22 @@ function init() {
     }
     $("form").keypress(function(e) {
     	if (e.which == 13) {
-    		$(this).find("input[type='button']").click();
-		$(this).find("button'").click();
+    		if($(this).find("input[type='button']").length > 0){
+			$(this).find("input[type='button']").click();
+		} else {
+			$(this).find("button'").click();
+		}
     		return false;
     	}
 	});
     $(".input_inside_form").on("keyup", function(e){
     	if (e.keyCode == 13) {
-    		$(this).closest("form").find("input[type='button']").click();
-    		$(this).closest("form").find("button").click();
+    		if($(this).closest("form").find("input[type='button']").length > 0) {
+			$(this).closest("form").find("input[type='button']").click();
+		} else {
+	    		$(this).closest("form").find("button").click();
+		}
+		return false;
     	}
     });	
 }

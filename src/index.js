@@ -35,6 +35,11 @@ function insert_some_problems_in_index(problems_div_class, get_problems_function
         	for(e of elements) {
         		if (problems.length > 0){
         			e.appendChild(h2_obj);
+			if (is_active) {
+				problems = problems.sort(sort_active_problems);
+			} else {
+				problems = problems.sort(sort_next_problems);
+			}
             		insert_given_problems_in_index(e, problems, is_active);
             	}
             }
@@ -138,3 +143,20 @@ function getTimerTime(diff) {
 	return ret;
 }
 
+function sort_active_problems (p,q){
+	d1 = new Date(p.deadline)
+	d2 = new Date(q.deadline)
+	if (d1 != d2){
+        	return d1 < d2 ? -1 : 1;
+	}
+	return get_problem_code(p) <= get_problem_code(q) ? -1 : 1;
+}
+
+function sort_next_problems (p,q){
+        d1 = new Date(p.release_date)
+        d2 = new Date(q.release_date)
+        if (d1 != d2){
+                return d1 < d2 ? -1 : 1;
+        }
+        return get_problem_code(p) <= get_problem_code(q) ? -1 : 1;
+}
