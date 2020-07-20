@@ -28,8 +28,10 @@ function register_with_validation(payload) {
 		clear_notifications();
 		if(err.code=="username_already_taken"){
 	        notify("notification urgent", "Registración Fallida", html_escape("Nombre de usuario ya utilizado"));
-		}else if(err.code=="email_already_taken"){
+		} else if(err.code=="email_already_taken"){
 	        notify("notification urgent", "Registración Fallida", html_escape("Email ya utilizado"));
+		} else if(err.code=="email_validation_is_email"){
+	        notify("notification urgent", "Registración Fallida", html_escape("El email no es válido"));
 		} else{
 	        notify("notification urgent", "Registración Fallida", html_escape(err.message));
 		}
