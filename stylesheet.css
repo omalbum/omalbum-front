@@ -18,8 +18,8 @@ main p, main h1 {
 
 nav {
     background: white;
-    color: #349;
-    border-bottom: 3px solid #349;
+    color: #073763;
+    border-bottom: 3px solid #073763;
     margin: 0;
     padding: 10px;
     padding-left: var(--side);
@@ -29,6 +29,20 @@ nav {
     align-items: baseline;
     flex-wrap: wrap;
 }
+
+footer {
+   background: #073763;
+    color: white;
+    margin: 0;
+    padding: 10px;
+    padding-left: var(--side);
+    padding-right: var(--side);
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
 
 img {
     height: 2.2rem;
@@ -52,7 +66,15 @@ img {
 }
 
 nav a {
-    color: #349;
+    color: #073763;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 2px;
+    margin-right: 20px;
+}
+
+footer a {
+    color: white;
     text-decoration: none;
     font-size: 1rem;
     padding: 2px;
@@ -183,9 +205,9 @@ main section h1 {
 }
 
 .normal {
-    background: #349;
+    background: #073763;
     color: white;
-    border-color: #349;
+    border-color: #073763;
 }
 
 .problem p {
@@ -250,7 +272,7 @@ form {
 }
 
 main a {
-    color: #349;
+    color: #073763;
 }
 
 main h1 i {
@@ -305,7 +327,7 @@ dt, dd {
     margin: 0;
     padding: 0;
     margin: 1px;
-    color: #349;
+    color: #073763;
     font-size: 1rem;
 }
 
