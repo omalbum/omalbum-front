@@ -80,10 +80,14 @@ function insert_problems() {
 
 
 function problem_view(data) {
+	var is_outlined="";
+	if (data.icon =="play_arrow"){
+		is_outlined = "-outlined";	
+	}
     return `
 <a class="problem ${data.status}" href="${data.url}">
     <p class="code">${data.code}</p>
-    <i class="material-icons problem-icon">${data.icon}</i>
+    <i class="material-icons${is_outlined} problem-icon">${data.icon}</i>
     <p>${data.attempts}</p>
     <p class="date">${data.date}</p>
 </a>`;

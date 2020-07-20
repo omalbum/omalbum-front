@@ -115,6 +115,7 @@ main h1 {
     padding-top: 20px;
     font-size: 3rem;
     font-weight: normal;
+	color: #0096da;
 }
 
 main p {
@@ -205,12 +206,12 @@ main section h1 {
     border-color: white;
     border-width: 2px;
     border-radius: 15px;
-    margin: 3px;
+    margin: 4px;
 }
 
 .problem:hover {
-    margin: 0px;
-    border-width: 5px;
+    margin: 3px;
+    border-width: 3px;
 }
 
 .failure {
@@ -220,15 +221,16 @@ main section h1 {
 }
 
 .success {
-    background: #0a0;
+    background: #0096da;
     color: white;
-    border-color: #0a0;
+    border-color: #0096da;
 }
 
 .normal {
-    background: #073763;
-    color: white;
+    background: white;
+    color: #073763;
     border-color: #073763;
+	border-style: dashed;
 }
 
 .problem p {
