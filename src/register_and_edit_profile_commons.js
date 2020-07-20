@@ -41,7 +41,7 @@ function append_user_objects_for_input() {
 function get_jquery_school_objects() {
 	var objs = [];
 	var div1 = $('<div class="stretch">');
-	div1.append($('<input id="school_input" type="text" list="school" name="school" placeholder="escuela" onkeyup="checkSchoolsInput(this)">'));
+	div1.append($('<input id="school_input" type="text" list="school" name="school" placeholder="escuela" >'));
 	div1.append($('<datalist id="school"></datalist>'));
 	objs.push(div1);
 	var div2 = $('<div id="school_not_found_div" style="display: none; inline-size: -webkit-fill-available">');

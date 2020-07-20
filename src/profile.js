@@ -66,7 +66,7 @@ function is_other_gender(gender) {
 
 function get_input_date_format(date_backend) {
 	var d = new Date(date_backend);
-	return  d.getFullYear().toString() + "-" + d.getMonth().toString().padStart(2, '0') + "-" + d.getDate().toString().padStart(2, '0');
+	return  d.getUTCFullYear().toString() + "-" + (1 + d.getUTCMonth()).toString().padStart(2, '0') + "-" + d.getUTCDate().toString().padStart(2, '0');
 }
 
 function fill_values_with_user_values() {
@@ -95,11 +95,13 @@ function fill_values_with_user_values() {
 	} else {
 		$("#is_student_no").prop("checked", true);
 	}
+	update_with_is_student_value(user()["is_student"] ? "true" : "false");
 	if (user()["is_teacher"]) {
 		$("#is_teacher_yes").prop("checked", true);
 	} else {
 		$("#is_teacher_no").prop("checked", true);
 	}
+	update_with_is_teacher_value(user()["is_teacher"] ? "true" : "false");
 	$("#school_year_input").val(user()["school_year"] || "");
 	if (user()["province"]) {
 		$("#province_input").val(user()["province"] || "");
@@ -108,19 +110,32 @@ function fill_values_with_user_values() {
 	}
 	if (user()["department"]) {
 		$("#department_input").val(user()["department"] || "");
+		$("#department_input").prop("disabled", false);
 		onDepartmentOrProvinceChange();
+		$("#locality_input").prop("disabled", false);
+		askForLocations(user()["province"], user()["department"]);
+		askForSchools(user()["province"], user()["department"]);
 	}
 	$("#locality_input").val(user()["location"] || "");
 	if(user()["school"]) {
 		$("#school_input").val(user()["school"]);
-		setSchoolsOptions([user()["school"]]);
+		$("#school_input").prop("disabled", false);
+		get_all_schools(user()["province"], user()["department"]).then(x => {
+			if (!x.includes(user()["school"])){
+				$("#school_input").val("");
+				$("#school_not_found_checkbox").prop("checked", true);
+				$("#written_school_name").css("display", "");
+				$("#written_school_name").prop("disabled", false);
+				$("#written_school_name").val(user()["school"]);
+			}
+		});
 	}
 }
 
 $(document).ready(function(){
 	if (window.location.href.endsWith("profile.html")){
 		var display = "none";
-		if(is_logged_in() && user()["country"] == "Argentina") {
+		if(is_logged_in() && (user()["country"] == "Argentina" || user()["is_teacher"])) {
 			display = "";
 		}
 		for (var elem of document.getElementsByClassName("locality_div")) {
@@ -128,6 +143,13 @@ $(document).ready(function(){
 		}
 		if(is_logged_in() && !user()["school"] ) {
 			$("#school_div").css("display", "none");
+		}
+		display = "none";
+		if(is_logged_in() && user()["is_student"]) {
+			display = "";
+		}
+		for (var elem of document.getElementsByClassName("if-student")) {
+			$(elem).css("display", display);
 		}
 	}
 });

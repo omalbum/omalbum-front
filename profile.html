@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="utils/jquery.min.js"></script>
+        <!-- begin necesario para el autocomplete de escuela -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- end necesario para el autocomplete de escuela -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -18,7 +22,7 @@
 		  gtag('config', 'UA-172622724-1');
 		</script>
 
-		<script type="text/javascript" src="locations.js"></script>
+		<script type="text/javascript" src="./all_departments.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <title>OMAlbum</title>
     </head>
@@ -80,7 +84,7 @@
 	                	<td style="text-align: left;" id="append_is_student" class="fill-is_student changeable">
 	                	</td>
 	                </tr>
-	                <tr>
+	                <tr class="if-student">
 	                	<td style="text-align: left">
 	                		<dt>Año de escolaridad</dt>
 	                	</td>

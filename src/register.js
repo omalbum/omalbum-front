@@ -93,7 +93,11 @@ function get_register_payload(form) {
 		payload.department = "";
 		payload.location = "";
 	}
-    payload.school_year = parseInt(payload.school_year);
+	if (isStudent()) {
+	    payload.school_year = parseInt(payload.school_year);
+	} else {
+		payload.school_year = undefined;
+	}
     payload.gender = getGenderValueForPayload(payload.gender);
     payload.is_teacher = isTeacher();
     payload.is_student = isStudent();
@@ -142,9 +146,8 @@ function province_selector() {
 			window.location.replace(".");
 			return;
 		}
+		*/
         for(k in all_departments) {
-		}*/
-        for(k in locations) {
 			opts.push(`<option>${k}</option>`);
         }
         ele.innerHTML = opts.join("\n");
@@ -210,16 +213,20 @@ function schoolNotFoundClick() {
 }
 
 function event_updated_teacher(elem) {
-	if (elem.value == 'true' || $('input[type=radio][name=is_student]:checked').val() == 'true') {
+	update_with_is_teacher_value(elem.value);
+}
+
+function update_with_is_teacher_value(value) {
+	if (value == 'true' || $('input[type=radio][name=is_student]:checked').val() == 'true') {
 		$("#school_div").css("display", "");
 	} else {
 		$("#school_div").css("display", "none");
 	}
     for(e of document.getElementsByClassName("if-teacher")) {
-        e.style.display = elem.value == "true" ? "" : "none";
+        e.style.display = value == "true" ? "" : "none";
     }
     for(e of document.getElementsByClassName("if-not-teacher")) {
-        e.style.display = elem.value == "true" ? "none" : "";
+        e.style.display = value == "true" ? "none" : "";
     }
     maybeShowSchoolForm();
     maybeShowLocalityDiv();
@@ -260,7 +267,7 @@ function maybeShowLocalityDiv() {
     }
 }
 
-function checkSchoolsInput(input) {
+function _checkSchoolsInput(input) {
 	var province = $("input[name=province]").val()
 	var department = $("input[name=department]").val()
 	var MIN_LETTERS = 3;
@@ -284,12 +291,12 @@ function onDepartmentOrProvinceChange(){
 		province = $("#province_input").val();
 		department = $("#department_input").val();
 		askForLocations(province,department);
+		askForSchools(province, department);
 	} else {
 		$("#school_input").prop("disabled", true);
 		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
 		$("#locality_input").prop("disabled", true);
 		$("#locality_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
-
 	}
 	$("#school_input").val("");
 	$("#locality_input").val("");
@@ -298,9 +305,21 @@ function onDepartmentOrProvinceChange(){
 function isDatalistValid(datalist_id) {
 	var datalist = document.getElementById(datalist_id);
 	var input_val = document.getElementById(datalist_id + "_input").value;
+	var options;
+	if (datalist_id == "school") {
+		options = $( "#school_input" ).autocomplete("option", "source");
+	} else {
+		options = datalist.options;
+	}
 	var optionFound = false;
-	for (var j = 0; j < datalist.options.length; j++) {
-		if (input_val == datalist.options[j].value) {
+	for (var j = 0; j < options.length; j++) {
+		var val;
+		if (datalist_id == "school") {
+			val = options[j];
+		} else {
+			val = options[j].value
+		}
+		if (input_val == val) {
 			optionFound = true;
 			break;
 		}
@@ -344,8 +363,12 @@ function setSchoolsOptions(schools){
 
 }
 
-function askForSchools(txt, province, department) {
-	$.getJSON( "./jsons/provincias/"+province+"/"+department+"_escuelas.json", x => {
+function get_all_schools(province, department) {
+	return $.getJSON( "./jsons/provincias/"+province.toUpperCase()+"/"+department+"_escuelas.json", x => x);
+}
+
+function askForSchools(province, department) {
+	get_all_schools(province, department).then(x => {
 		setSchoolsOptions(x);
 		$("#school_not_found_div").css("display", "inline-flex");
 	});
@@ -368,6 +391,6 @@ function setLocationOptions(localities){
 }
 
 function askForLocations(province,department){
-	$.getJSON( "./jsons/provincias/"+province+"/"+department+"_localidades.json", setLocationOptions);
+	$.getJSON( "./jsons/provincias/"+province.toUpperCase()+"/"+department+"_localidades.json", setLocationOptions);
 }
 
