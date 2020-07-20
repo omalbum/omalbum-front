@@ -88,7 +88,7 @@ function problem_view(data) {
 	}else if (data.icon=="star"){
 		icon_filename="Icon-star-white";
 	}else if (data.icon=="create"){
-		icon_filename="Icon-pencil";
+		icon_filename="Icon-create-white";
 	}
     return `
 <a class="problem ${data.status}" href="${data.url}">
