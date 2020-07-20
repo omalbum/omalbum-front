@@ -80,14 +80,18 @@ function insert_problems() {
 
 
 function problem_view(data) {
-	var is_outlined="";
+	var icon_filename="";
 	if (data.icon =="play_arrow"){
-		is_outlined = "-outlined";	
+		icon_filename="Icon-play";		
+	} else if (data.icon=="done"){
+		icon_filename="Icon-done-white";		
+	}else if (data.icon=="star"){
+		icon_filename="Icon-star-white";
 	}
     return `
 <a class="problem ${data.status}" href="${data.url}">
     <p class="code">${data.code}</p>
-    <i class="material-icons${is_outlined} problem-icon">${data.icon}</i>
+	<img src="./assets/${icon_filename}.svg" class="problem-icon"/>   
     <p>${data.attempts}</p>
     <p class="date">${data.date}</p>
 </a>`;
