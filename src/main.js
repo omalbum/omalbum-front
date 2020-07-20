@@ -77,6 +77,7 @@ function init() {
     $("form").keypress(function(e) {
     	if (e.which == 13) {
     		$(this).find("input[type='button']").click();
+		$(this).find("button'").click();
     		return false;
     	}
 	});
