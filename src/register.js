@@ -48,7 +48,7 @@ function custom_validate_register_payload(payload, check_locality, check_school)
 			custom_validation_failures.push({ field:"Localidad", error: "Debe ser una opción válida" });
 		}
 	}
-	if (check_school){
+	if (check_school && !$("#school_input").prop("disabled")){
 		if ($("#school_not_found_checkbox:checked").val() == undefined) {
 			if (! isDatalistValid("school")){
 				custom_validation_failures.push({ field:"Escuela", error: "Debe ser una opción válida" });

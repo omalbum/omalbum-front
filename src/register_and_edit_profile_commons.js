@@ -3,9 +3,9 @@ $(document).ready(function() {
 });
 
 function append_user_objects_for_input() {
-	$("#append_mail").append($('<input id="email_input" type="text" name="email" placeholder="dirección de email">'));
-	$("#append_name").append($('<input id="name_input" type="text" name="name" placeholder="nombres">'));
-	$("#append_last_name").append($('<input id="last_name_input" type="text" name="last_name" placeholder="apellidos">'));
+	$("#append_mail").append($('<input class="input_inside_form" id="email_input" type="text" name="email" placeholder="dirección de email">'));
+	$("#append_name").append($('<input class="input_inside_form" id="name_input" type="text" name="name" placeholder="nombres">'));
+	$("#append_last_name").append($('<input class="input_inside_form" id="last_name_input" type="text" name="last_name" placeholder="apellidos">'));
 	$("#append_birth_date").append($('<input id="birth_date_input" type="date" name="birth_date" placeholder="fecha de nacimiento">'));
 	for (var obj of get_jquery_gender_objects()){
 		$("#append_gender").append(obj);
@@ -22,7 +22,7 @@ function append_user_objects_for_input() {
 	$("#append_country").append($('<datalist id="country">'));
 	$("#append_is_student").append($('<span><input type="radio" id="is_student_yes" name="is_student" checked value="true" onchange="event_updated_student(this);">Sí</span>'));
 	$("#append_is_student").append($('<span><input type="radio" id="is_student_no" name="is_student" value="false" onchange="event_updated_student(this);">No</span>'));
-	$("#append_school_year").append($('<input type="number" id="school_year_input" name="school_year" placeholder="contando desde primer grado de primaria">'));
+	$("#append_school_year").append($('<input class="input_inside_form" type="number" id="school_year_input" name="school_year" placeholder="contando desde primer grado de primaria">'));
 	$("#append_is_teacher").append($('<span><input type="radio" id="is_teacher_yes" name="is_teacher" value="true" onchange="event_updated_teacher(this);">Sí</span>'));
 	$("#append_is_teacher").append($('<span><input type="radio" id="is_teacher_no" name="is_teacher" value="false" onchange="event_updated_teacher(this);">No</span>'));
 	$("#append_province").append($('<input autocomplete="off" id="province_input" type="text" onchange="reset_departments()" list="province" name="province" placeholder="provincia">'));
@@ -34,6 +34,12 @@ function append_user_objects_for_input() {
 	for (var obj of get_jquery_school_objects()){
 		$("#append_school").append(obj);
 	}
+	$(".input_inside_form").on("keyup", function(e){
+		if (e.keyCode == 13) {
+			$(this).closest("form").find("input[type='button']").click();
+			$(this).closest("form").find("button").click();
+		}
+	});
 	setCountries();
 	province_selector();
 }

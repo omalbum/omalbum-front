@@ -27,8 +27,12 @@ function login(user_name, password) {
     }).catch(err => {
     	clear_notifications();
     	setTimeout(function(){
-        	notify("notification urgent", "Login fallido", html_escape(err.code));
-        }, 500);
+    		var msg = err.message;
+    		if (err.message == "incorrect Username or Password") {
+    			msg = "Usuario o contraseña incorrecta";
+    		}
+        	notify("notification urgent", "Login fallido", html_escape(msg));
+        }, 250);
     });
 }
 

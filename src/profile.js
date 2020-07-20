@@ -37,6 +37,7 @@ function onEditProfileClick() {
 			if (err.code == "wrong_password") {
 				msg = "Contraseña incorrecta";
 			}
+			clear_notifications();
 			notify("notification urgent", "No se pudieron guardar los cambios", msg);
 			window.scrollTo(0, 0);
 		});
