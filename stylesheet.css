@@ -11,6 +11,27 @@ html, body {
     font-family: "Comfortaa";
 }
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: "Comfortaa";
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: "Comfortaa";
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: "Comfortaa";
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: "Comfortaa";
+}
+
+input {
+  font-family: "Comfortaa";
+}
+
+button {
+  font-family: "Comfortaa";
+}
+
 main p, main h1 {
     margin: 0;
     padding: 0;
