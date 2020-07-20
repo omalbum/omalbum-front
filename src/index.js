@@ -19,6 +19,9 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	}
 	td.align="left";
 	head.appendChild(td);
+	var td = document.createElement("th");
+	td.appendChild(document.createTextNode("Timer"));
+	head.appendChild(td);
     for(p of problems) {
         index_problem_view(p, is_active, tbdy);
     }
@@ -71,10 +74,62 @@ function index_problem_view(p, is_active, tbdy) {
 	tr.appendChild(td);
 	var td2=document.createElement("TD");
 	if (is_active){
-		td2.appendChild(document.createTextNode(get_nice_date_to_show(p.deadline)));
+		td2.appendChild(document.createTextNode(get_nice_date_to_show_without_time_missing(p.deadline)));
 	} else {
-		td2.appendChild(document.createTextNode(get_nice_date_to_show(p.release_date)));
+		td2.appendChild(document.createTextNode(get_nice_date_to_show_without_time_missing(p.release_date)));
 	}
 	tr.appendChild(td2);
+	var td3=document.createElement("TD");
+	td3.id = "timer_" + problem_code.substr(1);
+	var date_for_timer;
+	if (is_active){
+		date_for_timer = new Date(p.deadline);
+	} else {
+		date_for_timer = new Date(p.release_date);
+	}
+	var diff = get_diff_date(date_for_timer);
+	td3.appendChild(document.createTextNode(getTimerTime(diff)));
+	window.setInterval(function() {
+		var diff = get_diff_date(date_for_timer);
+		if (diff > 0) {
+			$("#" + td3.id).text(getTimerTime(diff));
+		} else {
+			if (!is_active) {
+				if(confirm("El problema " + get_problem_code_to_show(p) + " está activo! Querés ir?")){
+					window.location.href = get_problem_url(p);
+				}
+			} else {
+				$("#" + td3.id).closest("tr").remove();
+			}
+		}
+	}, 1000);
+	tr.appendChild(td3);
+}
+
+function get_diff_date(date_for_timer) {
+	var diff = parseInt(Math.abs(new Date() - date_for_timer));
+	diff /= 1000;
+	return parseInt(diff);
+}
+
+function getTimerTime(diff) {
+	var ret = "";
+	var days = parseInt(diff / (3600*24));
+	if (days > 0){
+		ret += days.toString().padStart(2, '0') + ":";
+	}
+	diff -= days*(3600*24);
+	hours = parseInt(diff / 3600);
+	if (hours > 0 || ret.length > 0){
+		ret += hours.toString().padStart(2, '0') + ":";
+	}
+	diff -= hours*3600;
+	minutes = parseInt(diff / 60);
+	if (minutes > 0 || ret.length > 0){
+		ret += minutes.toString().padStart(2, '0') + ":"
+	}
+	diff -= minutes*60;
+	ret += diff.toString().padStart(2, '0');
+	return ret;
 }
 

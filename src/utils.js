@@ -36,11 +36,17 @@ function extract_data(form) {
 }
 
 
+function get_nice_date_to_show_without_time_missing(date) {
+	var date_obj = new Date(date);
+	var ret = get_day_string(date_obj) + " " + date_obj.getDate().toString() + " de " + get_month_string(date_obj);
+	ret += ", a las " + getHourTime(date_obj);
+	return ret;
+}
+
 function get_nice_date_to_show(date){
-	date = new Date(date);
-	ret = get_day_string(date) + " " + date.getDate().toString() + " de " + get_month_string(date);
-	ret += ", a las " + getHourTime(date);
-	ret += " (" + get_date_diff_string_from_now(date) + ")";
+	var ret = get_nice_date_to_show_without_time_missing(date);
+	date_obj = new Date(date);
+	ret += " (" + get_date_diff_string_from_now(date_obj) + ")";
 	return ret;
 }
 
