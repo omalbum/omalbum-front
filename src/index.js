@@ -89,11 +89,14 @@ function index_problem_view(p, is_active, tbdy) {
 	}
 	var diff = get_diff_date(date_for_timer);
 	td3.appendChild(document.createTextNode(getTimerTime(diff)));
-	window.setInterval(function() {
+	var intervalID = window.setInterval(function() {
 		var diff = get_diff_date(date_for_timer);
-		if (diff > 0) {
+		if (diff >= 0) {
 			$("#" + td3.id).text(getTimerTime(diff));
-		} else {
+		}
+		if (diff <= 0) {
+			$("#" + td3.id).text(getTimerTime(0));
+			window.clearInterval(intervalID);
 			if (!is_active) {
 				if(confirm("El problema " + get_problem_code_to_show(p) + " está activo! Querés ir?")){
 					window.location.href = get_problem_url(p);
@@ -107,7 +110,7 @@ function index_problem_view(p, is_active, tbdy) {
 }
 
 function get_diff_date(date_for_timer) {
-	var diff = parseInt(Math.abs(new Date() - date_for_timer));
+	var diff = parseInt(date_for_timer - new Date());
 	diff /= 1000;
 	return parseInt(diff);
 }
