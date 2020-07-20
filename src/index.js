@@ -102,7 +102,7 @@ function index_problem_view(p, is_active, tbdy) {
 					window.location.href = get_problem_url(p);
 				}
 			} else {
-				$("#" + td3.id).closest("tr").remove();
+				window.location.href = "./index.html";
 			}
 		}
 	}, 1000);
