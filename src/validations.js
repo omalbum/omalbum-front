@@ -36,7 +36,7 @@ function is_valid_country(s) {
 	return is_nontrivial(s);
 }
 
-function validate_register_payload(payload){
+function validate_register_payload(payload, is_register){
 	// to do: agregar todas las validaciones
 	var validation_failures = [];
 	if(! is_nontrivial(payload["name"]) ){
@@ -48,7 +48,7 @@ function validate_register_payload(payload){
 	if(! is_valid_email(payload["email"]) ){
 		validation_failures.push({ field:"Email", error: "Email no válido" });
 	}
-	if(! is_valid_password(payload["password"]) ){
+	if(is_register && ! is_valid_password(payload["password"]) ){
 		validation_failures.push({ field:"Password", error: "Debe tener entre 6 y 20 caracteres." });
 	}
 

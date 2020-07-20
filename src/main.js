@@ -74,6 +74,18 @@ function init() {
         sessionStorage.removeItem("notif_text");
         sessionStorage.removeItem("notif_code");
     }
+    $("form").keypress(function(e) {
+    	if (e.which == 13) {
+    		$(this).find("input[type='button']").click();
+    		return false;
+    	}
+	});
+    $(".input_inside_form").on("keyup", function(e){
+    	if (e.keyCode == 13) {
+    		$(this).closest("form").find("input[type='button']").click();
+    		$(this).closest("form").find("button").click();
+    	}
+    });	
 }
 
 window.onload = init;

@@ -9,7 +9,7 @@ function load_problem() {
         MathJax.typesetPromise();
 		post_id = data["omaforos_post_id"];
 		if(post_id != 0){
-			l = ["<p><a href=\"https://omaforos.com.ar/viewtopic.php?p=", post_id.toString(), "\">Link al foro</a> para discutir este problema.</p>"];
+			l = ["<p><a href=\"https://omaforos.com.ar/viewtopic.php?p=", post_id.toString(), "\" target=\"_blank\">Link al foro</a> para discutir este problema (no entres si aún no lo pensaste!).</p>"];
 			document.getElementById("link-omaforos").innerHTML = l.join("");
 		}
     });
@@ -25,9 +25,13 @@ function load_problem() {
 	}
 }
 
-function block_new_answers() {
+function block_new_answers(solved) {
 	$("#solution").prop("disabled", true);
-	$("#attempt_button").val("Ya resolviste este problema!");
+	if (solved) {
+		$("#attempt_button").val("Ya resolviste este problema!");
+	} else {
+		$("#attempt_button").val("Ya enviaste una respuesta");
+	}
 	$("#attempt_button").prop("disabled", true);
 }
 
@@ -47,8 +51,8 @@ function add_intentos_to_table(attempts) {
 		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date));
 		var td2 = $("<td>").text(attempt.given_answer.toString());
 		table.append($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
-		if(attempt.result == "correct") {
-			block_new_answers();
+		if(attempt.result == "correct" || attempt.result == "wait") {
+			block_new_answers(attempt.result == "correct");
 		}
 	}
 }
@@ -87,7 +91,7 @@ function attempt_feedback_for_user(x){
 		return notify("notification urgent", "Pensalo un rato más!", "La respuesta es incorrecta.");
 	}
 	if(x.result=="wait"){
-		return notify("notification wait", "Paciencia!", "Tenés que esperar hasta las "+ x.deadline + " para saber si tu respuesta es correcta.");
+		return notify("notification wait", "Paciencia!", "Tenés que esperar hasta el "+ get_nice_date_to_show(x.deadline) + " para saber si tu respuesta es correcta.");
 	}
 }
 

@@ -61,7 +61,7 @@ function get_problem_stats(user_id, problem_id){
 	return do_request("api/v1/users/"+ user_id.toString() + "/attempts/" + problem_id.toString(), null, true, "GET");
 }
 
-function get_schools_matching_request(province, department, text){
+function _get_schools_matching_request(province, department, text){
 	return 	do_request("api/v1/schools/" + province + "/" + department + "/" + text, null, false, "GET");
 }
 
