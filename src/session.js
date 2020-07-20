@@ -55,7 +55,7 @@ function logout_update() {
     localStorage.setItem("expiration", "");
     localStorage.setItem("token", "");
     localStorage.setItem("user", "");
-	window.location.href = "index.html";
+
     for(elem of document.getElementsByClassName("logged-in")) {
         elem.style.display = "none";
     }
