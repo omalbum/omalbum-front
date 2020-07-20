@@ -18,7 +18,7 @@ function create_header_nav() {
 			linkoma.style = "margin: 0; padding: 0px;"
 			span.appendChild(linkoma);
 			var img = document.createElement("img");
-			img.src = "oma-bg.svg";
+			img.src = "OMAlbum-Logo-Simple.svg";
 			linkoma.appendChild(img);
 			var omalbum = document.createElement("span");
 			omalbum.className = "h1";

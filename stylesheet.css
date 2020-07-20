@@ -17,8 +17,9 @@ main p, main h1 {
 }
 
 nav {
-    background: #349;
-    color: white;
+    background: white;
+    color: #349;
+    border-bottom: 3px solid #349;
     margin: 0;
     padding: 10px;
     padding-left: var(--side);
@@ -51,7 +52,7 @@ img {
 }
 
 nav a {
-    color: white;
+    color: #349;
     text-decoration: none;
     font-size: 1rem;
     padding: 2px;
