@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Comfortaa);
+@import url(https://fonts.googleapis.com/css?family=Righteous);
 
 input::-webkit-calendar-picker-indicator {
 	opacity: 100;
@@ -6,7 +8,7 @@ input::-webkit-calendar-picker-indicator {
 
 html, body {
     margin: 0px;
-    font-family: "Arial";
+    font-family: "Comfortaa";
 }
 
 main p, main h1 {

@@ -24,8 +24,8 @@ function create_header_nav() {
 			omalbum.className = "h1";
 			omalbumName = document.createElement("a");
 			omalbumName.href=".";
-			omalbumName.style = "margin: 0; font-size: 1.5rem;  align-items: center; text-decoration : none";
-			omalbumName.text = "OMAlbum";
+			omalbumName.style = "margin: 0; font-size: 1.5rem;  align-items: center; text-decoration : none;font-family: 'Righteous';";
+			omalbumName.text = "OMALBUM";
 			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
