@@ -14,7 +14,7 @@ function create_header_nav() {
 			nav.appendChild(span);
 			span.className = "head";
 			var linkoma =document.createElement("a");
-			linkoma.href="http://oma.org.ar";
+			linkoma.href=".";
 			linkoma.style = "margin: 0; padding: 0px;"
 			span.appendChild(linkoma);
 			var img = document.createElement("img");
@@ -25,7 +25,7 @@ function create_header_nav() {
 			omalbumName = document.createElement("a");
 			omalbumName.href=".";
 			omalbumName.style = "margin: 0; font-size: 1.5rem;  align-items: center; text-decoration : none;font-family: 'Righteous';";
-			omalbumName.text = "OMALBUM";
+			omalbumName.innerHTML = "OMA<span style=\"color:#0096da;\">LBUM</span>";
 			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
