@@ -5,6 +5,7 @@ function onEditProfileClick() {
 		var validations = custom_validate_register_payload(payload,
 														$("#country_input").val() == "Argentina",
 														($("#country_input").val() == "Argentina" && isStudent()) || isTeacher());
+		validations = validations.concat(validate_register_payload(payload, false));
 		if (isStudent() && $("input[name='is_teacher']:checked").val() == "true"){
 			validations.push({ field:"Docente o estudiante?", error: "Seleccionaste ambas" });
 		}
@@ -32,7 +33,11 @@ function onEditProfileClick() {
 				location.reload();
 			}
 		}).catch(err => {
-			notify("notification urgent", "No se pudieron guardar los cambios", html_escape(err.code) || "Error desconocido");
+			var msg = html_escape(err.code) || "Error desconocido"
+			if (err.code == "wrong_password") {
+				msg = "Contraseña incorrecta";
+			}
+			notify("notification urgent", "No se pudieron guardar los cambios", msg);
 			window.scrollTo(0, 0);
 		});
 	} else {
@@ -56,6 +61,7 @@ function onEditProfileClick() {
 		});
 		append_user_objects_for_input();
 		fill_values_with_user_values();
+		$("#check_password_tr").css("display", "");
 		$("#edit_profile_button").text("Guardar");
 	}
 }

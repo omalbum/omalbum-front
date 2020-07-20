@@ -14,7 +14,7 @@ function setCountries(){
 }
 
 function register_with_validation(payload) {
-	validation_failures = validate_register_payload(payload);
+	validation_failures = validate_register_payload(payload, true);
 	all_validation_failures = validation_failures.concat(custom_validate_register_payload(payload,
 																						$("#locality_div").css("display") != "none",
 																						$("#school_div").css("display") != "none"));
