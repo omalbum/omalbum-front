@@ -9,7 +9,7 @@ function load_problem() {
         MathJax.typesetPromise();
 		post_id = data["omaforos_post_id"];
 		if(post_id != 0){
-			l = ["<p><a href=\"https://omaforos.com.ar/viewtopic.php?p=", post_id.toString(), "\">Link al foro</a> para discutir este problema.</p>"];
+			l = ["<p><a href=\"https://omaforos.com.ar/viewtopic.php?p=", post_id.toString(), "\" target=\"_blank\">Link al foro</a> para discutir este problema (no entres si aún no lo pensaste!).</p>"];
 			document.getElementById("link-omaforos").innerHTML = l.join("");
 		}
     });
