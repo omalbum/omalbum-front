@@ -2,6 +2,14 @@
 @import url(https://fonts.googleapis.com/css?family=Comfortaa);
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 
+
+.ui-autocomplete {
+  max-height: 100px;
+  overflow-y: auto; /* prevent horizontal scrollbar */
+  overflow-x: hidden;  /* IE 6 doesn't support max-height * we use height instead, but this forces the menu to always be this tall */
+  /* height: 100px; */
+}
+
 input::-webkit-calendar-picker-indicator {
 	opacity: 100;
 }
