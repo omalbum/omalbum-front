@@ -28,6 +28,10 @@ input {
   font-family: "Comfortaa";
 }
 
+button {
+  font-family: "Comfortaa";
+}
+
 main p, main h1 {
     margin: 0;
     padding: 0;
