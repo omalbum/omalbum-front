@@ -40,7 +40,7 @@ function create_header_nav() {
 			profile.appendChild(profile_em);
 			nav.appendChild(profile);
 			
-			var logout = create_header_button("", "salir", "logged-in");
+			var logout = create_header_button("index.html", "salir", "logged-in");
 			logout.onclick = function() {
 				do_logout();
 			}

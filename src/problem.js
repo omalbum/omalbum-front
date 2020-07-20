@@ -22,6 +22,8 @@ function load_problem() {
 	    		$("#intentos").append($("<label id='no_attempts'>").text("No hiciste intentos todavía"));
 	    	}
 	    });
+	} else {
+		$("#info_for_not_logged").append($('<p>Para poder enviar tu respuesta, <a href="./login.html?from_problem=' + problem_id.toString() + '">ingresá</a> a tu cuenta de OMAlbum o <a href="./register.html?from_problem=' + problem_id.toString() + '">registrate</a> si no tenés una.</p>'));
 	}
 }
 
