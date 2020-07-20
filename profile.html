@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="utils/jquery.min.js"></script>
+        <!-- begin necesario para el autocomplete de escuela -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- end necesario para el autocomplete de escuela -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -18,6 +22,7 @@
 		  gtag('config', 'UA-172622724-1');
 		</script>
 
+		<script type="text/javascript" src="./all_departments.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <title>OMAlbum</title>
     </head>
@@ -26,35 +31,108 @@
 		<div id="notifications">
 		</div>
         <main>
-            <h1>Profile</h1>
+            <h1>Perfil</h1>
             <font face="Comic-sans" >
             <form style="display: inline-block;">
 	            <table>
-	                <tr><td style="width: 20px; text-align: left; padding: 0 20% 0 0"><dt>username</dt></td><td style="text-align: left;" class="fill-user_name"></td></tr>
-	                <tr><td style="text-align: left"><dt>name</dt></td><td style="text-align: left;" id="name_td" class="fill-name changeable"></td></tr>
-	                <tr><td style="text-align: left"><dt>last name</dt></td><td style="text-align: left;" id="last_name_td" class="fill-last_name changeable"></td></tr>
-	                <tr><td style="text-align: left"><dt>user id</dt></td><td style="text-align: left;" class="fill-user_id"></td></tr>
-	                <tr><td style="text-align: left"><dt>email</dt></td><td style="text-align: left;" id="email_td" class="fill-email changeable"></td></tr>
 	                <tr>
-	                	<td style="text-align: left"><dt>género</dt></td>
-	                	<td style="text-align: left;" id="gender_td" class="fill-gender changeable"></td>
-		                <td style="display: none" id="gender_td_datalist">
-		                	<div class="stretch">
-			                    <input type="text" id="gender_input" list="gender" name="gender" placeholder="género">
-			                </div>
-			                <div id="gender_other" style="display: none">
-			                	<label style="float: left;">Género:</label>
-			                	<input type="text" id="gender_other_input" style="float: left;"></input>
-			                </div>
-			                <datalist id="gender">
-			                    <option>femenino</option>
-			                    <option>masculino</option>
-			                    <option>prefiero no responder</option>
-			                    <option>otro</option>
-			                </datalist>
-		                </td>
+	                	<td style="width: 20px; text-align: left; padding: 0 20% 0 0">
+	                		<dt>Usuario</dt>
+	                	</td>
+	                	<td style="text-align: left;" class="fill-user_name">
+	                	</td>
 	                </tr>
-	                <tr><td style="text-align: left; padding: 0 20% 0 0"><dt>País</dt></td><td style="text-align: left;" id="country_td" class="fill-country changeable"></td></tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Nombre</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_name" class="fill-name changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Apellido</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_last_name" class="fill-last_name changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Fecha de nacimiento</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_birth_date" class="fill-birth_date changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Mail</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_mail" class="fill-email changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Género</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_gender" class="fill-gender changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Sos estudiante?</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_is_student" class="fill-is_student changeable">
+	                	</td>
+	                </tr>
+	                <tr class="if-student">
+	                	<td style="text-align: left">
+	                		<dt>Año de escolaridad</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_school_year" class="fill-school_year changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left">
+	                		<dt>Sos docente en Argentina?</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_is_teacher" class="fill-is_teacher changeable">
+	                	</td>
+	                </tr>
+	                <tr>
+	                	<td style="text-align: left; padding: 0 20% 0 0">
+	                		<dt>País</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_country" class="fill-country changeable">
+	                	</td>
+	                </tr>
+	                <tr class="locality_div">
+	                	<td style="text-align: left; padding: 0 20% 0 0">
+	                		<dt>Provincia</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_province" class="fill-province changeable">
+	                	</td>
+	                </tr>
+	                <tr class="locality_div">
+	                	<td style="text-align: left; padding: 0 20% 0 0">
+	                		<dt>Departamento</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_department" class="fill-department changeable">
+	                	</td>
+	                </tr>
+	                <tr class="locality_div">
+	                	<td style="text-align: left; padding: 0 20% 0 0">
+	                		<dt>Localidad</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_locality" class="fill-locality changeable">
+	                	</td>
+	                </tr>
+	                <tr id="school_div">
+	                	<td style="text-align: left; padding: 0 20% 0 0">
+	                		<dt>Escuela</dt>
+	                	</td>
+	                	<td style="text-align: left;" id="append_school" class="fill-school changeable">
+	                	</td>
+	                </tr>
 	            </table>
 	            <br>
 	            <button id="edit_profile_button" type="button" onclick="onEditProfileClick()">Editar perfil</button>
