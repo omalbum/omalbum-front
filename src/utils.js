@@ -175,3 +175,8 @@ function compare_problems (p,q){
 function replaceEntersWithBr(text) {
 	return text.split("\n").join("<br>");
 }
+
+function get_from_url_params(key) {
+	const urlParams = new URLSearchParams(window.location.search);
+	return urlParams.get(key);
+}

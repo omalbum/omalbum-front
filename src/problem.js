@@ -22,6 +22,8 @@ function load_problem() {
 	    		$("#intentos").append($("<label id='no_attempts'>").text("No hiciste intentos todavía"));
 	    	}
 	    });
+	} else {
+		$("#info_for_not_logged").append($('<p>Para poder enviar tu respuesta, <a href="./login.html?from_problem=' + problem_id.toString() + '">ingresá</a> a tu cuenta de OMAlbum o <a href="./register.html?from_problem=' + problem_id.toString() + '">registrate</a> si no tenés una.</p>'));
 	}
 }
 
@@ -43,7 +45,7 @@ function add_intentos_to_table(attempts) {
 		$("#no_attempts").css("display", "none");
 		table = $("<table id='intentos_table'>");
 		var th1 = $("<th>").text("Fecha intento");
-		var th2 = $("<th>").text("Repuesta enviada");
+		var th2 = $("<th>").text("Respuesta enviada");
 		table.append($("<tr>").append(th1).append(th2));
 		$("#intentos").append(table);
 	}

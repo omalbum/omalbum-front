@@ -19,6 +19,7 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	}
 	head.appendChild(td);
 	var td = document.createElement("th");
+	td.style.width = "20%";
 	td.appendChild(document.createTextNode("Timer"));
 	head.appendChild(td);
     for(p of problems) {

@@ -22,7 +22,11 @@ function login(user_name, password) {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
         localStorage.setItem('user', JSON.stringify(token.User));
-        window.location.href = "index.html";
+        if (get_from_url_params("from_problem") != null) {
+		window.location.href = "problema.html?id=" + get_from_url_params("from_problem")
+	} else {
+	        window.location.href = "index.html";
+	}
     }).catch(err => {
     	clear_notifications();
     	setTimeout(function(){
