@@ -45,7 +45,7 @@ function add_intentos_to_table(attempts) {
 		$("#no_attempts").css("display", "none");
 		table = $("<table id='intentos_table'>");
 		var th1 = $("<th>").text("Fecha intento");
-		var th2 = $("<th>").text("Repuesta enviada");
+		var th2 = $("<th>").text("Respuesta enviada");
 		table.append($("<tr>").append(th1).append(th2));
 		$("#intentos").append(table);
 	}
