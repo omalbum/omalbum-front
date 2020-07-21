@@ -47,12 +47,12 @@
 		  		$("#series_input").val(p.series);
 		  		$("#omaforos_post_id_input").val(p.omaforos_post_id || "");
 		  		$("#answer_input").val(p.answer);
-		  		var release_date_splited = p.release_date.split("T");
-		  		$("#release_date_input").val(release_date_splited[0]);
-		  		$("#release_time_input").val(release_date_splited[1].substr(0, 5));
-		  		var deadline_date_splited = p.deadline.split("T");
-		  		$("#deadline_date_input").val(deadline_date_splited[0]);
-		  		$("#deadline_time_input").val(deadline_date_splited[1].substr(0, 5));
+		  		var release_date_obj = new Date(p.release_date);
+		  		$("#release_date_input").val(getDateTimeForHtmlObject(release_date_obj));
+		  		$("#release_time_input").val(getHourTime(release_date_obj));
+		  		var deadline_date_obj = new Date(p.deadline);
+		  		$("#deadline_date_input").val(getDateTimeForHtmlObject(deadline_date_obj));
+		  		$("#deadline_time_input").val(getHourTime(deadline_date_obj));
 		  		$("#tags_input").val(p.tags.join(","));
 		  		$("#previewed").val(p.annotations);
 		  		$("#is_draft_input").prop('checked', p.is_draft);

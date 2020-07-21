@@ -54,6 +54,10 @@ function getHourTime(date) {
 	return date.getHours().toString().padStart(2, '0') + ":" + date.getMinutes().toString().padStart(2, '0');
 }
 
+function getDateTimeForHtmlObject(date) {
+	return date.getFullYear().toString() + "-" + (date.getMonth() + 1).toString().padStart(2, '0') + "-" + date.getDate().toString().padStart(2, '0');
+}
+
 function get_date_diff_string_from_now(date) {
 	var now = new Date();
 	var past_or_future = (now < date) ? "faltan " : "hace ";
