@@ -144,8 +144,8 @@ function getTimerTime(diff) {
 }
 
 function sort_active_problems (p,q){
-	d1 = new Date(p.deadline)
-	d2 = new Date(q.deadline)
+	d1 = new Date(p.deadline).getTime()
+	d2 = new Date(q.deadline).getTime()
 	if (d1 != d2){
         	return d1 < d2 ? -1 : 1;
 	}
@@ -153,8 +153,8 @@ function sort_active_problems (p,q){
 }
 
 function sort_next_problems (p,q){
-        d1 = new Date(p.release_date)
-        d2 = new Date(q.release_date)
+        d1 = new Date(p.release_date).getTime()
+        d2 = new Date(q.release_date).getTime()
         if (d1 != d2){
                 return d1 < d2 ? -1 : 1;
         }
