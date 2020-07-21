@@ -149,7 +149,7 @@ function sort_active_problems (p,q){
 	if (d1 != d2){
         	return d1 < d2 ? -1 : 1;
 	}
-	return get_problem_code(p) <= get_problem_code(q) ? -1 : 1;
+	return get_problem_code_to_show(p) <= get_problem_code_to_show(q) ? -1 : 1;
 }
 
 function sort_next_problems (p,q){
@@ -158,5 +158,5 @@ function sort_next_problems (p,q){
         if (d1 != d2){
                 return d1 < d2 ? -1 : 1;
         }
-        return get_problem_code(p) <= get_problem_code(q) ? -1 : 1;
+        return get_problem_code_to_show(p) <= get_problem_code_to_show(q) ? -1 : 1;
 }
