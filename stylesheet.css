@@ -202,10 +202,6 @@ main section h1 {
 }
 
 .problem {
-    min-width: 5rem;
-}
-
-.problem {
     text-decoration: none !important;
 }
 
@@ -342,7 +338,7 @@ textarea {
 }
 
 .problem {
-    min-width: 6rem;
+    width: 6rem;
 }
 
 main h1 {
