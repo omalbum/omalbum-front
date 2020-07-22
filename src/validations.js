@@ -18,7 +18,7 @@ function is_alphanumeric_without_accents(s){
 }
 
 function is_integer(s){
-	return s.toString().match(/^([+-]?[0-9]\d*|0)$/) != null;
+	return s.toString().match(/^(-?[0-9]\d*|0)$/) != null;
 }
 
 function is_valid_password(s){

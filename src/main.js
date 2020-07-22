@@ -30,6 +30,7 @@ function create_header_nav() {
 			span.appendChild(omalbum);
 
 			nav.appendChild(create_header_button("index.html", "inicio", null));
+			nav.appendChild(create_header_button("FAQ.html", "info", ""));
 			nav.appendChild(create_header_button("problemas.html", "problemas", null));
 			nav.appendChild(create_header_button("login.html", "ingresar", "logged-out"));
 			nav.appendChild(create_header_button("register.html", "registrarse", "logged-out"));
@@ -76,22 +77,14 @@ function init() {
     }
     $("form").keypress(function(e) {
     	if (e.which == 13) {
-    		if($(this).find("input[type='button']").length > 0){
-			$(this).find("input[type='button']").click();
-		} else {
-			$(this).find("button'").click();
-		}
+			$(this).find(".click_if_enter_on_form").click();
     		return false;
     	}
 	});
     $(".input_inside_form").on("keyup", function(e){
     	if (e.keyCode == 13) {
-    		if($(this).closest("form").find("input[type='button']").length > 0) {
-			$(this).closest("form").find("input[type='button']").click();
-		} else {
-	    		$(this).closest("form").find("button").click();
-		}
-		return false;
+    		$(this).find(".click_if_enter_on_form").click();
+    		return false;
     	}
     });	
 }

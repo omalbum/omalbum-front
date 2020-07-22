@@ -167,7 +167,15 @@
 	                <div class="stretch" id="append_locality">
 	                </div>
 	                <div id="school_div">
-		                <p class="tit">Escuela</p>
+				<div class="tooltip" >
+						<div class="tooltiptit" >
+						<p class="tit">Escuela <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+						</div>
+						<span class="tooltiptext">
+							Puede que no encuentres tu escuela en este listado si tiene un nombre en idioma extranjero. 
+							Intentá buscarla con el nombre en español, y si eso tampoco resulta marcá la opción "No encuentro mi escuela".
+						</span>
+					</div>
 		                <div id="append_school">
 			            </div>
 		                <!--
@@ -179,7 +187,7 @@
 	                </div>
 	            </div>
                 <div class="spacer"></div>
-                <button type="button" id="register_button" onclick="register_event(this)">Registrarse</button>
+                <button class="click_if_enter_on_form" type="button" id="register_button" onclick="register_event(this)">Registrarse</button>
             </form>
         </main>
 		<br/>

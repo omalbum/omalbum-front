@@ -13,7 +13,7 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	head.appendChild(td);
 	var td = document.createElement("th");
 	if (is_active){
-		td.appendChild(document.createTextNode("Estará activo hasta"));
+		td.appendChild(document.createTextNode("Activo hasta"));
 	}else{
 		td.appendChild(document.createTextNode("Será publicado el"));
 	}
@@ -53,12 +53,15 @@ function get_next_problems(){
 
 function insert_index_problems(){
 	var h2_active_problem = document.createElement("h2");
+	h2_active_problem.style.marginBottom = "0.5rem";
 	h2_active_problem.appendChild(document.createTextNode("Problemas activos"));
 	h2_active_problem.className = "active-problem-h2";
 	insert_some_problems_in_index("active-problems", get_all_current_problems, true, h2_active_problem);
 	var h2_next_problems = document.createElement("h2");
 	h2_next_problems.appendChild(document.createTextNode("Próximos problemas"));
 	h2_next_problems.className = "next-problems-h2";
+	h2_next_problems.style.marginBottom = "0.5rem";
+	h2_next_problems.style.color = "white";
 	insert_some_problems_in_index("next-problems", get_next_problems, false, h2_next_problems);
 }
 

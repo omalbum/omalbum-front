@@ -63,9 +63,9 @@ function attempt_problem_event(form) {
     const urlParams = new URLSearchParams(window.location.search);
 	const param = parseInt(urlParams.get('id'));
 	answer = document.getElementById("solution").value;
-	if( !is_integer(answer.toString())){
+	if( !is_integer(answer.toString()) || answer.toString().length > 10 || (answer.toString().length == 10 && answer.toString()[0] != "-")){
 		clear_notifications();
-		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero.");
+		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero de hasta 9 dígitos.");
 	}
 	payload = {
         "problem_id": param,

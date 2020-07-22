@@ -202,10 +202,6 @@ main section h1 {
 }
 
 .problem {
-    min-width: 5rem;
-}
-
-.problem {
     text-decoration: none !important;
 }
 
@@ -342,7 +338,7 @@ textarea {
 }
 
 .problem {
-    min-width: 6rem;
+    width: 6rem;
 }
 
 main h1 {
@@ -548,13 +544,13 @@ p {
 
 
 .active-problem-h2 {
-	background-color: #64D89F;
+	background-color: #40B5EA;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 10px;
 }
 .next-problems-h2 {
-	background-color: #5890E5;
+	background-color: #073763;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 10px;
