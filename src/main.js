@@ -30,6 +30,7 @@ function create_header_nav() {
 			span.appendChild(omalbum);
 
 			nav.appendChild(create_header_button("index.html", "inicio", null));
+			nav.appendChild(create_header_button("FAQ.html", "info", ""));
 			nav.appendChild(create_header_button("problemas.html", "problemas", null));
 			nav.appendChild(create_header_button("login.html", "ingresar", "logged-out"));
 			nav.appendChild(create_header_button("register.html", "registrarse", "logged-out"));
@@ -45,7 +46,6 @@ function create_header_nav() {
 				do_logout();
 			}
 			nav.appendChild(logout);
-			nav.appendChild(create_header_button("FAQ.html", "FAQ", ""));
 		}
 	}
 }
