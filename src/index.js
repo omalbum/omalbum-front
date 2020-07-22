@@ -15,7 +15,7 @@ function insert_given_problems_in_index(element, problems, is_active) {
 	if (is_active){
 		td.appendChild(document.createTextNode("Activo hasta"));
 	}else{
-		td.appendChild(document.createTextNode("Será publicado el"));
+		td.appendChild(document.createTextNode("Se publicará el"));
 	}
 	head.appendChild(td);
 	var td = document.createElement("th");
