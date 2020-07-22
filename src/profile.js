@@ -160,3 +160,44 @@ $(document).ready(function(){
 		}
 	}
 });
+
+function onEditPasswordClick(btn) {
+	if ($("#only_asterisks").css("display") != "none") {
+		$("#only_asterisks").css("display", "none");
+		$("#current_password").css("display", "");
+		$("#new_password").css("display", "");
+		$("#new_password_2").css("display", "");
+	} else {
+		payload = extract_data(btn.closest("form"));
+		if (payload.new_password != payload.new_password_2) {
+			clear_notifications();
+			notify("notification urgent", "Las contraseñas no coinciden", "Asegurate de repetir correctamente la nueva contraseña");
+			window.scrollTo(0, 0);
+			return;
+		}
+		if (!is_valid_password(payload.new_password)){
+			clear_notifications();
+			notify("notification urgent", "Contraseña no válida", "La contraseña debe tener entre 6 y 20 caracteres");
+			window.scrollTo(0, 0);
+			return;
+		}
+		change_user_password(user()["user_id"], payload.current_password, payload.new_password).then(x => {
+			clear_notifications();
+			notify("notification good", "Contraseña cambiada!", "La contraseña fue actualiza");
+			window.scrollTo(0, 0);
+			$("input[name='current_password']").val("");
+			$("input[name='new_password']").val("");
+			$("input[name='new_password_2']").val("");
+			$("#new_password").css("display", "none");
+			$("#new_password_2").css("display", "none");
+			$("#only_asterisks").css("display", "");
+			$("#current_password").css("display", "none");
+		}).catch(err => {
+			if (err.code == "incorrect_old_password"){
+				clear_notifications();
+				notify("notification urgent", "Contraseña incorrecta", "La contraseña actual que pusiste es incorrecta");
+				window.scrollTo(0, 0);
+			}
+		});
+	}
+}

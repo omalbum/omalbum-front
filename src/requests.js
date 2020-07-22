@@ -65,6 +65,10 @@ function _get_schools_matching_request(province, department, text){
 	return 	do_request("api/v1/schools/" + province + "/" + department + "/" + text, null, false, "GET");
 }
 
+function change_user_password(user_id, old_password, new_password){
+	return do_request("api/v1/users/"+ user_id.toString() + "/password", {"old_password": old_password, "new_password": new_password}, true, "PUT");
+}
+
 // https://stackoverflow.com/a/24468752
 function do_request(endpoint, payload, authorize, method) {
     return new Promise (
