@@ -45,6 +45,7 @@ function create_header_nav() {
 				do_logout();
 			}
 			nav.appendChild(logout);
+			nav.appendChild(create_header_button("FAQ.html", "FAQ", ""));
 		}
 	}
 }
