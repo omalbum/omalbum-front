@@ -33,15 +33,30 @@
 		  gtag('config', 'UA-172622724-1');
 		</script>
 
+		 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
+		 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+		 <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
+
 		<script>
 		  $(function(){
 		  	$("#formContent").load("problem_form.html", function(){
 		  		$("#submit_button").on("click", function(){
 		  			create_problem_event(this);
 		  		}).text("Crear Problema");
+				var input = document.getElementById('tags_input');
+				var settings = {
+				  dropdown: {
+					 enabled: 0
+				  },
+				  whitelist:[] //tags sugeridas
+				}
+				var tagify = new Tagify(input, settings);
+
 		  	}); 
 		  });
 		</script>
+
 
         <script type="text/javascript" src="main.js"></script>
         <title>OMAlbum</title>

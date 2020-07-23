@@ -15,7 +15,7 @@
     </div>
     <button type="button" class="margin" onclick="update_preview(this)" for="hint">Preview</button>
     <div class="boxed light-bg">
-    <p id="preview">Apriete "Preview" para ver el contenido renderizado con Mathjax</p>
+    <p id="preview" class="enunciado math light-bg boxed" >Apretar "Preview" para ver el contenido renderizado con Mathjax</p>
     </div>
     <div class="spacer"></div>
     <p class="tit">Serie</p>
@@ -41,13 +41,13 @@
         <input id="deadline_time_input" type="time" name="time:deadline">
     </div>
     <p class="tit">Tags</p>
-    <div class="stretch">
+    <!--<div class="stretch">-->
         <input id="tags_input" type="text" name="tags" value=""><br>
-		Insertar las tags separadas por comas. Por ejemplo Combinatoria,Juegos
-    </div>
+		Insertar las tags apretando &lt;enter&gt; entre tag y tag. Por ejemplo Combinatoria &lt;enter&gt; Juegos
+    <!--</div>-->
     <p class="tit">Anotaciones</p>
     <div class="stretch padded">
-        <textarea class="input" name="annotations" type="text" rows="10" id="previewed">anotaciones</textarea>
+        <textarea class="input" name="annotations" type="text" rows="10" id="previewed" placeholder="anotaciones"></textarea>
     </div>
     <div class="left">
         <p class="tit">draft?</p>

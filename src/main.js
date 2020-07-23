@@ -29,7 +29,7 @@ function create_header_nav() {
 			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
-			nav.appendChild(create_header_button("index.html", "inicio", null));
+			//nav.appendChild(create_header_button("index.html", "inicio", null));
 			nav.appendChild(create_header_button("FAQ.html", "info", ""));
 			nav.appendChild(create_header_button("problemas.html", "problemas", null));
 			nav.appendChild(create_header_button("login.html", "ingresar", "logged-out"));

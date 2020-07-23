@@ -313,6 +313,14 @@ main section h1 {
     box-shadow: #bbb 0px 0px 5px 5px; */
 }
 
+.enunciado img{
+    display: block;
+    width: 60%;
+    max-width: 500px;
+    height: auto;
+    margin: auto;
+}
+
 hr {
     border-width: 1px;
     border-color: #000;
