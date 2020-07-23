@@ -2,7 +2,7 @@ function get_new_problem_payload(data) {
 	return {
 		deadline : date_string(data["date:deadline"], data["time:deadline"]),
 		release_date : date_string(data["date:release_date"], data["time:release_date"]),
-		tags : data["tags"].split(","),
+		tags : JSON.parse(data["tags"]).map( x => x.value ),
 		statement : replaceEntersWithBr(data["statement"]),
 		omaforos_post_id : parseInt(data["omaforos_post_id"]),
 		answer : parseInt(data["answer"]),
@@ -49,8 +49,6 @@ function create_problem_with_validation(payload){
 
 function update_problem_with_validation(payload, problem_id){
 	// TODO: No anda bien esto, supongo que por el back
-	// No se puede editar la serie
-	// No cambia el valor de draft de true a false
 	// pasan cosas raras con la hora
 	validation_failures = validate_create_problem_payload(payload);
 	if( validation_failures.length > 0 ){
