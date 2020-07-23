@@ -68,6 +68,7 @@ footer {
     padding-right: var(--side);
     display: flex;
     justify-content: left;
+    text-align: center;
     align-items: baseline;
     flex-wrap: wrap;
 }
@@ -214,8 +215,7 @@ main section h1 {
 }
 
 .problem:hover {
-    margin: 4px;
-    border-width: 3px;
+    transform: scale(1.1);
 }
 
 .failure {
