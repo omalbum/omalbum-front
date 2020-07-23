@@ -2,7 +2,7 @@ function get_new_problem_payload(data) {
 	return {
 		deadline : date_string(data["date:deadline"], data["time:deadline"]),
 		release_date : date_string(data["date:release_date"], data["time:release_date"]),
-		tags : JSON.parse(data["tags"]).map( x => x.value ),
+		tags : JSON.parse(data["tags"] || "[]").map( x => x.value ),
 		statement : replaceEntersWithBr(data["statement"]),
 		omaforos_post_id : parseInt(data["omaforos_post_id"]),
 		answer : parseInt(data["answer"]),
