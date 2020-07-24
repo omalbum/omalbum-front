@@ -331,7 +331,8 @@ function isDatalistValid(datalist_id) {
 
 
 $(document).ready(function(){
-	if (window.location.href.endsWith("register.html") || window.location.href.endsWith("register") ){
+	
+	if (get_current_page_name_without_extension()=="register" ){
 		append_user_objects_for_input();
 		$("#department_input").prop("disabled", true);
 		$("#locality_input").prop("disabled", true);

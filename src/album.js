@@ -58,7 +58,7 @@ function insert_given_problems(element, problems) {
             "icon": "create",
             "attempts": "<br/>",
             "date": "<br/>",
-            "url": "admin.html"
+            "url": "admin"
         });
     }
     for(p of problems.sort(compare_problems)) {

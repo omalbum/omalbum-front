@@ -35,6 +35,24 @@ function extract_data(form) {
     return data;
 }
 
+function get_full_path_from_url(url){
+	return url.split("?")[0];
+}
+
+function get_page_name_from_url(url){
+	ls = get_full_path_from_url(url).split("/");
+	return ls[ls.length-1];
+}	
+
+function get_current_page_name(){
+	return get_page_name_from_url(window.location.href);
+}
+
+function get_current_page_name_without_extension(){
+	return get_current_page_name().split(".")[0];
+}
+
+
 
 function get_nice_date_to_show_without_time_missing(date) {
 	var date_obj = new Date(date);
