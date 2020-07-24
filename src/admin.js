@@ -129,6 +129,12 @@ function insert_given_problems_admin(element, problems) {
     MathJax.typesetPromise();
 }
 
+function delete_problem_on_click(problem_id){
+	if ( confirm("Borrar el problema "+problem_id.toString() +"?")) {
+		delete_problem_request(problem_id).then( function(x){ location.reload(); } );
+	}
+}
+
 function problem_admin_html(data){
 	if (data.omaforos_post_id>0 ){
 		link_omaforos = `<a href=\"https://omaforos.com.ar/viewtopic.php?p=${data.omaforos_post_id}">link a omaforos </a><br/>`;
@@ -137,7 +143,7 @@ function problem_admin_html(data){
 	}
     return `
 	<div>
-		<h3>Problema ${data.problem_id} - ${get_problem_code_to_show(data)} - <a href = "editar.html?id=${data.problem_id}">editar</a> </h3>
+		<h3>Problema ${data.problem_id} - ${get_problem_code_to_show(data)} - <a href = "editar.html?id=${data.problem_id}">editar</a> - <a onclick="delete_problem_on_click(${data.problem_id});" >borrar</a> </h3>
 		<div  class="enunciado math light-bg boxed">${data.statement}</div>
 		Respuesta: ${data.answer}<br/>
 		${link_omaforos}

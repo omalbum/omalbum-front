@@ -57,6 +57,10 @@ function update_problem_request(payload, problem_id){
 	return 	do_request("api/v1/admin/problem/" + problem_id.toString(), payload, true, "PUT");
 }
 
+function delete_problem_request(problem_id){
+	return 	do_request("api/v1/admin/problem/" + problem_id.toString(), null, true, "DELETE");
+}
+
 function get_problem_stats(user_id, problem_id){
 	return do_request("api/v1/users/"+ user_id.toString() + "/attempts/" + problem_id.toString(), null, true, "GET");
 }
