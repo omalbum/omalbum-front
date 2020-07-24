@@ -5,7 +5,7 @@ To start the server, run `./server.py`.
 
 To recompile run `make`
 
-The webpage can be accessed at `https://localhost:8003/index.html`
+The webpage can be accessed at `https://localhost:8000/index.html`
 
 It is possible to use either a local backend or the testing backend by editing `/src/backend.js`
 - `var host = "var host = "http://localhost:8080/";`
