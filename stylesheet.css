@@ -4,6 +4,14 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 
 /********************************************************************/
+/** Our main colors **/
+
+:root {
+	--omalbum-lightblue: #0096da;
+	--omalbum-darkblue: #073763;
+}
+
+/********************************************************************/
 
 .ui-autocomplete {
   max-height: 100px;
@@ -63,8 +71,8 @@ main p, main h1 {
 
 nav {
     background: white;
-    color: #073763;
-    border-bottom: 3px solid #073763;
+    color: var(--omalbum-darkblue);
+    border-bottom: 3px solid var(--omalbum-darkblue);
     margin: 0;
     padding: 10px;
     padding-left: var(--side);
@@ -79,7 +87,7 @@ nav {
 /** footer **/
 
 footer {
-    background: #073763;
+    background: var(--omalbum-darkblue);
     color: white;
     margin: 0;
     padding: 10px;
@@ -146,7 +154,7 @@ img {
 /********************************************************************/
 
 nav a {
-    color: #073763;
+    color: var(--omalbum-darkblue);
     text-decoration: none;
     font-size: 1rem;
     padding: 2px;
@@ -177,7 +185,7 @@ main h1 {
     padding-top: 20px;
     font-size: 3rem;
     font-weight: normal;
-	color: #0096da;
+	color: var(--omalbum-lightblue);
 }
 
 main p {
@@ -290,22 +298,22 @@ main section h1 {
 }
 
 .success {
-    background: #0096da;
+    background: var(--omalbum-lightblue);
     color: white;
-    border-color: #0096da;
+    border-color: var(--omalbum-lightblue);
 }
 
 .normal {
     background: white;
-    color: #073763;
-    border-color: #073763;
+    color: var(--omalbum-darkblue);
+    border-color: var(--omalbum-darkblue);
 	border-style: dashed;
 }
 
 .admin{
-    background: #073763;
+    background: var(--omalbum-darkblue);
     color: white;
-    border-color: #073763;
+    border-color: var(--omalbum-darkblue);
 }
 
 .problem p {
@@ -408,7 +416,7 @@ form {
 /** main **/
 
 main a {
-    color: #073763;
+    color: var(--omalbum-darkblue);
 }
 
 main h1 i {
@@ -481,7 +489,7 @@ dt, dd {
     margin: 0;
     padding: 0;
     margin: 1px;
-    color: #073763;
+    color: var(--omalbum-darkblue);
     font-size: 1rem;
 }
 
@@ -685,7 +693,7 @@ p {
 	padding-left: 10px;
 }
 .next-problems-h2 {
-	background-color: #073763;
+	background-color: var(--omalbum-darkblue);
 	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 10px;
