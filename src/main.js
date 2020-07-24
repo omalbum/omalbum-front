@@ -29,19 +29,19 @@ function create_header_nav() {
 			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
-			//nav.appendChild(create_header_button("index.html", "inicio", null));
-			nav.appendChild(create_header_button("FAQ.html", "info", ""));
-			nav.appendChild(create_header_button("problemas.html", "problemas", null));
-			nav.appendChild(create_header_button("login.html", "ingresar", "logged-out"));
-			nav.appendChild(create_header_button("register.html", "registrarse", "logged-out"));
+			//nav.appendChild(create_header_button(".", "inicio", null));
+			nav.appendChild(create_header_button("FAQ", "info", ""));
+			nav.appendChild(create_header_button("problemas", "problemas", null));
+			nav.appendChild(create_header_button("login", "ingresar", "logged-out"));
+			nav.appendChild(create_header_button("register", "registrarse", "logged-out"));
 
-			var profile = create_header_button("profile.html", "perfil ", "logged-in")
+			var profile = create_header_button("profile", "perfil ", "logged-in")
 			var profile_em = document.createElement("em");
 			profile_em.className = "fill-user_name";
 			profile.appendChild(profile_em);
 			nav.appendChild(profile);
 			
-			var logout = create_header_button("index.html", "salir", "logged-in");
+			var logout = create_header_button(".", "salir", "logged-in");
 			logout.onclick = function() {
 				do_logout();
 			}

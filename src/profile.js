@@ -140,7 +140,7 @@ function fill_values_with_user_values() {
 }
 
 $(document).ready(function(){
-	if (window.location.href.endsWith("profile.html")){
+	if (window.location.href.endsWith("profile.html") || window.location.href.endsWith("profile") ){
 		var display = "none";
 		if(is_logged_in() && (user()["country"] == "Argentina" || user()["is_teacher"])) {
 			display = "";

@@ -23,7 +23,7 @@ function load_problem() {
 	    	}
 	    });
 	} else {
-		$("#info_for_not_logged").append($('<p>Para poder enviar tu respuesta, <a href="./login.html?from_problem=' + problem_id.toString() + '">ingresá</a> a tu cuenta de OMAlbum o <a href="./register.html?from_problem=' + problem_id.toString() + '">registrate</a> si no tenés una.</p>'));
+		$("#info_for_not_logged").append($('<p>Para poder enviar tu respuesta, <a href="./login?from_problem=' + problem_id.toString() + '">ingresá</a> a tu cuenta de OMAlbum o <a href="./register?from_problem=' + problem_id.toString() + '">registrate</a> si no tenés una.</p>'));
 	}
 }
 
@@ -81,7 +81,7 @@ function attempt_problem(payload) {
 
 
 function get_problem_url(p){
-	return `problema.html?id=${p.problem_id}`;
+	return `problema?id=${p.problem_id}`;
 }
 
 function attempt_feedback_for_user(x){

@@ -122,8 +122,8 @@ function insert_given_problems_admin(element, problems) {
 			}
 		}
     }
-	element.innerHTML =  `<h2><a href="./admin_stats.html"> Ver stats </a><h2><br/>`;
-	element.innerHTML +=  `<h2><a href="./crear.html"> Crear problema </a><h2>`;
+	element.innerHTML =  `<h2><a href="./admin_stats"> Ver stats </a><h2><br/>`;
+	element.innerHTML +=  `<h2><a href="./crear"> Crear problema </a><h2>`;
 	element.innerHTML += "<h2>Drafts</h2>"+ drafts.map(problem_admin_html).join("\n") + "<br/><br/> ";
 	element.innerHTML += "<h2>Scheduled</h2>"+ scheduled.map(problem_admin_html).join("\n") + "<br/><br/><h2>Released</h2>"+ released.map(problem_admin_html).join("\n");
     MathJax.typesetPromise();
@@ -143,7 +143,7 @@ function problem_admin_html(data){
 	}
     return `
 	<div>
-		<h3>Problema ${data.problem_id} - ${get_problem_code_to_show(data)} - <a href = "editar.html?id=${data.problem_id}">editar</a> - <a onclick="delete_problem_on_click(${data.problem_id});" >borrar</a> </h3>
+		<h3>Problema ${data.problem_id} - ${get_problem_code_to_show(data)} - <a href = "editar?id=${data.problem_id}">editar</a> - <a onclick="delete_problem_on_click(${data.problem_id});" >borrar</a> </h3>
 		<div  class="enunciado math light-bg boxed">${data.statement}</div>
 		Respuesta: ${data.answer}<br/>
 		${link_omaforos}

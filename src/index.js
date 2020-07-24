@@ -109,7 +109,7 @@ function index_problem_view(p, is_active, tbdy) {
 				if(confirm("¡El problema " + get_problem_code_to_show(p) + " está activo! ¿Querés ir?")){
 					window.location.href = get_problem_url(p);
 				}else {
-				window.location.href = "./index.html";
+				window.location.href = ".";
 				}
 			} else {
 				$("#" + td3.id).closest("tr").remove();	

@@ -143,7 +143,7 @@ function province_selector() {
     ele = document.getElementById("province");
 	opts = [];
     if(ele) {
-    	// TODO: Si comento esto la gente podría ir a /register.html estando logueada
+    	// TODO: Si comento esto la gente podría ir a /register estando logueada
 		/*if (is_logged_in()){
 			window.location.replace(".");
 			return;
@@ -331,7 +331,7 @@ function isDatalistValid(datalist_id) {
 
 
 $(document).ready(function(){
-	if (window.location.href.endsWith("register.html")){
+	if (window.location.href.endsWith("register.html") || window.location.href.endsWith("register") ){
 		append_user_objects_for_input();
 		$("#department_input").prop("disabled", true);
 		$("#locality_input").prop("disabled", true);
