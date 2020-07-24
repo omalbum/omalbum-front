@@ -167,7 +167,7 @@ function reset_departments() {
 		document.getElementById("department_input").placeholder = "departamento o partido";
 		document.getElementById("department_input").disabled = false;
 	}else{
-		document.getElementById("department_input").placeholder = "departamento o partido (primero seleccionar provincia)";
+		document.getElementById("department_input").placeholder = "primero seleccionar provincia";
 		document.getElementById("department_input").disabled = true;
 	}
 	document.getElementById("department_input").value = "";
@@ -296,9 +296,9 @@ function onDepartmentOrProvinceChange(){
 		askForSchools(province, department);
 	} else {
 		$("#school_input").prop("disabled", true);
-		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+		$("#school_input").prop("placeholder", "primero seleccionar provincia y departamento");
 		$("#locality_input").prop("disabled", true);
-		$("#locality_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
+		$("#locality_input").prop("placeholder", "primero seleccionar provincia y departamento");
 	}
 	$("#school_input").val("");
 	$("#locality_input").val("");
@@ -336,9 +336,9 @@ $(document).ready(function(){
 		$("#department_input").prop("disabled", true);
 		$("#locality_input").prop("disabled", true);
 		$("#school_input").prop("disabled", true);
-		$("#department_input").placeholder = "departamento o partido (primero selecciona provincia)";
-		$("#locality_input").prop("placeholder", "localidad (primero selecciona provincia y departamento)");
-		$("#school_input").prop("placeholder", "escuela (primero selecciona provincia y departamento)");
+		$("#department_input").placeholder = "primero seleccionar provincia";
+		$("#locality_input").prop("placeholder", "primero seleccionar provincia y departamento");
+		$("#school_input").prop("placeholder", "primero seleccionar provincia y departamento");
 		update_with_country_value($("input[name=country]").val());
 		update_with_is_student_value($("input[name='is_student']:checked").val());
 	}
