@@ -52,14 +52,13 @@ function create_header_nav() {
 
 function create_footer(){
 	document.getElementById("footer").innerHTML=`
-<div style="margin-left:auto;max-width:80%;">
-	 &copy; 2020 &nbsp; <a href="http://oma.org.ar" style=\"font-size:1.0rem;padding-right:0px;margin-top:auto;" >Olimpíada Matemática Argentina</a>
+<div class="copyright">
+	 &copy;&nbsp;2020&nbsp;<a href="http://oma.org.ar">Olimpíada Matemática Argentina</a>
 </div>
-<div style="margin-left: auto;margin-right:0;margin-top:auto;max-width:19%;">
-	<a href="https://www.instagram.com/omalbum.ok" target="_blank" title="Seguinos en Instagram!">
-		<img src="./assets/instagram.png" alt="Instagram" style="height:1.75rem;"/>
-	</a>
-</div>`;
+<div class="socialNetworks">
+	<a href="https://www.instagram.com/omalbum.ok" target="_blank" title="Seguinos en Instagram!" class="fa fa-instagram"></a>
+</div>
+`;
 }
 
 function init() {
