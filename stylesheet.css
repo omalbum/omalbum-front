@@ -68,7 +68,6 @@ footer {
     padding-right: var(--side);
     display: flex;
     flex-wrap: wrap;
-    /*flex-flow: row wrap;*/
     align-items: center;
 }
 
