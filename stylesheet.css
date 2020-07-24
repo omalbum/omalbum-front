@@ -3,6 +3,8 @@
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 
+/********************************************************************/
+
 .ui-autocomplete {
   max-height: 100px;
   overflow-y: auto; /* prevent horizontal scrollbar */
@@ -10,14 +12,22 @@
   /* height: 100px; */
 }
 
+/********************************************************************/
+
 input::-webkit-calendar-picker-indicator {
 	opacity: 100;
 }
+
+/********************************************************************/
+/** html - body **/
 
 html, body {
     margin: 0px;
     font-family: "Comfortaa";
 }
+
+/********************************************************************/
+/** Fonts **/
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-family: "Comfortaa";
@@ -40,10 +50,16 @@ button {
   font-family: "Comfortaa";
 }
 
+/********************************************************************/
+/** main **/
+
 main p, main h1 {
     margin: 0;
     padding: 0;
 }
+
+/********************************************************************/
+/** nav **/
 
 nav {
     background: white;
@@ -58,6 +74,9 @@ nav {
     align-items: baseline;
     flex-wrap: wrap;
 }
+
+/********************************************************************/
+/** footer **/
 
 footer {
     background: #073763;
@@ -84,7 +103,6 @@ footer {
 }
 
 .fa {
-  /*padding: 20px;*/
   font-size: 30px;
   /*width: 50px;*/
   /*text-align: center;*/
@@ -100,6 +118,8 @@ footer {
   color: white;
 }
 
+/********************************************************************/
+
 img {
     height: 2.2rem;
     margin: 0;
@@ -109,6 +129,8 @@ img {
     margin-top: -0.2rem;
     vertical-align: bottom;
 }
+
+/********************************************************************/
 
 .h1 {
     margin: 0;
@@ -120,6 +142,8 @@ img {
 .head {
     justify-content: center;
 }
+
+/********************************************************************/
 
 nav a {
     color: #073763;
@@ -140,6 +164,9 @@ footer a {
 a:hover, a:active {
     text-decoration: underline;
 }
+
+/********************************************************************/
+/** main **/
 
 main {
     padding-left: var(--side);
@@ -163,9 +190,13 @@ main section h1 {
     font-weight: bold;
 }
 
+/********************************************************************/
+
 .head {
     text-align: center;
 }
+
+/********************************************************************/
 
 @media(max-width: 700px) {
     html {
@@ -200,6 +231,8 @@ main section h1 {
     }
 }
 
+/********************************************************************/
+
 @media(min-width: 701px) {
     html {
         --inset: 0;
@@ -209,6 +242,8 @@ main section h1 {
         justify-content: left;
     }
 }
+
+/********************************************************************/
 
 @media(min-width: 701px) and (max-width: 1000px) {
     html {
@@ -221,6 +256,9 @@ main section h1 {
         --side: 20vw;
     }
 }
+
+/********************************************************************/
+/** Problems **/
 
 .problem-list {
     display: flex;
@@ -294,14 +332,18 @@ main section h1 {
     text-align: center;
 }
 
-
 .problem {
     padding: 10px;
 }
 
+/********************************************************************/
+
 .code {
     font-size: 1.5rem;
 }
+
+/********************************************************************/
+/** enunciado **/
 
 .enunciado {
     padding: 0;
@@ -320,6 +362,8 @@ main section h1 {
     margin: auto;
 }
 
+/********************************************************************/
+
 hr {
     border-width: 1px;
     border-color: #000;
@@ -328,10 +372,14 @@ hr {
     margin-left: 10vw;
 }
 
+/********************************************************************/
+
 form {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+
+/********************************************************************/
 
 .center {
     margin-left: auto;
@@ -339,9 +387,13 @@ form {
     display: box;
 }
 
+/********************************************************************/
+
 input {
     margin: 5px;
 }
+
+/********************************************************************/
 
 form {
     /* background: rgb(170, 180, 230); */
@@ -352,6 +404,9 @@ form {
     /* box-shadow: #bbb 0px 0px 5px 5px; */
 }
 
+/********************************************************************/
+/** main **/
+
 main a {
     color: #073763;
 }
@@ -360,32 +415,46 @@ main h1 i {
     font-size: 3rem !important;
 }
 
+/********************************************************************/
+
 .done {
     color: #0a0;
 }
+
+/********************************************************************/
 
 .add i {
     color: white;
 }
 
+/********************************************************************/
+
 textarea {
     width: 100%;
 }
 
+/********************************************************************/
+
 .problem {
     width: 6rem;
 }
+
+/********************************************************************/
 
 main h1 {
     text-align: center;
     padding: 10px;
 }
 
+/********************************************************************/
+
 #login {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
+/********************************************************************/
 
 form {
     display: flex;
@@ -394,10 +463,14 @@ form {
     margin: auto;
 }
 
+/********************************************************************/
+
 input {
     margin: 5px;
     padding: 5px;
 }
+
+/********************************************************************/
 
 dt, dd {
     margin: 0;
@@ -416,21 +489,29 @@ dd {
     margin-left: 1rem;
 }
 
+/********************************************************************/
+
 .username {
     font-style: italic;
     color: rgb(147, 160, 226);
     padding-left: 0.2rem;
 }
 
+/********************************************************************/
+
 legend {
     padding-top: 2rem;
     font-size: 1.5rem;
 }
 
+/********************************************************************/
+
 button {
     margin-left: auto;
     margin-right: auto;
 }
+
+/********************************************************************/
 
 .stretch {
     display: flex;
@@ -439,6 +520,8 @@ button {
     width: 100%;
     box-sizing: border-box;
 }
+
+/********************************************************************/
 
 .boxed {
     margin-left: var(--inset);
@@ -453,6 +536,8 @@ button {
     margin: 0;
 }
 
+/********************************************************************/
+
 .stretch * {
     flex-basis: 100%;
 }
@@ -461,13 +546,19 @@ button {
     margin: 0.5rem;
 }
 
+/********************************************************************/
+
 .light-bg {
     background: #cdf;
 }
 
+/********************************************************************/
+
 p {
     margin: 1rem;
 }
+
+/********************************************************************/
 
 .spacer {
     height: 1rem;
@@ -475,20 +566,29 @@ p {
     padding: 0;
 }
 
+/********************************************************************/
+
 .left {
     display: flex;
     justify-content: space-between;
 }
+
+/********************************************************************/
 
 .padded {
     padding-left: 5px;
     padding-right: 5px;
 }
 
+/********************************************************************/
+
 .margin {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+/********************************************************************/
+/** Notifications **/
 
 .notification {
     margin: 0.5em;
@@ -508,7 +608,6 @@ p {
     color: white;
 }
 
-
 .notification h1, .notification p {
     margin: 0;
     padding: 0;
@@ -519,6 +618,8 @@ p {
     color: white;
 }
 
+/********************************************************************/
+/** Tooltips **/
 
 /* Tooltip container */
 .tooltip {
@@ -527,7 +628,6 @@ p {
   float: left;
   width: 100%;
 }
-
 
 /* Tooltip text */
 .tooltip .tooltiptext {
@@ -558,7 +658,6 @@ p {
   border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
-
 /* Tooltip arrow */
 .tooltip .tooltiptext::after {
   content: "";
@@ -577,6 +676,7 @@ p {
   opacity: 1;
 }
 
+/********************************************************************/
 
 .active-problem-h2 {
 	background-color: #40B5EA;
@@ -590,6 +690,8 @@ p {
 	padding-bottom: 3px;
 	padding-left: 10px;
 }
+
+/********************************************************************/
 
 /*
 table, th, td {
@@ -619,7 +721,6 @@ tr {
     border-collapse: collapse;
 }​
 
-
 tbody td {
   text-align: center;
 }
@@ -628,6 +729,7 @@ tbody td {
   text-align: center;
 }
 
+/********************************************************************/
 
 .result_incorrect {
 	background-color: #FA9B9B;
@@ -638,3 +740,4 @@ tbody td {
 .result_wait {
 	background-color: #BDFCF3;
 }
+
