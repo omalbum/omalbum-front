@@ -4,7 +4,7 @@ function onEditProfileClick() {
 		payload.user_name = user()["user_name"];
 		var validations = custom_validate_register_payload(payload,
 														$("#country_input").val() == "Argentina",
-														($("#country_input").val() == "Argentina" && isStudent()) || isTeacher());
+														$("#country_input").val() == "Argentina" && (isStudent() || isTeacher()));
 		validations = validations.concat(validate_register_payload(payload, false));
 		if (isStudent() && $("input[name='is_teacher']:checked").val() == "true"){
 			validations.push({ field:"Docente o estudiante?", error: "Seleccionaste ambas" });
