@@ -203,6 +203,10 @@ function replaceEntersWithBr(text) {
 	return text.split("\n").join("<br>");
 }
 
+function replaceBrWithEnters(text) {
+	return text.split("<br>").join("\n");
+}
+
 function get_from_url_params(key) {
 	const urlParams = new URLSearchParams(window.location.search);
 	return urlParams.get(key);

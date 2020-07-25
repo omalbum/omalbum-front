@@ -50,7 +50,7 @@
 		  		}).text("Editar Problema");
 
 			  	get_admin_problem_request(problem_id).then(p => {
-			  		$("#statement").val(p.statement);
+			  		$("#statement").val(replaceBrWithEnters(p.statement));
 			  		$("#solution").val(p.official_solution);
 			  		$("#hint").val(p.hint);
 			  		$("#series_input").val(p.series);
