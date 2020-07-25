@@ -248,7 +248,7 @@ function isFromArg() {
 
 function maybeShowSchoolForm() {
 	var should_show = false;
-	if (isTeacher() || (isStudent() && isFromArg())) {
+	if (isFromArg() && (isTeacher() || isStudent())) {
 		should_show = true;
 	}
 	for(e of document.getElementsByClassName("if-argentinian-and-student-or-teacher-defined")) {

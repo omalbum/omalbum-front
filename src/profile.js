@@ -142,7 +142,7 @@ function fill_values_with_user_values() {
 $(document).ready(function(){
 	if ( get_current_page_name_without_extension() == "profile" ){
 		var display = "none";
-		if(is_logged_in() && (user()["country"] == "Argentina" || user()["is_teacher"])) {
+		if(is_logged_in() && user()["country"] == "Argentina") {
 			display = "";
 		}
 		for (var elem of document.getElementsByClassName("locality_div")) {
