@@ -258,7 +258,7 @@ function maybeShowSchoolForm() {
 }
 
 function maybeShowLocalityDiv() {
-	if ((isFromArg() && (isStudent() || $("input[name='is_teacher']:checked").val() != undefined)) || isTeacher()) {
+	if (isFromArg() && (isStudent() || $("input[name='is_teacher']:checked").val() != undefined)) {
     	$(".locality_div").css("display", "");
     	if ($("#province_input").val() == ""){
 	    	reset_departments();
