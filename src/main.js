@@ -84,8 +84,10 @@ function init() {
     }
     $("form").keypress(function(e) {
     	if (e.which == 13) {
-			$(this).find(".click_if_enter_on_form").click();
-    		return false;
+    		if ($(this).find(".click_if_enter_on_form").length > 0) {
+    			$(this).find(".click_if_enter_on_form").click();
+    			return false;
+    		}
     	}
 	});
     $(".input_inside_form").on("keyup", function(e){
