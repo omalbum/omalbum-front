@@ -17,7 +17,7 @@ function load_problem() {
     	$("#intentos").append($("<h2>").text("INTENTOS"));
 	    get_problem_stats(user().user_id, problem_id).then(x => {
 	    	if (x.attempt_list.length > 0) {
-	    		add_intentos_to_table(x.attempt_list);
+	    		add_intentos_to_table(x.attempt_list, true, x.deadline);
 	    	} else {
 	    		$("#intentos").append($("<label id='no_attempts'>").text("No hiciste intentos todavía"));
 	    	}
@@ -30,14 +30,14 @@ function load_problem() {
 function block_new_answers(solved) {
 	$("#solution").prop("disabled", true);
 	if (solved) {
-		$("#attempt_button").val("Ya resolviste este problema!");
+		$("#attempt_button").val("Ya resolviste este problema correctamente!");
 	} else {
 		$("#attempt_button").val("Ya enviaste una respuesta");
 	}
 	$("#attempt_button").prop("disabled", true);
 }
 
-function add_intentos_to_table(attempts) {
+function add_intentos_to_table(attempts, from_load, problem_deadline) {
 	var table = undefined;
 	if ($("#intentos_table").length > 0) {
 		table = $("#intentos_table");
@@ -55,6 +55,9 @@ function add_intentos_to_table(attempts) {
 		table.append($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
 		if(attempt.result == "correct" || attempt.result == "wait") {
 			block_new_answers(attempt.result == "correct");
+			if (attempt.result == "wait" && from_load) {
+				notify_patience(problem_deadline);
+			}
 		}
 	}
 }
@@ -84,23 +87,30 @@ function get_problem_url(p){
 	return `problema?id=${p.problem_id}`;
 }
 
+function notify_patience(deadline) {
+	clear_notifications();
+	return notify("notification wait", "Paciencia!", "Tenés que esperar hasta el "+ get_nice_date_to_show(deadline) + " para saber si tu respuesta es correcta.");
+}
+
 function attempt_feedback_for_user(x){
-	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value), result: x.result}]);
+	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value), result: x.result}],
+							false, undefined);
 	if(x.result=="correct"){
-		return notify("notification good", "Bien!", "La respuesta es correcta.");
+		notify("notification good", "Bien!", "La respuesta es correcta.");
 	}
 	if(x.result=="incorrect"){
-		return notify("notification urgent", "Pensalo un rato más!", "La respuesta es incorrecta.");
+		notify("notification urgent", "Pensalo un rato más!", "La respuesta es incorrecta.");
 	}
 	if(x.result=="wait"){
-		return notify("notification wait", "Paciencia!", "Tenés que esperar hasta el "+ get_nice_date_to_show(x.deadline) + " para saber si tu respuesta es correcta.");
+		notify_patience(x.deadline);
 	}
+	scrollToTopOnPage();
 }
 
 function attempt_error_manager(x){
 	clear_notifications();
 	if(x.code=="problem_already_attempted_during_contest"){
-		return notify("notification urgent", "Error!", "Ya enviaste tu respuesta a este problema.");
-
+		notify("notification urgent", "Error!", "Ya enviaste tu respuesta a este problema.");
+		scrollToTopOnPage();
 	}
 }
