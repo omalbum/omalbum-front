@@ -41,6 +41,7 @@ function add_intentos_to_table(attempts, from_load, problem_deadline) {
 	var table = undefined;
 	if ($("#intentos_table").length > 0) {
 		table = $("#intentos_table");
+		reload_attempts_times();
 	} else {
 		$("#no_attempts").css("display", "none");
 		table = $("<table id='intentos_table'>");
@@ -49,10 +50,11 @@ function add_intentos_to_table(attempts, from_load, problem_deadline) {
 		table.append($("<tr>").append(th1).append(th2));
 		$("#intentos").append(table);
 	}
-	for (attempt of attempts){
-		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date));
+	var titleTr = table.find("tr:first");
+	for (attempt of attempts.sort(sort_attempts)){
+		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date)).addClass(attempt.attempt_date);
 		var td2 = $("<td>").text(attempt.given_answer.toString());
-		table.append($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
+		titleTr.after($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
 		if(attempt.result == "correct" || attempt.result == "wait") {
 			block_new_answers(attempt.result == "correct");
 			if (attempt.result == "wait" && from_load) {
@@ -62,12 +64,31 @@ function add_intentos_to_table(attempts, from_load, problem_deadline) {
 	}
 }
 
+function reload_attempts_times() {
+	var table = $("#intentos_table");
+	table.find("tr").each(function() {
+		var firstTd = $(this).find("td:first");
+		var date_str = firstTd.attr('class');
+		firstTd.text(get_nice_date_to_show(date_str));
+	});
+}
+
+function sort_attempts(x, y) {
+	d1 = new Date(x.attempt_date).getTime();
+	d2 = new Date(y.attempt_date).getTime();
+	if (d1 != d2){
+        	return d1 < d2 ? -1 : 1;
+	}
+	return x.given_answer >= y.given_answer ? -1 : 1;
+}
+
 function attempt_problem_event(form) {
     const urlParams = new URLSearchParams(window.location.search);
 	const param = parseInt(urlParams.get('id'));
 	answer = document.getElementById("solution").value;
 	if( !is_integer(answer.toString()) || answer.toString().length > 10 || (answer.toString().length == 10 && answer.toString()[0] != "-")){
 		clear_notifications();
+		scrollToTopOnPage();
 		return notify("notification urgent", "Tu respuesta no fue enviada.", "Debés ingresar un número entero de hasta 9 dígitos.");
 	}
 	payload = {
@@ -93,7 +114,7 @@ function notify_patience(deadline) {
 }
 
 function attempt_feedback_for_user(x){
-	add_intentos_to_table([{"attempt_date": new Date(), "given_answer": parseInt(document.getElementById("solution").value), result: x.result}],
+	add_intentos_to_table([{"attempt_date": x.attempt_date, "given_answer": parseInt(document.getElementById("solution").value), result: x.result}],
 							false, undefined);
 	if(x.result=="correct"){
 		notify("notification good", "Bien!", "La respuesta es correcta.");
