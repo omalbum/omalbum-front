@@ -36,6 +36,8 @@ function onEditProfileClick() {
 			var msg = html_escape(err.code) || "Error desconocido"
 			if (err.code == "wrong_password") {
 				msg = "Contraseña incorrecta";
+			} else if (err.code == "email_already_taken") {
+				msg = "El email es utilizado por otro usuario, si es tu mail avisanos";
 			}
 			clear_notifications();
 			notify("notification urgent", "No se pudieron guardar los cambios", msg);

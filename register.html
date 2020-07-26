@@ -37,160 +37,166 @@
 		<div id="notifications">
 		</div>
         <main>
-            <h1>Registrate!</h1>
-            <form>
-                <legend>Elegí el nombre de usuario y la contraseña que usarás para acceder a OMAlbum</legend>
-				<div>
-
-					<div class="tooltip" >
-						<div class="tooltiptit" >
-						<p class="tit">Nombre de usuario <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/> </p>
+        	<div class="logged-out" style="display: none;">
+	            <h1>Registrate!</h1>
+	            <form>
+	                <legend>Elegí el nombre de usuario y la contraseña que usarás para acceder a OMAlbum</legend>
+					<div>
+	
+						<div class="tooltip" >
+							<div class="tooltiptit" >
+							<p class="tit">Nombre de usuario <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/> </p>
+							</div>
+							<span class="tooltiptext">
+								Entre 2 y 20 caracteres (letras o dígitos).
+							</span>
 						</div>
-						<span class="tooltiptext">
-							Entre 2 y 20 caracteres (letras o dígitos).
-						</span>
-					</div>
-		            <div class="stretch">
-		                <input class="input_inside_form" type="text" name="user_name" placeholder="nombre de usuario">
-		            </div>
-					</div>
-
-				<div class="tooltip" >
-					<div class="tooltiptit" >
-	                <p class="tit">Contraseña <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
-					</div>
-					<span class="tooltiptext">
-						Entre 6 y 20 caracteres.
-					</span>
-				</div>
-                <div class="stretch">
-                    <input type="password" name="password" placeholder="contraseña">
-                </div>
-
-
-				<div>
-					<div class="tooltip" >
-						<div class="tooltiptit" >
-		           		<p class="tit">Email <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/> </p>
-						</div>
-						<span class="tooltiptext">
-							A esta dirección te escribiremos si en algún momento olvidás tu nombre de usuario y/o tu contraseña.
-						</span>
-					</div>
-		            <div class="stretch" id="append_mail">
-		                
-		            </div>
-				</div>
-                <div class="stretch">
-                <legend>Completá tus datos</legend>
-                </div>
-                <p class="tit">Nombres</p>
-                <div class="stretch" id="append_name">
-                </div>
-                <p class="tit">Apellidos</p>
-                <div class="stretch" id="append_last_name">
-                </div>
-                <p class="tit">Fecha de nacimiento</p>
-                <div class="stretch" id="append_birth_date">
-                </div>
-                <p class="tit">Género</p>
-                <!--
-                // COMENTADO, REEMPLAZADO POR RADIOBUTTON LO DE GENDER
-                <div class="stretch">
-                    <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
-                </div>
-                <div id="gender_other" style="display: none">
-                	<label style="float: left;">Género:</label>
-                	<input type="text" id="gender_other_input" style="float: left;"></input>
-                </div>
-                <datalist id="gender">
-                    <option>femenino</option>
-                    <option>masculino</option>
-                    <option>prefiero no responder</option>
-                    <option>otro</option>
-                </datalist>
-                // HASTA ACA
-                -->
-                <div style="text-align: left;" id="append_gender">
-                </div>
-                <p class="tit">País</p>
-                <div class="stretch" id="append_country">
-                </div>
-                </datalist>
-                <p class="tit" id="title_student_this_year"></p>
-                <div class="stretch" id="append_is_student">
-                </div>
-                <div class="if-student" style="display:none">
-					<div class="tooltip" >
-						<div class="tooltiptit" >
-						<p class="tit">Año de escolaridad <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
-						</div>
-						<span class="tooltiptext">
-							Por ejemplo, si sos participante del segundo nivel de OMA, tu año de escolaridad 
-							debería ser <b>10</b> u <b>11</b>. Si completás <b>5</b> en este campo significa 
-							que estás cursando el quinto grado de primaria.
-						</span>
-					</div>
-                    <div class="stretch" id="append_school_year">
-                    </div>
-                </div>
-                <div class="if-not-student" style="display:none">
-                    <p class="tit">¿Sos docente de matemática en alguna escuela?</p>
-                    <div class="stretch" id="append_is_teacher">
-                    </div>
-                </div>
-                <div class="if-argentinian" style="display:none">
-                	<div class="if-student" style="display:none">
-                    	<legend>Completá la siguiente información sobre la escuela donde estudiás</legend>
-                    </div>
-                </div>
-                <div class="if-argentinian" style="display:none">         	
-			<div class="if-teacher" style="display:none">
-            			<div class="if-not-student" style="display:none">
-                    		<legend>Completá la siguiente información sobre la escuela donde trabajás (si son varias, elegí una de ellas)</legend>
-				</div>
-                    	</div>
-                </div>
-                <div class="if-argentinian" style="display:none">
-                	<div class="if-not-student" style="display:none">
-                		<div class="if-not-teacher" style="display:none">
-                    		<legend>Completá la siguiente información sobre dónde vivís</legend>
-                    	</div>
-                    </div>
-                </div>
-		<div class="locality_div" id="locality_div">
-	                <p class="tit">Provincia</p>
-	                <div class="stretch" id="append_province">
-	                </div>
-	                <p class="tit">Departamento o partido</p>
-	                <div class="stretch" id="append_department">
-	                </div>
-	                <p class="tit">Localidad</p>
-	                <div class="stretch" id="append_locality">
-	                </div>
-	                <div id="school_div">
-				<div class="tooltip" >
-						<div class="tooltiptit" >
-						<p class="tit">Escuela <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
-						</div>
-						<span class="tooltiptext">
-							Puede que no encuentres tu escuela en este listado si tiene un nombre en idioma extranjero. 
-							Intentá buscarla con el nombre en español, y si eso tampoco resulta marcá la opción "No encuentro mi escuela".
-						</span>
-					</div>
-		                <div id="append_school">
+			            <div class="stretch">
+			                <input class="input_inside_form" type="text" name="user_name" placeholder="nombre de usuario">
 			            </div>
-		                <!--
-	                    <select id="select">
-	                    </select>
-	                    -->
-	                    <br>
-	                    <br>
+						</div>
+	
+					<div class="tooltip" >
+						<div class="tooltiptit" >
+		                <p class="tit">Contraseña <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+						</div>
+						<span class="tooltiptext">
+							Entre 6 y 20 caracteres.
+						</span>
+					</div>
+	                <div class="stretch">
+	                    <input type="password" name="password" placeholder="contraseña">
 	                </div>
-	            </div>
-                <div class="spacer"></div>
-                <button class="click_if_enter_on_form" type="button" id="register_button" onclick="register_event(this)">Registrarse</button>
-            </form>
+	
+	
+					<div>
+						<div class="tooltip" >
+							<div class="tooltiptit" >
+			           		<p class="tit">Email <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/> </p>
+							</div>
+							<span class="tooltiptext">
+								A esta dirección te escribiremos si en algún momento olvidás tu nombre de usuario y/o tu contraseña.
+							</span>
+						</div>
+			            <div class="stretch" id="append_mail">
+			                
+			            </div>
+					</div>
+	                <div class="stretch">
+	                <legend>Completá tus datos</legend>
+	                </div>
+	                <p class="tit">Nombres</p>
+	                <div class="stretch" id="append_name">
+	                </div>
+	                <p class="tit">Apellidos</p>
+	                <div class="stretch" id="append_last_name">
+	                </div>
+	                <p class="tit">Fecha de nacimiento</p>
+	                <div class="stretch" id="append_birth_date">
+	                </div>
+	                <p class="tit">Género</p>
+	                <!--
+	                // COMENTADO, REEMPLAZADO POR RADIOBUTTON LO DE GENDER
+	                <div class="stretch">
+	                    <input type="text" id="gender_input" list="gender" name="gender" onchange="onGenderChange()" placeholder="género">
+	                </div>
+	                <div id="gender_other" style="display: none">
+	                	<label style="float: left;">Género:</label>
+	                	<input type="text" id="gender_other_input" style="float: left;"></input>
+	                </div>
+	                <datalist id="gender">
+	                    <option>femenino</option>
+	                    <option>masculino</option>
+	                    <option>prefiero no responder</option>
+	                    <option>otro</option>
+	                </datalist>
+	                // HASTA ACA
+	                -->
+	                <div style="text-align: left;" id="append_gender">
+	                </div>
+	                <p class="tit">País</p>
+	                <div class="stretch" id="append_country">
+	                </div>
+	                </datalist>
+	                <p class="tit" id="title_student_this_year"></p>
+	                <div class="stretch" id="append_is_student">
+	                </div>
+	                <div class="if-student" style="display:none">
+						<div class="tooltip" >
+							<div class="tooltiptit" >
+							<p class="tit">Año de escolaridad <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+							</div>
+							<span class="tooltiptext">
+								Por ejemplo, si sos participante del segundo nivel de OMA, tu año de escolaridad 
+								debería ser <b>10</b> u <b>11</b>. Si completás <b>5</b> en este campo significa 
+								que estás cursando el quinto grado de primaria.
+							</span>
+						</div>
+	                    <div class="stretch" id="append_school_year">
+	                    </div>
+	                </div>
+	                <div class="if-not-student" style="display:none">
+	                    <p class="tit">¿Sos docente de matemática en alguna escuela?</p>
+	                    <div class="stretch" id="append_is_teacher">
+	                    </div>
+	                </div>
+	                <div class="if-argentinian" style="display:none">
+	                	<div class="if-student" style="display:none">
+	                    	<legend>Completá la siguiente información sobre la escuela donde estudiás</legend>
+	                    </div>
+	                </div>
+	                <div class="if-argentinian" style="display:none">         	
+		                <div class="if-teacher" style="display:none">
+		                	<div class="if-not-student" style="display:none">
+		                		<legend>Completá la siguiente información sobre la escuela donde trabajás (si son varias, elegí una de ellas)</legend>
+		                	</div>
+		                </div>
+	                </div>
+	                <div class="if-argentinian" style="display:none">
+	                	<div class="if-not-student" style="display:none">
+	                		<div class="if-not-teacher" style="display:none">
+	                    		<legend>Completá la siguiente información sobre dónde vivís</legend>
+	                    	</div>
+	                    </div>
+	                </div>
+	                <div class="locality_div" id="locality_div">
+		                <p class="tit">Provincia</p>
+		                <div class="stretch" id="append_province">
+		                </div>
+		                <p class="tit">Departamento o partido</p>
+		                <div class="stretch" id="append_department">
+		                </div>
+		                <p class="tit">Localidad</p>
+		                <div class="stretch" id="append_locality">
+		                </div>
+		            </div>
+		            <div id="school_div">
+		            	<div class="tooltip" >
+							<div class="tooltiptit" >
+								<p class="tit">Escuela <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+							</div>
+							<span class="tooltiptext">
+								Puede que no encuentres tu escuela en este listado si tiene un nombre en idioma extranjero. 
+								Intentá buscarla con el nombre en español, y si eso tampoco resulta marcá la opción "No encuentro mi escuela".
+							</span>
+						</div>
+						<div id="append_school">
+						</div>
+						<!--
+							<select id="select">
+							</select>
+						-->
+						<br>
+						<br>
+		            </div>
+	                <div class="spacer"></div>
+	                <button class="click_if_enter_on_form" type="button" id="register_button" onclick="register_event(this)">Registrarse</button>
+	            </form>
+	        </div>
+	        <div class="logged-in" style="display: none;">
+	        	<h1>Ya tenés usuario!</h1>
+	        	<p>Si querés registrar otro usuario, deslogueate del actual</p>
+	        </div>
         </main>
 		<br/>
 		<footer id="footer"></footer>
