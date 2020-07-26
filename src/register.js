@@ -26,12 +26,16 @@ function register_with_validation(payload) {
         return login(payload.user_name, payload.password);
     }).catch(err => {
 		clear_notifications();
+		$('[id^=bad_]').css("display", "none");
 		if(err.code=="username_already_taken"){
 	        notify("notification urgent", "Registración Fallida", html_escape("Nombre de usuario ya utilizado"));
+	        $("#bad_user_name").css("display", "block");
 		} else if(err.code=="email_already_taken"){
 	        notify("notification urgent", "Registración Fallida", html_escape("Email ya utilizado"));
+	        $("#bad_mail").css("display", "block");
 		} else if(err.code=="email_validation_is_email"){
 	        notify("notification urgent", "Registración Fallida", html_escape("El email no es válido"));
+	        $("#bad_mail").css("display", "block");
 		} else{
 	        notify("notification urgent", "Registración Fallida", html_escape(err.message));
 		}
@@ -125,7 +129,39 @@ function getSchoolNameFromOptionOrHardcoded() {
 
 function feedback_register_validation_fails(validation_failures){
 	clear_notifications();
-	validation_failures.forEach( x => notify("notification urgent", x.field, x.error) );
+	$('[id^=bad_]').css("display", "none");
+	validation_failures.forEach( x => {
+		notify("notification urgent", x.field, x.error);
+		bad_info_alert_id = "";
+		if (x.field == "Provincia"){
+			bad_info_alert_id = "bad_province";
+		} else if (x.field == "Departamento"){
+			bad_info_alert_id = "bad_department";
+		} else if (x.field == "Localidad"){
+			bad_info_alert_id = "bad_location";
+		} else if (x.field == "Escuela"){
+			bad_info_alert_id = "bad_school";
+		} else if (x.field == "Año de escolaridad"){
+			bad_info_alert_id = "bad_school_year";
+		} else if (x.field == "Género"){
+			bad_info_alert_id = "bad_gender";
+		} else if (x.field == "País"){
+			bad_info_alert_id = "bad_country";
+		} else if (x.field == "Nombre"){
+			bad_info_alert_id = "bad_name";
+		} else if (x.field == "Apellido"){
+			bad_info_alert_id = "bad_last_name";
+		} else if (x.field == "Email"){
+			bad_info_alert_id = "bad_mail";
+		} else if (x.field == "Contraseña"){
+			bad_info_alert_id = "bad_password";
+		} else if (x.field == "Nombre de usuario"){
+			bad_info_alert_id = "bad_user_name";
+		} else if (x.field == "Fecha de nacimiento"){
+			bad_info_alert_id = "bad_birth_date";
+		}
+		$("#" + bad_info_alert_id).css("display", "block");
+	});
 	scrollToTopOnPage();
 }
 

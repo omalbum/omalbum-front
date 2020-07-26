@@ -42,11 +42,11 @@
 	            <form>
 	                <legend>Elegí el nombre de usuario y la contraseña que usarás para acceder a OMAlbum</legend>
 					<div>
-	
 						<div class="tooltip" >
 							<div class="tooltiptit" >
 							<p class="tit">Nombre de usuario <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/> </p>
 							</div>
+			                <p class="bad-info" id="bad_user_name">*</p>
 							<span class="tooltiptext">
 								Entre 2 y 20 caracteres (letras o dígitos).
 							</span>
@@ -54,12 +54,13 @@
 			            <div class="stretch">
 			                <input class="input_inside_form" type="text" name="user_name" placeholder="nombre de usuario">
 			            </div>
-						</div>
+					</div>
 	
 					<div class="tooltip" >
 						<div class="tooltiptit" >
 		                <p class="tit">Contraseña <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
 						</div>
+						<p class="bad-info" id="bad_password">*</p>
 						<span class="tooltiptext">
 							Entre 6 y 20 caracteres.
 						</span>
@@ -67,13 +68,12 @@
 	                <div class="stretch">
 	                    <input type="password" name="password" placeholder="contraseña">
 	                </div>
-	
-	
 					<div>
 						<div class="tooltip" >
 							<div class="tooltiptit" >
 			           		<p class="tit">Email <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/> </p>
 							</div>
+							<p class="bad-info" id="bad_mail">*</p>
 							<span class="tooltiptext">
 								A esta dirección te escribiremos si en algún momento olvidás tu nombre de usuario y/o tu contraseña.
 							</span>
@@ -85,16 +85,28 @@
 	                <div class="stretch">
 	                <legend>Completá tus datos</legend>
 	                </div>
-	                <p class="tit">Nombres</p>
+	                <div style="display: flex;">
+		                <p class="tit">Nombres</p>
+		                <p class="bad-info" id="bad_name">*</p>
+		            </div>
 	                <div class="stretch" id="append_name">
 	                </div>
-	                <p class="tit">Apellidos</p>
+	                <div style="display: flex;">
+		                <p class="tit">Apellidos</p>
+		                <p class="bad-info" id="bad_last_name">*</p>
+		            </div>
 	                <div class="stretch" id="append_last_name">
 	                </div>
-	                <p class="tit">Fecha de nacimiento</p>
+	                <div style="display: flex;">
+		                <p class="tit">Fecha de nacimiento</p>
+		                <p class="bad-info" id="bad_birth_date">*</p>
+		            </div>
 	                <div class="stretch" id="append_birth_date">
 	                </div>
-	                <p class="tit">Género</p>
+	                <div style="display: flex;">
+		                <p class="tit">Género</p>
+		                <p class="bad-info" id="bad_gender">*</p>
+		            </div>
 	                <!--
 	                // COMENTADO, REEMPLAZADO POR RADIOBUTTON LO DE GENDER
 	                <div class="stretch">
@@ -114,7 +126,10 @@
 	                -->
 	                <div style="text-align: left;" id="append_gender">
 	                </div>
-	                <p class="tit">País</p>
+	                <div style="display: flex;">
+		                <p class="tit">País</p>
+		                <p class="bad-info" id="bad_country">*</p>
+		            </div>
 	                <div class="stretch" id="append_country">
 	                </div>
 	                </datalist>
@@ -124,7 +139,10 @@
 	                <div class="if-student" style="display:none">
 						<div class="tooltip" >
 							<div class="tooltiptit" >
-							<p class="tit">Año de escolaridad <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+							<div style="display: flex;">
+								<p class="tit">Año de escolaridad <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+								<p class="bad-info" id="bad_school_year">*</p>
+							</div>
 							</div>
 							<span class="tooltiptext">
 								Por ejemplo, si sos participante del segundo nivel de OMA, tu año de escolaridad 
@@ -160,20 +178,32 @@
 	                    </div>
 	                </div>
 	                <div class="locality_div" id="locality_div">
-		                <p class="tit">Provincia</p>
+		                <div style="display: flex;">
+							<p class="tit">Provincia</p>
+							<p class="bad-info" id="bad_province">*</p>
+						</div>
 		                <div class="stretch" id="append_province">
 		                </div>
-		                <p class="tit">Departamento o partido</p>
+		                <div style="display: flex;">
+							<p class="tit">Departamento o partido</p>
+							<p class="bad-info" id="bad_department">*</p>
+						</div>
 		                <div class="stretch" id="append_department">
 		                </div>
-		                <p class="tit">Localidad</p>
+		                <div style="display: flex;">
+							<p class="tit">Localidad</p>
+							<p class="bad-info" id="bad_location">*</p>
+						</div>
 		                <div class="stretch" id="append_locality">
 		                </div>
 		            </div>
 		            <div id="school_div">
 		            	<div class="tooltip" >
 							<div class="tooltiptit" >
-								<p class="tit">Escuela <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+								<div style="display: flex;">
+									<p class="tit">Escuela <img src="./assets/tooltip.svg" style="height: 1.2em;vertical-align:middle;"/></p>
+									<p class="bad-info" id="bad_school">*</p>
+								</div>
 							</div>
 							<span class="tooltiptext">
 								Puede que no encuentres tu escuela en este listado si tiene un nombre en idioma extranjero. 
