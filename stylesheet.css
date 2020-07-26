@@ -4,11 +4,13 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 
 /********************************************************************/
-/** Our main colors **/
+/** Our main colors and fonts **/
 
 :root {
 	--omalbum-lightblue: #0096da;
 	--omalbum-darkblue: #073763;
+
+	--omalbum-mainfont: "Comfortaa";
 }
 
 /********************************************************************/
@@ -21,45 +23,43 @@
 }
 
 /********************************************************************/
+/** Inputs **/
 
 input::-webkit-calendar-picker-indicator {
 	opacity: 100;
 }
 
 /********************************************************************/
-/** html - body **/
+/** Fonts **/
 
 html, body {
     margin: 0px;
-    font-family: "Comfortaa";
+    font-family: var(--omalbum-mainfont);
 }
-
-/********************************************************************/
-/** Fonts **/
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family: "Comfortaa";
+  font-family: var(--omalbum-mainfont);
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  font-family: "Comfortaa";
+  font-family: var(--omalbum-mainfont);
 }
 :-ms-input-placeholder { /* IE 10+ */
-  font-family: "Comfortaa";
+  font-family: var(--omalbum-mainfont);
 }
 :-moz-placeholder { /* Firefox 18- */
-  font-family: "Comfortaa";
+  font-family: var(--omalbum-mainfont);
 }
 
 input {
-  font-family: "Comfortaa";
+  font-family: var(--omalbum-mainfont);
 }
 
 button {
-  font-family: "Comfortaa";
+  font-family: var(--omalbum-mainfont);
 }
 
 /********************************************************************/
-/** main **/
+/** main p - main h1 **/
 
 main p, main h1 {
     margin: 0;
@@ -67,7 +67,7 @@ main p, main h1 {
 }
 
 /********************************************************************/
-/** nav **/
+/** Navigation bar **/
 
 nav {
     background: white;
@@ -84,13 +84,14 @@ nav {
 }
 
 .active-tab {
-	border: 3px solid var(--omalbum-lightblue);
+	/*border: 3px solid var(--omalbum-lightblue);
 	border-radius: 40px 40px 40px 40px;
-	border-style: double;
+	border-style: double;*/
+    color: var(--omalbum-lightblue);
 }
 
 /********************************************************************/
-/** footer **/
+/** Footer **/
 
 footer {
     background: var(--omalbum-darkblue);
@@ -133,6 +134,7 @@ footer {
 }
 
 /********************************************************************/
+/** Images **/
 
 img {
     height: 2.2rem;
@@ -158,6 +160,7 @@ img {
 }
 
 /********************************************************************/
+/** Links **/
 
 nav a {
     color: var(--omalbum-darkblue);
@@ -184,7 +187,7 @@ a:hover, a:active {
 
 main {
     padding-left: var(--side);
-    min-height: 87vh;
+    /*min-height: 87vh; esto se tiene que ir */
     padding-right: var(--side);
 }
 
@@ -283,15 +286,17 @@ main section h1 {
 
 .problem {
     text-decoration: none !important;
-}
 
-.problem {
     border-style: solid;
     border-color: white;
     border-width: 2px;
     border-radius: 15px;
+
     margin: 5px;
+
 	transition: 0.3s;
+
+    padding: 10px;
 }
 
 .problem:hover {
@@ -347,18 +352,12 @@ main section h1 {
     text-align: center;
 }
 
-.problem {
-    padding: 10px;
-}
-
-/********************************************************************/
-
 .code {
     font-size: 1.5rem;
 }
 
 /********************************************************************/
-/** enunciado **/
+/** Enunciados **/
 
 .enunciado {
     padding: 0;
@@ -403,6 +402,7 @@ form {
 }
 
 /********************************************************************/
+/** Inputs **/
 
 input {
     margin: 5px;
@@ -420,7 +420,7 @@ form {
 }
 
 /********************************************************************/
-/** main **/
+/** main a - main h1 i **/
 
 main a {
     color: var(--omalbum-darkblue);
@@ -449,7 +449,7 @@ textarea {
 }
 
 /********************************************************************/
-
+/** por que esta esto aca? **/
 .problem {
     width: 6rem;
 }
@@ -479,6 +479,7 @@ form {
 }
 
 /********************************************************************/
+/** Inputs **/
 
 input {
     margin: 5px;
