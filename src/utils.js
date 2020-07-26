@@ -1,9 +1,9 @@
 function scrollToTopOnPage() {
-	setTimeout(function() {
-	    window.scrollTo(0,1);
-	  }, 0);
-	//document.body.scrollTop = 0; // For Safari
-	//document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	//setTimeout(function() {
+	  //  window.scrollTo(0,1);
+	  //}, 0);
+	document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 	//$(window).scrollTop(0);
 }
 
