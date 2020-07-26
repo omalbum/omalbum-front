@@ -183,7 +183,7 @@ function onEditPasswordClick(btn) {
 		}
 		change_user_password(user()["user_id"], payload.current_password, payload.new_password).then(x => {
 			clear_notifications();
-			notify("notification good", "Contraseña cambiada!", "La contraseña fue actualiza");
+			notify("notification good", "Contraseña cambiada!", "La contraseña fue actualizada");
 			scrollToTopOnPage();
 			$("input[name='current_password']").val("");
 			$("input[name='new_password']").val("");

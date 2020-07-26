@@ -49,7 +49,7 @@ function validate_register_payload(payload, is_register){
 		validation_failures.push({ field:"Email", error: "Email no válido" });
 	}
 	if(is_register && ! is_valid_password(payload["password"]) ){
-		validation_failures.push({ field:"Password", error: "Debe tener entre 6 y 20 caracteres." });
+		validation_failures.push({ field:"Contraseña", error: "Debe tener entre 6 y 20 caracteres." });
 	}
 
 	if(! is_valid_user_name(payload["user_name"]) ){
