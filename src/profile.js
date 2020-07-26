@@ -18,7 +18,7 @@ function onEditProfileClick() {
 			if (x.code) {
 				clear_notifications();
 				notify("notification urgent", "Error al intentar modificar", html_escape(x.code) || "Error desconocido");
-				scrollToTop();
+				scrollToTopOnPage();
 			} else {
 				new_user_data = user();
 				for (key in x) {
@@ -39,7 +39,7 @@ function onEditProfileClick() {
 			}
 			clear_notifications();
 			notify("notification urgent", "No se pudieron guardar los cambios", msg);
-			scrollToTop();
+			scrollToTopOnPage();
 		});
 	} else {
 		$(".changeable").each(function(){
@@ -172,19 +172,19 @@ function onEditPasswordClick(btn) {
 		if (payload.new_password != payload.new_password_2) {
 			clear_notifications();
 			notify("notification urgent", "Las contraseñas no coinciden", "Asegurate de repetir correctamente la nueva contraseña");
-			scrollToTop();
+			scrollToTopOnPage();
 			return;
 		}
 		if (!is_valid_password(payload.new_password)){
 			clear_notifications();
 			notify("notification urgent", "Contraseña no válida", "La contraseña debe tener entre 6 y 20 caracteres");
-			scrollToTop();
+			scrollToTopOnPage();
 			return;
 		}
 		change_user_password(user()["user_id"], payload.current_password, payload.new_password).then(x => {
 			clear_notifications();
 			notify("notification good", "Contraseña cambiada!", "La contraseña fue actualiza");
-			scrollToTop();
+			scrollToTopOnPage();
 			$("input[name='current_password']").val("");
 			$("input[name='new_password']").val("");
 			$("input[name='new_password_2']").val("");
@@ -196,7 +196,7 @@ function onEditPasswordClick(btn) {
 			if (err.code == "incorrect_old_password"){
 				clear_notifications();
 				notify("notification urgent", "Contraseña incorrecta", "La contraseña actual que pusiste es incorrecta");
-				scrollToTop();
+				scrollToTopOnPage();
 			}
 		});
 	}

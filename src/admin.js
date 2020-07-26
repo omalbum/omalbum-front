@@ -39,11 +39,11 @@ function create_problem_with_validation(payload){
 		}
 		clear_notifications();
 		notify("notification good", txt, "Para verlo podés ir <a href=\"" + host + get_problem_url(p) + "\">acá</a>  :)");
-		scrollToTop();
+		scrollToTopOnPage();
 	}).catch(err => {
 		clear_notifications();
 		notify("notification urgent", "No se pudo agregar", html_escape(err.code) || "Error desconocido");
-		scrollToTop();
+		scrollToTopOnPage();
 	});
 }
 
@@ -64,11 +64,11 @@ function update_problem_with_validation(payload, problem_id){
 		}
 		clear_notifications();
 		notify("notification good", txt, "Para verlo podés ir <a href=\"" + host + get_problem_url(p) + "\">acá</a>  :)");
-		scrollToTop();
+		scrollToTopOnPage();
 	}).catch(err => {
 		clear_notifications();
 		notify("notification urgent", "No se pudo editar", html_escape(err.code) || "Error desconocido");
-		scrollToTop();
+		scrollToTopOnPage();
 	});
 }
 
@@ -76,7 +76,7 @@ function update_problem_with_validation(payload, problem_id){
 function feedback_create_problem_validation_fails(validation_failures){
 	clear_notifications();
 	validation_failures.forEach( x => notify("notification urgent", x.field, x.error) );
-	scrollToTop();
+	scrollToTopOnPage();
 }
 
 function update_preview(button) {

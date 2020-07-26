@@ -35,7 +35,7 @@ function register_with_validation(payload) {
 		} else{
 	        notify("notification urgent", "Registración Fallida", html_escape(err.message));
 		}
-		scrollToTop();
+		scrollToTopOnPage();
     });
 }
 
@@ -126,7 +126,7 @@ function getSchoolNameFromOptionOrHardcoded() {
 function feedback_register_validation_fails(validation_failures){
 	clear_notifications();
 	validation_failures.forEach( x => notify("notification urgent", x.field, x.error) );
-	scrollToTop();
+	scrollToTopOnPage();
 }
 
 
