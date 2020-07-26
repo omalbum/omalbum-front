@@ -178,6 +178,7 @@ a:hover, a:active {
 
 main {
     padding-left: var(--side);
+    min-height: 87vh;
     padding-right: var(--side);
 }
 
