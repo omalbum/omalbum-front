@@ -1,6 +1,7 @@
-function create_header_button(link, text, clsName) {
+function create_header_button(link, text, clsName, objId) {
 	var link_object = document.createElement("a");
 	link_object.href = link;
+	link_object.id = objId;
 	link_object.className = clsName;
 	link_object.appendChild(document.createTextNode(text));
 	return link_object;
@@ -29,19 +30,19 @@ function create_header_nav() {
 			omalbum.appendChild(omalbumName);
 			span.appendChild(omalbum);
 
-			//nav.appendChild(create_header_button(".", "inicio", null));
-			nav.appendChild(create_header_button("FAQ", "info", ""));
-			nav.appendChild(create_header_button("problemas", "problemas", null));
-			nav.appendChild(create_header_button("login", "ingresar", "logged-out"));
-			nav.appendChild(create_header_button("register", "registrarse", "logged-out"));
+			nav.appendChild(create_header_button(".", "inicio", null, "inicio_nav"));
+			nav.appendChild(create_header_button("FAQ", "info", "", "faq_nav"));
+			nav.appendChild(create_header_button("problemas", "problemas", null, "problemas_nav"));
+			nav.appendChild(create_header_button("login", "ingresar", "logged-out", "login_nav"));
+			nav.appendChild(create_header_button("register", "registrarse", "logged-out", "registrarse_nav"));
 
-			var profile = create_header_button("profile", "perfil ", "logged-in")
+			var profile = create_header_button("profile", "perfil ", "logged-in", "perfil_nav")
 			var profile_em = document.createElement("em");
 			profile_em.className = "fill-user_name";
 			profile.appendChild(profile_em);
 			nav.appendChild(profile);
 			
-			var logout = create_header_button(".", "salir", "logged-in");
+			var logout = create_header_button(".", "salir", "logged-in", "salir_nav");
 			logout.onclick = function() {
 				do_logout();
 			}
@@ -59,6 +60,22 @@ function create_footer(){
 	<a href="https://www.instagram.com/omalbum.ok" target="_blank" title="Seguinos en Instagram!" class="fa fa-instagram"></a>
 </div>
 `;
+}
+
+function border_active_tab() {
+	var obj_id = "inicio_nav";
+	if (window.location.href.endsWith("FAQ")) {
+		obj_id = "faq_nav";
+	} else if (window.location.href.endsWith("problemas")) {
+		obj_id = "problemas_nav";
+	} else if (window.location.href.endsWith("login")) {
+		obj_id = "login_nav";
+	} else if (window.location.href.endsWith("register")) {
+		obj_id = "registrarse_nav";
+	} else if (window.location.href.endsWith("profile")) {
+		obj_id = "perfil_nav";
+	}
+	$("#" + obj_id).addClass("active-tab");
 }
 
 function init() {
@@ -95,7 +112,8 @@ function init() {
     		$(this).find(".click_if_enter_on_form").click();
     		return false;
     	}
-    });	
+    });
+    border_active_tab();
 }
 
 window.onload = init;

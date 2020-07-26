@@ -35,14 +35,19 @@ function insert_some_problems_in_index(problems_div_class, get_problems_function
         	for(e of elements) {
         		if (problems.length > 0){
         			e.appendChild(h2_obj);
-			if (is_active) {
-				problems = problems.sort(sort_active_problems);
-			} else {
-				problems = problems.sort(sort_next_problems);
-			}
-            		insert_given_problems_in_index(e, problems, is_active);
-            	}
-            }
+        			if (is_active) {
+        				problems = problems.sort(sort_active_problems);
+        			} else {
+        				problems = problems.sort(sort_next_problems);
+        			}
+        			insert_given_problems_in_index(e, problems, is_active);
+        		} else if (is_active) {
+        			e.appendChild(h2_obj);
+        			var txt = document.createElement("p");
+        			txt.append(document.createTextNode("En este momento no hay problemas activos."));
+        			e.appendChild(txt);
+        		}
+        	}
         });
     }
 }

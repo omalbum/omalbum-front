@@ -83,6 +83,12 @@ nav {
     flex-wrap: wrap;
 }
 
+.active-tab {
+	border: 3px solid var(--omalbum-lightblue);
+	border-radius: 40px 40px 40px 40px;
+	border-style: double;
+}
+
 /********************************************************************/
 /** footer **/
 
