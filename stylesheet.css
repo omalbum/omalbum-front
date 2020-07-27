@@ -765,3 +765,25 @@ tbody td {
 }
 
 /********************************************************************/
+/** FAQ style **/
+
+.ui-accordion-header.ui-state-default{
+    /*border: 1px solid var(--omalbum-darkblue);*/
+    /*background: white;*/
+    color: var(--omalbum-darkblue);
+}
+
+.ui-accordion-header.ui-state-active{
+    border: 1px solid var(--omalbum-lightblue);
+	border-radius: 3px;
+    background: var(--omalbum-lightblue);
+    color: white;
+}
+
+.ui-accordion-content.ui-widget-content{
+    border: none;
+    color: var(--omalbum-darkblue);
+}
+
+/********************************************************************/
+
