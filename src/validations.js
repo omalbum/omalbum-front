@@ -53,7 +53,7 @@ function validate_register_payload(payload, is_register){
 	}
 
 	if(! is_valid_user_name(payload["user_name"]) ){
-		validation_failures.push({ field:"Nombre de usuario", error: "Solamente puede tener letras minúsculas, mayúsculas y números (sin acentos ni espacios ni 'ñ')." });
+		validation_failures.push({ field:"Nombre de usuario", error: "Solamente puede tener letras minúsculas y números (sin acentos, espacios ni 'ñ')." });
 	}
 	
 	if(! is_valid_birth_date(payload["birth_date"]) ){
