@@ -30,7 +30,7 @@ function load_problem() {
 function block_new_answers(solved) {
 	$("#solution").prop("disabled", true);
 	if (solved) {
-		$("#attempt_button").val("Ya resolviste este problema correctamente!");
+		$("#attempt_button").val("Ya enviaste la respuesta correcta!");
 	} else {
 		$("#attempt_button").val("Ya enviaste una respuesta");
 	}
