@@ -6,7 +6,9 @@ function append_user_objects_for_input() {
 	$("#append_mail").append($('<input class="input_inside_form" id="email_input" type="text" name="email" placeholder="dirección de email">'));
 	$("#append_name").append($('<input class="input_inside_form" id="name_input" type="text" name="name" placeholder="nombres">'));
 	$("#append_last_name").append($('<input class="input_inside_form" id="last_name_input" type="text" name="last_name" placeholder="apellidos">'));
-	$("#append_birth_date").append($('<input id="birth_date_input" type="date" name="birth_date" placeholder="fecha de nacimiento">'));
+	for (var obj of get_jquery_birth_date_objects()){
+		$("#append_birth_date").append(obj);
+	}
 	for (var obj of get_jquery_gender_objects()){
 		$("#append_gender").append(obj);
 	}
@@ -42,6 +44,31 @@ function append_user_objects_for_input() {
 	});
 	setCountries();
 	province_selector();
+}
+
+function get_jquery_birth_date_objects() {
+	var objs = []
+	var div1 = $('<div style="display: -webkit-inline-box;">');
+	var day_select = $("<select id='day_input' name='birth_date_day'>");
+	for (var i=1; i<=31; i++){
+		day_select.append($("<option>").val(i.toString().padStart(2, 0)).text(i));
+	}
+	div1.append(day_select);
+	var month_select = $("<select id='month_input' name='birth_date_month'>");
+	var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+				"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+	for (var i=1; i<=12; i++){
+		month_select.append($("<option>").val(i.toString().padStart(2, 0)).text(meses[i-1]));
+	}
+	div1.append(month_select);
+	var year_select = $("<select id='year_input' name='birth_date_year'>");
+	for (var i=parseInt((new Date()).getFullYear()) - 2; i>=1911; i--){
+		year_select.append($("<option>").val(i.toString()).text(i.toString()));
+	}
+	div1.append(year_select);
+	objs.push(div1);
+	return objs;
+	// $("#append_birth_date").append($('<input id="birth_date_input" type="date" name="birth_date" placeholder="fecha de nacimiento">'));
 }
 
 function get_jquery_school_objects() {

@@ -78,12 +78,29 @@ function get_input_date_format(date_backend) {
 	return  d.getUTCFullYear().toString() + "-" + (1 + d.getUTCMonth()).toString().padStart(2, '0') + "-" + d.getUTCDate().toString().padStart(2, '0');
 }
 
+function get_date_day(date_backend) {
+	var d = new Date(date_backend);
+	return d.getUTCDate().toString().padStart(2, '0');
+}
+
+function get_date_month(date_backend) {
+	var d = new Date(date_backend);
+	return (1 + d.getUTCMonth()).toString().padStart(2, '0');
+}
+
+function get_date_year(date_backend) {
+	var d = new Date(date_backend);
+	return d.getUTCFullYear().toString();
+}
+
 function fill_values_with_user_values() {
 	$("#email_input").val(user()["email"]);
 	$("#name_input").val(user()["name"]);
 	$("#last_name_input").val(user()["last_name"]);
 	var user_birth_date = new Date(user()["birth_date"]);
-	$("#birth_date_input").val(get_input_date_format(user_birth_date));
+	$("#day_input").val(get_date_day(user_birth_date));
+	$("#month_input").val(get_date_month(user_birth_date));
+	$("#year_input").val(get_date_year(user_birth_date));
 	if (is_other_gender(user()["gender"])) {
 		$("#otro").prop("checked", true);
 		$("#gender_other_input").prop("disabled", false);
