@@ -63,7 +63,7 @@ function create_footer(){
 }
 
 function border_active_tab() {
-	var obj_id = "inicio_nav";
+	var obj_id = undefined;
 	if (window.location.href.endsWith("FAQ")) {
 		obj_id = "faq_nav";
 	} else if (window.location.href.endsWith("problemas")) {
@@ -74,8 +74,14 @@ function border_active_tab() {
 		obj_id = "registrarse_nav";
 	} else if (window.location.href.endsWith("profile")) {
 		obj_id = "perfil_nav";
+	} else if (window.location.href.endsWith("inicio")){
+		obj_id = "inicio_nav";
+	} else if (window.location.href.endsWith(window.location.host) || window.location.href.endsWith(window.location.host + "/")) {
+		obj_id = "inicio_nav";
 	}
-	$("#" + obj_id).addClass("active-tab");
+	if (obj_id != undefined) {
+		$("#" + obj_id).addClass("active-tab");
+	}
 }
 
 function init() {
