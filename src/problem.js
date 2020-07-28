@@ -41,7 +41,6 @@ function add_intentos_to_table(attempts, from_load, problem_deadline) {
 	var table = undefined;
 	if ($("#intentos_table").length > 0) {
 		table = $("#intentos_table");
-		reload_attempts_times();
 	} else {
 		$("#no_attempts").css("display", "none");
 		table = $("<table id='intentos_table'>");
@@ -52,7 +51,7 @@ function add_intentos_to_table(attempts, from_load, problem_deadline) {
 	}
 	var titleTr = table.find("tr:first");
 	for (attempt of attempts.sort(sort_attempts)){
-		var td1 = $("<td>").text(get_nice_date_to_show(attempt.attempt_date)).addClass(attempt.attempt_date);
+		var td1 = $("<td>").text(get_nice_date_to_show_without_time_missing(attempt.attempt_date));
 		var td2 = $("<td>").text(attempt.given_answer.toString());
 		titleTr.after($("<tr>").addClass("result_" + attempt.result).append(td1).append(td2));
 		if(attempt.result == "correct" || attempt.result == "wait") {
@@ -62,15 +61,6 @@ function add_intentos_to_table(attempts, from_load, problem_deadline) {
 			}
 		}
 	}
-}
-
-function reload_attempts_times() {
-	var table = $("#intentos_table");
-	table.find("tr").each(function() {
-		var firstTd = $(this).find("td:first");
-		var date_str = firstTd.attr('class');
-		firstTd.text(get_nice_date_to_show(date_str));
-	});
 }
 
 function sort_attempts(x, y) {
