@@ -63,22 +63,16 @@ function create_footer(){
 }
 
 function border_active_tab() {
-	var obj_id = undefined;
-	if (window.location.href.endsWith("FAQ")) {
-		obj_id = "faq_nav";
-	} else if (window.location.href.endsWith("problemas")) {
-		obj_id = "problemas_nav";
-	} else if (window.location.href.endsWith("login")) {
-		obj_id = "login_nav";
-	} else if (window.location.href.endsWith("register")) {
-		obj_id = "registrarse_nav";
-	} else if (window.location.href.endsWith("profile")) {
-		obj_id = "perfil_nav";
-	} else if (window.location.href.endsWith("inicio")){
-		obj_id = "inicio_nav";
-	} else if (window.location.href.endsWith(window.location.host) || window.location.href.endsWith(window.location.host + "/")) {
-		obj_id = "inicio_nav";
-	}
+	var page_name_to_obj_id = {
+		"FAQ": "faq_nav",
+		"problemas": "problemas_nav",
+		"login": "login_nav",
+		"register": "registrarse_nav",
+		"profile": "perfil_nav",
+		"inicio": "inicio_nav",
+		"": "inicio_nav",
+	};
+	var obj_id = page_name_to_obj_id[get_current_page_name()];
 	if (obj_id != undefined) {
 		$("#" + obj_id).addClass("active-tab");
 	}
