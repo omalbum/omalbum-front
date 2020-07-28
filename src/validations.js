@@ -33,7 +33,7 @@ function is_valid_birth_date(s) {
 	month = parseInt(nums[1]);
 	day = parseInt(nums[2]);
 	var dias_segun_mes = [31, (year%4==0 && (year%100 != 0 || year%400 == 0)) ? 29 : 28,
-						31, 30, 31, 30, 30, 31, 30, 31, 30, 31];
+						31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	return dias_segun_mes[month-1] >= day; 
 }
 
