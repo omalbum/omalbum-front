@@ -31,12 +31,12 @@ function create_header_nav() {
 			span.appendChild(omalbum);
 
 			nav.appendChild(create_header_button(".", "inicio", null, "inicio_nav"));
-			nav.appendChild(create_header_button("FAQ", "info", "", "faq_nav"));
+			nav.appendChild(create_header_button("preguntas-frecuentes", "info", "", "faq_nav"));
 			nav.appendChild(create_header_button("problemas", "problemas", null, "problemas_nav"));
-			nav.appendChild(create_header_button("login", "ingresar", "logged-out", "login_nav"));
-			nav.appendChild(create_header_button("register", "registrarse", "logged-out", "registrarse_nav"));
+			nav.appendChild(create_header_button("ingresar", "ingresar", "logged-out", "login_nav"));
+			nav.appendChild(create_header_button("registrarse", "registrarse", "logged-out", "registrarse_nav"));
 
-			var profile = create_header_button("profile", "perfil ", "logged-in", "perfil_nav")
+			var profile = create_header_button("perfil", "perfil ", "logged-in", "perfil_nav")
 			var profile_em = document.createElement("em");
 			profile_em.className = "fill-user_name";
 			profile.appendChild(profile_em);
@@ -64,11 +64,11 @@ function create_footer(){
 
 function border_active_tab() {
 	var page_name_to_obj_id = {
-		"FAQ": "faq_nav",
+		"preguntas-frecuentes": "faq_nav",
 		"problemas": "problemas_nav",
-		"login": "login_nav",
-		"register": "registrarse_nav",
-		"profile": "perfil_nav",
+		"ingresar": "login_nav",
+		"registrarse": "registrarse_nav",
+		"perfil": "perfil_nav",
 		"inicio": "inicio_nav",
 		"": "inicio_nav",
 	};
