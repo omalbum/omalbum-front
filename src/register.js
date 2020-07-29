@@ -107,6 +107,8 @@ function get_register_payload(form) {
     payload.gender = getGenderValueForPayload(payload.gender);
     payload.is_teacher = isTeacher();
     payload.is_student = isStudent();
+    payload.birth_date = payload.birth_date_year.toString() + "-" + 
+    					payload.birth_date_month.toString() + "-" + payload.birth_date_day.toString();
     return payload;
 }
 
