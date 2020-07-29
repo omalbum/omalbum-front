@@ -159,7 +159,7 @@ function fill_values_with_user_values() {
 }
 
 $(document).ready(function(){
-	if ( get_current_page_name_without_extension() == "profile" ){
+	if ( get_current_page_name_without_extension() == "perfil" ){
 		var display = "none";
 		if(is_logged_in() && user()["country"] == "Argentina") {
 			display = "";

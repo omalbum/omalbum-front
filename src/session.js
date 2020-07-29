@@ -22,8 +22,8 @@ function login(user_name, password) {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
         localStorage.setItem('user', JSON.stringify(token.User));
-        if (get_from_url_params("from_problem") != null) {
-		window.location.href = "problema?id=" + get_from_url_params("from_problem")
+        if (get_from_url_params("p") != null) {
+		window.location.href = "problema?id=" + get_from_url_params("p")
 	} else {
 	        window.location.href = ".";
 	}

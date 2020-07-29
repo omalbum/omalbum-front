@@ -370,7 +370,7 @@ function isDatalistValid(datalist_id) {
 
 $(document).ready(function(){
 	
-	if (get_current_page_name_without_extension()=="register" ){
+	if (get_current_page_name_without_extension()=="registrarse" ){
 		append_user_objects_for_input();
 		$("#department_input").prop("disabled", true);
 		$("#locality_input").prop("disabled", true);

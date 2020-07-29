@@ -23,7 +23,7 @@ function load_problem() {
 	    	}
 	    });
 	} else {
-		$("#info_for_not_logged").append($('<p>Para poder enviar tu respuesta, <a href="./login?from_problem=' + problem_id.toString() + '">ingresá</a> a tu cuenta de OMAlbum o <a href="./register?from_problem=' + problem_id.toString() + '">registrate</a> si no tenés una.</p>'));
+		$("#info_for_not_logged").append($('<p>Para poder enviar tu respuesta, <a href="./ingresar?p=' + problem_id.toString() + '">ingresá</a> a tu cuenta de OMAlbum o <a href="./registrarse?p=' + problem_id.toString() + '">registrate</a> si no tenés una.</p>'));
 	}
 }
 
