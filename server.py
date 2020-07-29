@@ -5,9 +5,10 @@
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-
 import os
 from urllib import parse as urlparse
+
+# SimpleHTTPRequestHandler.extensions_map = {k: v + ';charset=UTF-8' for k, v in SimpleHTTPRequestHandler.extensions_map.items()}
 
 class CORSRequestHandler(SimpleHTTPRequestHandler):
 	def end_headers(self):
@@ -20,7 +21,8 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
 		# Parse query data to find out what was requested
 		parsedParams = urlparse.urlparse(self.path)
 		# See if the file requested exists
-		if os.access('.' + os.sep + parsedParams.path, os.R_OK):
+		if os.access('.' + urlparse.unquote(parsedParams.path), os.R_OK):
+			print("file found")
 			# File exists, serve it up
 			SimpleHTTPRequestHandler.do_GET(self);
 		else:
@@ -29,7 +31,7 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
 			if len(parts)>1:
 				self.path+="?"+parts[1]
 			parsedParams = urlparse.urlparse(self.path)
-			if os.access('.' + os.sep + parsedParams.path, os.R_OK):
+			if os.access('.' + os.sep + urlparse.unquote(parsedParams.path), os.R_OK):
 				SimpleHTTPRequestHandler.do_GET(self);
 
 httpd = HTTPServer(('localhost', 8000), CORSRequestHandler)
