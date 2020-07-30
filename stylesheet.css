@@ -7,6 +7,7 @@
 /** Our main colors and fonts **/
 
 :root {
+	--omalbum-lighterblue: #cff0ff;
 	--omalbum-lightblue: #0096da;
 	--omalbum-darkblue: #073763;
 
@@ -575,7 +576,7 @@ button {
 /********************************************************************/
 
 .light-bg {
-    background: #cdf;
+    background: var(--omalbum-lighterblue);
 }
 
 /********************************************************************/
@@ -630,7 +631,7 @@ p {
 }
 
 .wait {
-    background: #87CEFA;
+    background: var(--omalbum-lightblue);
     color: white;
 }
 
@@ -764,7 +765,7 @@ tbody td {
 	background-color: #AAFDAB;
 }
 .result_wait {
-	background-color: #BDFCF3;
+	background-color: white;
 }
 
 /********************************************************************/
