@@ -22,8 +22,8 @@ function login(user_name, password) {
         localStorage.setItem('token', token.token);
         localStorage.setItem('expiration', token.expiration);
         localStorage.setItem('user', JSON.stringify(token.User));
-        if (get_from_url_params("from_problem") != null) {
-		window.location.href = "problema?id=" + get_from_url_params("from_problem")
+        if (get_from_url_params("p") != null) {
+		window.location.href = "problema?id=" + get_from_url_params("p")
 	} else {
 	        window.location.href = ".";
 	}
@@ -75,7 +75,7 @@ function login_update() {
     fill_with("fill-last_name", () => my_user["last_name"]);
     fill_with("fill-user_id", () => my_user["user_id"]);
     fill_with("fill-email", () => my_user["email"]);
-    fill_with("fill-birth_date", () => get_album_date_format(my_user["birth_date"]));
+    fill_with("fill-birth_date", () => get_input_date_format(my_user["birth_date"]));
     fill_with("fill-gender", () => my_user["gender"]);
     fill_with("fill-country", () => my_user["country"]);
     fill_with("fill-province", () => my_user["province"]);
@@ -91,4 +91,9 @@ function login_update() {
     for(elem of document.getElementsByClassName("logged-in")) {
         elem.style.display = "block";
     }
+}
+
+function get_input_date_format(date_backend) {
+	var d = new Date(date_backend);
+	return d.getUTCDate().toString().padStart(2, '0') + "-" + (1 + d.getUTCMonth()).toString().padStart(2, '0') + "-" + d.getUTCFullYear().toString();
 }

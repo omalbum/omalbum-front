@@ -107,6 +107,8 @@ function get_register_payload(form) {
     payload.gender = getGenderValueForPayload(payload.gender);
     payload.is_teacher = isTeacher();
     payload.is_student = isStudent();
+    payload.birth_date = payload.birth_date_year.toString() + "-" + 
+    					payload.birth_date_month.toString() + "-" + payload.birth_date_day.toString();
     return payload;
 }
 
@@ -368,7 +370,7 @@ function isDatalistValid(datalist_id) {
 
 $(document).ready(function(){
 	
-	if (get_current_page_name_without_extension()=="register" ){
+	if (get_current_page_name_without_extension()=="registrarse" ){
 		append_user_objects_for_input();
 		$("#department_input").prop("disabled", true);
 		$("#locality_input").prop("disabled", true);

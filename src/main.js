@@ -31,12 +31,12 @@ function create_header_nav() {
 			span.appendChild(omalbum);
 
 			nav.appendChild(create_header_button(".", "inicio", null, "inicio_nav"));
-			nav.appendChild(create_header_button("FAQ", "info", "", "faq_nav"));
+			nav.appendChild(create_header_button("preguntas-frecuentes", "info", "", "faq_nav"));
 			nav.appendChild(create_header_button("problemas", "problemas", null, "problemas_nav"));
-			nav.appendChild(create_header_button("login", "ingresar", "logged-out", "login_nav"));
-			nav.appendChild(create_header_button("register", "registrarse", "logged-out", "registrarse_nav"));
+			nav.appendChild(create_header_button("ingresar", "ingresar", "logged-out", "login_nav"));
+			nav.appendChild(create_header_button("registrarse", "registrarse", "logged-out", "registrarse_nav"));
 
-			var profile = create_header_button("profile", "perfil ", "logged-in", "perfil_nav")
+			var profile = create_header_button("perfil", "perfil ", "logged-in", "perfil_nav")
 			var profile_em = document.createElement("em");
 			profile_em.className = "fill-user_name";
 			profile.appendChild(profile_em);
@@ -63,19 +63,19 @@ function create_footer(){
 }
 
 function border_active_tab() {
-	var obj_id = "inicio_nav";
-	if (window.location.href.endsWith("FAQ")) {
-		obj_id = "faq_nav";
-	} else if (window.location.href.endsWith("problemas")) {
-		obj_id = "problemas_nav";
-	} else if (window.location.href.endsWith("login")) {
-		obj_id = "login_nav";
-	} else if (window.location.href.endsWith("register")) {
-		obj_id = "registrarse_nav";
-	} else if (window.location.href.endsWith("profile")) {
-		obj_id = "perfil_nav";
+	var page_name_to_obj_id = {
+		"preguntas-frecuentes": "faq_nav",
+		"problemas": "problemas_nav",
+		"ingresar": "login_nav",
+		"registrarse": "registrarse_nav",
+		"perfil": "perfil_nav",
+		"inicio": "inicio_nav",
+		"": "inicio_nav",
+	};
+	var obj_id = page_name_to_obj_id[get_current_page_name()];
+	if (obj_id != undefined) {
+		$("#" + obj_id).addClass("active-tab");
 	}
-	$("#" + obj_id).addClass("active-tab");
 }
 
 function init() {
