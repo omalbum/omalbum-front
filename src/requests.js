@@ -2,6 +2,11 @@ function register_request(payload){
 	return do_request("api/v1/register", payload, false, "POST");
 }
 
+function password_reset_request(payload){
+	return do_request("api/v1/users/password/reset", payload, false, "POST");
+}
+
+
 function update_user_request(payload){
 	return do_request("api/v1/users/" + user().user_id + "/profile", payload, true, "PUT");
 }
