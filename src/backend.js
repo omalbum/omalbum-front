@@ -1,1 +1,1 @@
-var host = "https://testing.omalbum.tk/";
+var host = "https://testing.album.oma.org.ar/";
