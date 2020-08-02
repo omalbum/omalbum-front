@@ -36,7 +36,13 @@ function register_with_validation(payload) {
 		} else if(err.code=="email_validation_is_email"){
 	        notify("notification urgent", "Registración Fallida", html_escape("El email no es válido"));
 	        $("#bad_mail").css("display", "block");
-		} else{
+		} else if(err.code=="user_name_validation_length_out_of_range"){
+			notify("notification urgent", "Registración Fallida", html_escape("El usuario debe tener entre 2 y 20 caracteres"));
+			$("#bad_mail").css("display", "block");
+		} else if(err.code=="registration_failed_unknown"){
+			notify("notification urgent", "Registración Fallida", html_escape("Volvé a intentar y si el error persiste escribinos a omalbum.ok@gmail.com"));
+			$("#bad_mail").css("display", "block");
+		} else {
 	        notify("notification urgent", "Registración Fallida", html_escape(err.message));
 		}
 		scrollToTopOnPage();
