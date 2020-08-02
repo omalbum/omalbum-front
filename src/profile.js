@@ -204,7 +204,7 @@ function onEditPasswordClick(btn) {
 	}).catch(err => {
 		if (err.code == "incorrect_old_password"){
 			clear_notifications();
-			notify("notification urgent", "Contraseña incorrecta", "La contraseña actual que pusiste es incorrecta");
+			notify("notification urgent", "Contraseña incorrecta", "Es necesario ingresar correctamente la contraseña actual");
 			scrollToTopOnPage();
 		}
 	});
