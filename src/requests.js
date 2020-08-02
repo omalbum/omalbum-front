@@ -51,7 +51,7 @@ function get_next_problems_request(){
 }
 
 function attempt_problem_request(payload){
-    return do_request("api/v1/users/answer/",payload,true,"POST");
+    return do_request("api/v1/users/answer",payload,true,"POST");
 }
 
 function create_problem_request(payload){
