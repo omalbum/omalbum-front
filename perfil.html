@@ -149,6 +149,8 @@
 	            <br>
 	            <button class="click_if_enter_on_form" id="edit_profile_button" type="button" onclick="onEditProfileClick()">Editar perfil</button>
 	        </form>
+	        <br>
+        	<h1>Editar contraseña</h1>
 	        <div>
 	        <form style="display: inline-block;">
 	        	<table>
@@ -156,13 +158,11 @@
 	                	<td style="width: 20px; text-align: left; padding: 0 20% 0 0">
 	                		<dt>Contraseña actual</dt>
 	                	</td>
-	                	<td id="only_asterisks" style="text-align: left;">********
-	                	</td>
-	                	<td id="current_password" style="text-align: left; display: none">
+	                	<td id="current_password" style="text-align: left;">
 	                		<input type='password' name="current_password">
 	                	</td>
 	                </tr>
-	                <tr id="new_password" style="display: none;">
+	                <tr id="new_password">
 	                	<td style="width: 20px; text-align: left; padding: 0 20% 0 0">
 	                		<dt>Nueva contraseña</dt>
 	                	</td>
@@ -170,7 +170,7 @@
 							<input type="password" name="new_password">
 	                	</td>
 	                </tr>
-	                <tr id="new_password_2" style="display: none;">
+	                <tr id="new_password_2">
 	                	<td style="width: 20px; text-align: left; padding: 0 20% 0 0">
 	                		<dt>Repetir la nueva contraseña</dt>
 	                	</td>
