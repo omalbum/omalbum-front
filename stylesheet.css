@@ -100,9 +100,6 @@ footer {
     padding: 10px;
     padding-left: var(--side);
     padding-right: var(--side);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
 }
 
 body {
@@ -116,6 +113,18 @@ main {
 }
 
 .copyright {
+	text-align: center;
+	padding-right: 0px;
+	font-size: 0.75rem;
+}
+
+.contact {
+	display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.email {
 	text-align: left;
 	padding-right: 0px;
 	font-size: 1.0rem;
@@ -183,9 +192,6 @@ nav a {
 footer a {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
-    padding: 2px;
-    margin-right: 20px;
 }
 
 a:hover, a:active {
