@@ -57,6 +57,7 @@ function create_footer(){
 	 &copy;&nbsp;2020&nbsp;<a href="http://oma.org.ar">Olimpíada Matemática Argentina</a>
 </div>
 <div class="socialNetworks">
+	<a href="./contacto" title="Contacto" class="fa fa-email">Contacto</a>
 	<a href="https://www.instagram.com/omalbum.ok" target="_blank" title="Seguinos en Instagram!" class="fa fa-instagram"></a>
 </div>
 `;
