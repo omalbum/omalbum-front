@@ -50,11 +50,13 @@ function get_jquery_birth_date_objects() {
 	var objs = []
 	var div1 = $('<div style="display: -webkit-inline-box;">');
 	var day_select = $("<select id='day_input' name='birth_date_day'>");
+	day_select.append($("<option>").val("none").text(""));
 	for (var i=1; i<=31; i++){
 		day_select.append($("<option>").val(i.toString().padStart(2, 0)).text(i));
 	}
 	div1.append(day_select);
 	var month_select = $("<select id='month_input' name='birth_date_month'>");
+	month_select.append($("<option>").val("none").text(""));
 	var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 				"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 	for (var i=1; i<=12; i++){
@@ -62,6 +64,7 @@ function get_jquery_birth_date_objects() {
 	}
 	div1.append(month_select);
 	var year_select = $("<select id='year_input' name='birth_date_year'>");
+	year_select.append($("<option>").val("none").text(""));
 	for (var i=parseInt((new Date()).getFullYear()) - 2; i>=1911; i--){
 		year_select.append($("<option>").val(i.toString()).text(i.toString()));
 	}
