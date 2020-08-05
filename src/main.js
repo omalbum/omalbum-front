@@ -84,9 +84,20 @@ function border_active_tab() {
 	}
 }
 
+function safari_fix(){
+	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+	if (isSafari){
+		document.body.style["display"] = "initial";
+		document.body.style["flex-direction"]= "initial";
+		document.body.style["height"]= "initial";
+		document.body.main.style["flex-grow"] = "initial";
+	}
+}
+
 function init() {
 	create_footer();
 	create_header_nav();
+	safari_fix();
     if(is_logged_in()) {
         login_update();
     } else {
