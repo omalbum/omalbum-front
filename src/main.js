@@ -53,11 +53,17 @@ function create_header_nav() {
 
 function create_footer(){
 	document.getElementById("footer").innerHTML=`
+<div class="contact">
+	<div class="email">
+		<a href="./contacto" title="Contacto"><img class="mail-icon" src="./assets/Icon-mail-white.svg"></a>
+		<a href="./contacto" title="Contacto">Contacto</a>
+	</div>
+	<div class="socialNetworks">
+		<a href="https://www.instagram.com/omalbum.ok" target="_blank" title="Seguinos en Instagram!" class="fa fa-instagram"></a>
+	</div>
+</div>
 <div class="copyright">
 	 &copy;&nbsp;2020&nbsp;<a href="http://oma.org.ar">Olimpíada Matemática Argentina</a>
-</div>
-<div class="socialNetworks">
-	<a href="https://www.instagram.com/omalbum.ok" target="_blank" title="Seguinos en Instagram!" class="fa fa-instagram"></a>
 </div>
 `;
 }
