@@ -29,6 +29,9 @@ function is_valid_password(s){
 function is_valid_birth_date(s) {
 	if (s === "") return false;
 	nums = s.split("-");
+	if (!is_integer(nums[0]) || !is_integer(nums[1]) || !is_integer(nums[2])) {
+		return false;
+	}
 	year = parseInt(nums[0]);
 	month = parseInt(nums[1]);
 	day = parseInt(nums[2]);
