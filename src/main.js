@@ -90,7 +90,9 @@ function safari_fix(){
 		document.body.style["display"] = "initial";
 		document.body.style["flex-direction"]= "initial";
 		document.body.style["height"]= "initial";
-		document.body.main.style["flex-grow"] = "initial";
+		for(m of document.getElementsByTagName("main")) {
+			m.style["flex-grow"] = "initial";
+		}
 	}
 }
 
