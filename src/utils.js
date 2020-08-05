@@ -31,8 +31,8 @@ function fill_with(class_name, action) {
 
 function extract_data(form) {
     var data = {};
-    for(elem of Array.from(form.getElementsByTagName("input")).concat(Array.from(form.getElementsByClassName("input"))).concat(Array.from(form.getElementsByTagName("select")))) {
-        if(elem.name && (elem.offsetParent || elem.name == "tags" )) {
+    for(elem of Array.from(form.getElementsByClassName("extract_value_for_data"))) {
+        if(elem.name) {
             if(elem.type == "checkbox") {
                 value = elem.checked;
             } else {
