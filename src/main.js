@@ -55,6 +55,7 @@ function create_footer(){
 	document.getElementById("footer").innerHTML=`
 <div class="contact">
 	<div class="email">
+		<a href="./contacto" title="Contacto"><img class="mail-icon" src="./assets/Icon-mail-white.svg"></a>
 		<a href="./contacto" title="Contacto">Contacto</a>
 	</div>
 	<div class="socialNetworks">
