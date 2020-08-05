@@ -167,8 +167,12 @@ function feedback_register_validation_fails(validation_failures){
 			bad_info_alert_id = "bad_user_name";
 		} else if (x.field == "Fecha de nacimiento"){
 			bad_info_alert_id = "bad_birth_date";
+		} else if (x.field == "Sos docente?") {
+			bad_info_alert_id = "bad_is_teacher";
 		}
-		$("#" + bad_info_alert_id).css("display", "block");
+		if ($("#" + bad_info_alert_id).length > 0) {
+			$("#" + bad_info_alert_id).css("display", "block");
+		}
 	});
 	scrollToTopOnPage();
 }
