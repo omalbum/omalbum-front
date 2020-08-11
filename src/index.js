@@ -45,7 +45,7 @@ function insert_some_problems_in_index(problems_div_class, get_problems_function
         			e.appendChild(h2_obj);
         			var txt = document.createElement("p");
         			e.appendChild(txt);
-					txt.innerHTML = `En este momento no hay problemas activos. Podés intentar los problemas ya publicados entrando <a href="./problemas">acá</a>.`
+					txt.innerHTML = `En este momento no hay problemas activos. Podés resolver los problemas ya publicados entrando <a href="./problemas">acá</a>.`
         		}
         	}
         });
