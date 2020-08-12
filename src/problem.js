@@ -14,7 +14,7 @@ function load_problem() {
 		}
     });
     if (is_logged_in()){
-    	$("#intentos").append($("<h2>").text("INTENTOS"));
+    	$("#intentos").append($("<h1>").text("Intentos"));
 	    get_problem_stats(user().user_id, problem_id).then(x => {
 	    	if (x.attempt_list.length > 0) {
 	    		add_intentos_to_table(x.attempt_list, true, x.deadline);
